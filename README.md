@@ -1,10 +1,11 @@
 # Verteilte Systeme
 ## Heizkörperthermostat
 
+### Software Overview
 | Modul       | Zuständig   | Kommentare  | Probleme    |
 |-------------|-------------|-------------|-------------|
-| Timer0      |||||
-| TMP75B      |||||
-| WS2812      |||||
-| Servo       |||||
+| Timer0      | Mattis      ||||
+| TMP75B      | Moritz      ||||
+| WS2812      | Moritz      ||||
+| Servo       | Mattis      ||||
 | CAN         |||||
