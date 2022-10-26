@@ -9,3 +9,4 @@
 | WS2812      | Moritz      ||||
 | Servo       | Mattis      ||||
 | CAN         |||||
+| Timer1      |             | output 10ms |              |
