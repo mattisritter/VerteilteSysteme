@@ -12,8 +12,10 @@
 //Includes
 #include <avr/io.h>
 
+#include "Init1.h"
 #include "Servo.h"
 #include "WS2812.h"
+
 
 //Deklaration of global variables
 
