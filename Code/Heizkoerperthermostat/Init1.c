@@ -24,5 +24,5 @@ void InitThermostat(void){
 	//Source:			-
 	//Status:			not testet
 	//--------------------------------
-	TWI_Init(sTWI_InitParam);
+	TWI_Init();
 }
