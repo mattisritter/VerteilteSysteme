@@ -42,8 +42,4 @@ unsigned char TWI_Master_Read_Ack(void);
 unsigned char TWI_Master_Read_NAck(void);
 
 
-
-
-
-
 #endif /* TWI_H_ */

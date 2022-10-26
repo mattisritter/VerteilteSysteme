@@ -13,8 +13,6 @@
 int iTemperature;
 
 //Definition of funcitons
-
-
 uint8_t TMP75_Read_Temperature(uint8_t ucdevice_address, uint8_t uctemp2read)
 {
 	//Description:		Read temperature from TMP75
