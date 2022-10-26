@@ -119,6 +119,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Init1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Init1.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -129,6 +135,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Servo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TMP75.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TMP75.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="WS2812.c">
