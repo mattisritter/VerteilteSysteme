@@ -11,7 +11,7 @@
 #define TMP75_H_
 
 //Includes
-#include "TMP75.h"
+#include <avr/io.h>
 
 //Defines
 #define F_CPU 20000000UL //Clock des Board-?C in Hz
@@ -27,8 +27,22 @@ typedef struct{	//configuration TWI
 	uint8_t ucAddressMask; //ev. Adressmaske für den Slave
 } TWI_InitParam;
 
+typedef struct
+{
+	uint8_t ucAddress; //für den Slave: private oder allgemeine
+	Adresse
+	uint8_t ucTWIData[4];
+	uint8_t ucTWIDataLength;
+}twi_frame;
+
 //Deklaration of functions
-void TWI_Init(TWI_InitParam sinit_param);
+void TWI_Init(void);
+void TWI_Master_Start(void);
+void TWI_Master_Transmit(unsigned char ucdata);
+uint8_t TWI_Send_Frame(uint8_t ucdevice_address, twi_frame *sframe);
+unsigned char TWI_Master_Read_Ack(void);
+unsigned char TWI_Master_Read_NAck(void);
+
 uint8_t TMP75_Read_Temperature(uint8_t ucdevice_address, uint8_tuctemp2read);
 int TMP75_Get_Temperature(void);
 
