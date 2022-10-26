@@ -11,6 +11,7 @@
 #define TMP75_H_
 
 //Includes
+#include "TMP75.h"
 
 //Defines
 #define F_CPU 20000000UL //Clock des Board-?C in Hz

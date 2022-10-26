@@ -5,14 +5,7 @@
  * Author : matti
  */ 
 
-#include <avr/io.h>
 #include "main.h"
-<<<<<<< Updated upstream
-
-=======
-#include "Init1.h"
->>>>>>> Stashed changes
-
 
 int main(void)
 {
