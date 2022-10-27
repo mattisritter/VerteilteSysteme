@@ -28,7 +28,10 @@ typedef struct{	//configuration TWI
 } TWI_InitParam;
 
 //Deklaration of functions
+<<<<<<< Updated upstream
 void TWI_Init(TWI_InitParam sinit_param);
+=======
+>>>>>>> Stashed changes
 uint8_t TMP75_Read_Temperature(uint8_t ucdevice_address, uint8_tuctemp2read);
 int TMP75_Get_Temperature(void);
 
