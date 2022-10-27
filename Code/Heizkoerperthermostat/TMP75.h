@@ -12,13 +12,16 @@
 
 //Includes
 #include <avr/io.h>
-#include "TWI.h"
+#include "TWI_ATMEGA.h"
+#include <avr/interrupt.h>
+
 
 //Defines
+#define TMP75_DEVICE_TYPE_ADDRESS 0
 
 //Deklaration of functions
 
-uint8_t TMP75_Read_Temperature(uint8_t ucdevice_address, uint8_tuctemp2read);
+uint8_t TMP75_Read_Temperature(uint8_t ucdevice_address, uint8_t uctemp2read);
 int TMP75_Get_Temperature(void);
 
 
