@@ -120,10 +120,22 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="display_funktionen.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="display_funktionen.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Init1.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Init1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LED.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LED.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
@@ -132,10 +144,28 @@
     <Compile Include="main.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCP2515_HHN.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCP2515_HHN.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Servo.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Servo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Timer2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Timer2.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TMP75.c">
@@ -148,6 +178,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TWI.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TWI_ATMEGA.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TWI_ATMEGA.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="WS2812.c">
