@@ -13,36 +13,6 @@
 int iTemperature;
 
 //Definition of funcitons
-void TWI_Init(TWI_InitParam sinit_param)
-{
-	//Description:		Read temperature from TMP75
-	//Call_parameter:	sinit_param
-	//Return_parameter:	void
-	//Version:			1
-	//Date :			220408
-	//Autor:			Meroth, Sora
-	//Source:			Sensornetzwerke In Theorie Und Praxis
-	//Status:			not testet
-	//--------------------------------
-	if(sinit_param.ucDevice == TWI_MASTER)
-	{
-		TWCR = (1 << TWEA) | (1 << TWEN);
-		TWBR = sinit_param.ucTwiClock;
-		//die Taktfrequenz wird in der Haupt-Datei ausgerechnet
-	}
-	else if(sinit_param.ucDevice == TWI_SLAVE)
-	{
-		TWAR = (sinit_param.ucSlaveAddress << 1) | sinit_param.
-		ucGenAddress;
-		//die Adresse des Slaves wird bestimmt und die Freigabe für die
-		allgemeine Adresse 0x00
-		TWAMR = sinit_param.ucAddressMask <<1; //Speicherung der
-		Adressen-Maske
-		TWCR |= (1 << TWEN) | (1 << TWEA) | (1 << TWIE);
-	}
-}
-
-
 uint8_t TMP75_Read_Temperature(uint8_t ucdevice_address, uint8_t uctemp2read)
 {
 	//Description:		Read temperature from TMP75

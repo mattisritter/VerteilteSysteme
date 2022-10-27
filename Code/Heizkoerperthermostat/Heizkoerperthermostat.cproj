@@ -144,6 +144,12 @@
     <Compile Include="TMP75.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="TWI.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TWI.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="WS2812.c">
       <SubType>compile</SubType>
     </Compile>
