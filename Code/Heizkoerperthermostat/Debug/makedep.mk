@@ -20,8 +20,6 @@ Timer2.c
 
 TMP75.c
 
-TWI.c
-
 TWI_ATMEGA.c
 
 WS2812.c

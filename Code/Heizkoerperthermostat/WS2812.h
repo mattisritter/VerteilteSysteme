@@ -37,11 +37,12 @@
 
 #include <avr/io.h>
 
+
 //****************************************************************************************
 //in der main wird eine Variable vom Typ WS2812_pin definiert mit dem ansteuernden Pin nach
 //dem Beispiel:	WS2812_pin WS2812_1 =	{/*DDR register*/	&DDRD,
 //										/*PORT register*/	&PORTD,
-//										/*Pin*/				PD6};
+//										/*Pin*/				PD2};
 //****************************************************************************************
 typedef struct
 {

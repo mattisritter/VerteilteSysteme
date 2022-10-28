@@ -21,7 +21,7 @@
 //Deklaration of funtions
 void GeneralInit(void);
 
-void CAN_Filter_Init(void);
+//void CAN_Filter_Init(void);
 //void ShowMessage(can_frame *showFrame);
 void HexToAscii(unsigned char input, unsigned char* output);
 

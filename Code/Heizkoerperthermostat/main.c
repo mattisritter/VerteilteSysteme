@@ -5,12 +5,14 @@
  * Author : matti
  */ 
 
+//Includes
 #include "main.h"
 
+//Main function
 int main(void)
 {
 	
-	
+
 	
 	GerneralInit();
 	while (1)
@@ -47,5 +49,7 @@ int main(void)
 			//}
 		//}
 	}
+	
+
 }
 

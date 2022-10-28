@@ -27,40 +27,40 @@ void GerneralInit(void){
 	Display_Init();
 	//keys_Init();
 	LEDInit();
-	CAN_Filter_Init();
-	MCP2515_Init(MCP2515_1, BAUDRATE_250_KBPS);
-	MCP2515_Set_Filter_Mask(MCP2515_1, &sFilter);
+	//CAN_Filter_Init();
+	//MCP2515_Init(MCP2515_1, BAUDRATE_250_KBPS);
+	//MCP2515_Set_Filter_Mask(MCP2515_1, &sFilter);
 	//Timer1_Init();		//muss erstellt werden
 	InitTimer2CTC();
 	WS2812_Init();
 	
 }
 
-void CAN_Filter_Init(void)
-{
-	//Description:		can filter
-	//Call_parameter:	void
-	//Return_parameter:	void
-	//Version:			1
-	//Date :			27.10.2022
-	//Autor:			Sora
-	//Source:			Ilias
-	//Status:			not testet
-	//--------------------------------
-	sFilter.Rec_Buff0_Rollover = ROLLOVER_ON;
-	sFilter.RecBuff_ID[0] = STANDARD_ID;
-	sFilter.RecBuff_ID[1] = STANDARD_ID;
-	sFilter.Filter_RecBuff[0] = FILTER_ON;
-	sFilter.Filter_RecBuff[1] = FILTER_ON;
-	for(uint8_t ucI = 0; ucI < 6; ucI++)
-	{
-		sFilter.ulRecBuff_Filter[ucI] = ulReceiveFilter[ucI];
-	}
-	for(uint8_t ucI = 0; ucI < 2; ucI++)
-	{
-		sFilter.ulRecBuff_Mask[ucI] = ulReceiveMask[ucI];
-	}
-}
+//void CAN_Filter_Init(void)
+//{
+	////Description:		can filter
+	////Call_parameter:	void
+	////Return_parameter:	void
+	////Version:			1
+	////Date :			27.10.2022
+	////Autor:			Sora
+	////Source:			Ilias
+	////Status:			not testet
+	////--------------------------------
+	//sFilter.Rec_Buff0_Rollover = ROLLOVER_ON;
+	//sFilter.RecBuff_ID[0] = STANDARD_ID;
+	//sFilter.RecBuff_ID[1] = STANDARD_ID;
+	//sFilter.Filter_RecBuff[0] = FILTER_ON;
+	//sFilter.Filter_RecBuff[1] = FILTER_ON;
+	//for(uint8_t ucI = 0; ucI < 6; ucI++)
+	//{
+		//sFilter.ulRecBuff_Filter[ucI] = ulReceiveFilter[ucI];
+	//}
+	//for(uint8_t ucI = 0; ucI < 2; ucI++)
+	//{
+		//sFilter.ulRecBuff_Mask[ucI] = ulReceiveMask[ucI];
+	//}
+//}
 
 
 void HexToAscii(unsigned char input, unsigned char* output)
