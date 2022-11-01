@@ -15,8 +15,29 @@ int main(void)
 
 	
 	GerneralInit();
+	//Can
+	MCP2515_Init(MCP2515_1, BAUDRATE_250_KBPS);
+	//MCP2515_Set_Filter_Mask(MCP2515_1, &sFilter);
 	while (1)
 	{
+		if(Timer1_get_100msState() == TIMER_TRIGGERED)
+		{
+			//durchlauf alle 100ms
+			//testen der LED
+			if (keys_get_state() == S1_PRESSED)
+			{
+				LEDOn(GREEN);	//ECU Board led green
+			}
+			
+			else if (keys_get_state() == S2_PRESSED)
+			{
+				LEDOn(RED);	//ECU Board led green
+			}
+			
+		}
+		
+		
+		
 		//von Petre sora; timer1 muss erstellt werden
 		//if(Timer1_get_1sState() == TIMER_TRIGGERED)
 		//{
@@ -50,6 +71,5 @@ int main(void)
 		//}
 	}
 	
-
 }
 

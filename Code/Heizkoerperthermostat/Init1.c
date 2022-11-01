@@ -8,9 +8,7 @@
 //Includes
 #include "Init1.h"
 
-
 //Variables
-
 
 //Definition of funcitons
 
@@ -25,14 +23,12 @@ void GerneralInit(void){
 	//Status:			not testet
 	//--------------------------------
 	Display_Init();
-	//keys_Init();
 	LEDInit();
 	//CAN_Filter_Init();
-	//MCP2515_Init(MCP2515_1, BAUDRATE_250_KBPS);
-	//MCP2515_Set_Filter_Mask(MCP2515_1, &sFilter);
-	//Timer1_Init();		//muss erstellt werden
 	InitTimer2CTC();
 	WS2812_Init();
+	keys_Init();
+	Timer1_Init();
 	
 }
 

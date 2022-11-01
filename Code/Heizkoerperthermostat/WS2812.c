@@ -59,6 +59,7 @@ volatile uint8_t ucPort;
 uint16_t *PtrLedNumber, PtrPort;
 extern WS2812_pin WS2812_1;
 
+
 //uint8_t ucTresetTime[2] = {PRESCALER_64, 9};	//52µs @ 12,288MHz
 
 //****************************************************************************************

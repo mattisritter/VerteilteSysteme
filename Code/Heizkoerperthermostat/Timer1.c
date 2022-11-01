@@ -4,7 +4,7 @@
  * Created: 27.04.2022 12:02:28
  *  Author: Moritz Hoehnel
  */ 
-//register nicht angepasst
+//
 //includes
 #include "Timer1.h"
 
@@ -25,10 +25,10 @@ void Timer1_Init(){
 	//Autor:			mh
 	//Status:			ok
 	//-------------------------------------------------------------------
-	TCCR0A |= (1<<WGM01);					//CTC-Modus
-	TCCR0B |= ((1<<CS00) | (1<<CS02));		//Prescaler=1024
+	TCCR1A |= (1<<WGM11);					//CTC-Modus
+	TCCR1B |= ((1<<CS10) | (1<<CS12));		//Prescaler=1024
 	OCR0A = 179;							//10ms @f=18.432MHz
-	TIMSK0 |= 1<<OCIE0A;					//Freigabe des Timerinterrupt
+	TIMSK1 |= 1<<OCIE1A;					//Freigabe des Timerinterrupt
 	sei();									//alle Interrupts freigegeben
 }
 

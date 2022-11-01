@@ -23,11 +23,20 @@
 #include "Timer2.h"
 #include "TMP75.h"
 #include "TWI_ATMEGA.h"
+#include "Keys.h"
+#include "Timer1.h"
+
 
 //Definition von ws2812_1
 WS2812_pin WS2812_1 =	{/*DDR register*/	&DDRD,
 						/*PORT register*/	&PORTD,
 						/*Pin*/				PD2};
+						
+//
+MCP2515_pins  MCP2515_1 = {{/*CS_DDR*/	&DDRB,
+						    /*CS_PORT*/		&PORTB,
+							/*CS_pin*/		PB3,
+							/*CS_state*/	ON}};
 	
 	
 ////Deklaration of global variables
