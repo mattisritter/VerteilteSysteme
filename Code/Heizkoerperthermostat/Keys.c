@@ -1,8 +1,9 @@
 /*
  * Keys.c
  *
- * Created: 08.04.2022 10:05:15
- *  Author: Moritz Hoehnel
+ * Created:		08.04.2022 10:05:15
+ *  Author:		Moritz Hoehnel
+ * Comment:		S4 used for LED -> deactivated
  */ 
 
 //includes======================================================
@@ -25,7 +26,7 @@ void keys_Init(void){
 	//Autor:			mh
 	//Status:			ok
 	//--------------------------------
-	DDRD &= ~((1<<PD5) | (1<<PD4) | (1<<PD3) | (1<<PD2)); //Pin 5,4,3 und 2 wird zu eingang
+	DDRD &= ~((1<<PD5) | (1<<PD4) | (1<<PD3) /*| (1<<PD2)*/); //Pin 3,2 wird zu eingang
 }
 //==============================================================
 unsigned char keys_get_state(void){
@@ -60,9 +61,9 @@ unsigned char keys_get_state(void){
 		return S3_PRESSED;
 	}
 	
-	if((!ucS4_new && ucS4_old)){
-		return S4_PRESSED;
-	}
+	//if((!ucS4_new && ucS4_old)){
+		//return S4_PRESSED;
+	//}
 	
 	return KEYS_NOT_PRESSED;
 }

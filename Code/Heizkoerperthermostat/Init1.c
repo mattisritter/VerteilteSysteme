@@ -23,9 +23,9 @@ void GerneralInit(void){
 	//Status:			not testet
 	//--------------------------------
 	Display_Init();
-	LEDInit();
+	LED_Init();
 	//CAN_Filter_Init();
-	InitTimer2CTC();
+	//InitTimer2CTC();
 	WS2812_Init();
 	keys_Init();
 	Timer1_Init();

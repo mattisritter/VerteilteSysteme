@@ -1,21 +1,31 @@
 /*
  * LED.h
  *
- * Created: 12.04.2020 14:19:23
- *  Author: Meroth
+ * Created: 30.03.2022 12:17:13
+ *  Author: Moritz Hoehnel
+  Funktion: Steuerung LED
  */ 
 
 
 #ifndef LED_H_
 #define LED_H_
 
-#define RED 10
-#define GREEN 20
+//include
+#include <avr/io.h>
 
-void LEDInit();
-void LEDOn(char color);
-void LEDOff(char color);
-void LEDToggle(char color);
+
+
+//define
+
+
+//Deklaration der Fnen
+void LED_Init(void);
+//void LED_gn_on(void);
+//void LED_gn_off(void);
+void LED_rd_on(void);
+void LED_rd_off(void);
+void LED_rd_toggle(void);
+//void LED_gn_toggle(void);
 
 
 

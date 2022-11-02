@@ -12,8 +12,8 @@ main.d main.o: .././main.c .././main.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  .././Init1.h .././Servo.h .././WS2812.h .././display_funktionen.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././LED.h .././MCP2515_HHN.h .././SPI.h .././Timer2.h .././TMP75.h \
- .././TWI_ATMEGA.h .././Keys.h .././Timer1.h
+ .././LED.h .././MCP2515_HHN.h .././SPI.h .././TMP75.h .././TWI_ATMEGA.h \
+ .././Keys.h .././Timer1.h
 
 .././main.h:
 
@@ -54,8 +54,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././MCP2515_HHN.h:
 
 .././SPI.h:
-
-.././Timer2.h:
 
 .././TMP75.h:
 

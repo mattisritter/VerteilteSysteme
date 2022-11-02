@@ -16,7 +16,7 @@
 #define S1_PRESSED			1
 #define S2_PRESSED			2
 #define S3_PRESSED			3
-#define S4_PRESSED			4
+//#define S4_PRESSED			4
 #define KEYS_NOT_PRESSED	0
 
 //Deklaration der Funktionen

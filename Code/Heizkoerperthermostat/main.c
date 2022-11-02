@@ -12,7 +12,7 @@
 int main(void)
 {
 	
-
+	char i = 0;
 	
 	GerneralInit();
 	//Can
@@ -20,19 +20,77 @@ int main(void)
 	//MCP2515_Set_Filter_Mask(MCP2515_1, &sFilter);
 	while (1)
 	{
+		
 		if(Timer1_get_100msState() == TIMER_TRIGGERED)
 		{
-			//durchlauf alle 100ms
-			//testen der LED
-			if (keys_get_state() == S1_PRESSED)
+			
+		
+			
+			
+			uint8_t uGreen[3] = {7/*green*/,0/*red*/,0/*blue*/};
+			uint8_t uBrightGreen[3] = {5/*green*/,2/*red*/,0/*blue*/};
+			uint8_t uYellow[3] = {3/*green*/,4/*red*/,0/*blue*/};
+			uint8_t uOrange[3] = {2/*green*/,4/*red*/,1/*blue*/};
+			uint8_t uMagenta[3] = {0/*green*/,4/*red*/,3/*blue*/};
+			uint8_t uRed[3] = {0/*green*/,7/*red*/,0/*blue*/};
+				
+			
+			if (i == 0)
 			{
-				LEDOn(GREEN);	//ECU Board led green
+				WS2812_set_off();
+				WS2812_Set_Colour(uGreen,2);
+				i=1;
+			}
+			else if (i == 1)
+			{
+				//WS2812_set_off();
+				WS2812_Set_Colour(uBrightGreen,2);
+				i=2;
+			}
+			else if (i == 2)
+			{
+				WS2812_set_off();
+				WS2812_Set_Colour(uYellow,2);
+				i=3;
+			}
+			else if (i == 3)
+			{
+				WS2812_set_off();
+				WS2812_Set_Colour(uOrange,2);
+				i=4;
+			}
+			else if (i == 4)
+			{
+				WS2812_set_off();
+				WS2812_Set_Colour(uMagenta,2);
+				i=5;
+			}
+			else if (i == 5)
+			{
+				WS2812_set_off();
+				WS2812_Set_Colour(uRed,2);
+				i=0;
 			}
 			
-			else if (keys_get_state() == S2_PRESSED)
+				
+				
+			unsigned char ucKey = keys_get_state();
+			//durchlauf alle 100ms
+			//testen der LED
+			if (ucKey == S1_PRESSED)
 			{
-				LEDOn(RED);	//ECU Board led green
+				WS2812_Set_Colour(uRed,2);
+				LED_rd_toggle();	//ECU Board red green
 			}
+			
+			if (ucKey == S2_PRESSED)
+			{
+				LED_rd_toggle();	//ECU Board red green
+			}
+			if (ucKey == S3_PRESSED)
+			{
+				LED_rd_toggle();	//ECU Board red green
+			}	
 			
 		}
 		
