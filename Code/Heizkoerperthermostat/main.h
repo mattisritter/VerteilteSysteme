@@ -27,6 +27,9 @@
 #include "Keys.h"
 #include "Timer1.h"
 
+//Defines
+#define CAN_NOT_RECEIVED 101
+#define CAN_RECEIVED 111
 
 //Definition von ws2812_1
 WS2812_pin WS2812_1 =	{/*DDR register*/	&DDRD,

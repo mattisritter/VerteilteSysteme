@@ -3,7 +3,7 @@
  *
  * Created: 30.03.2022 12:27:38
  *  Author: Moritz Hoehnel
- * Comment: GREEN LED switch off, clashing with servo
+ * Comment: GREEN LED switched off, clashing with servo
  */ 
 
 

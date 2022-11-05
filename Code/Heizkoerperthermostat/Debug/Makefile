@@ -37,6 +37,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../Controller.c \
 ../display_funktionen.c \
 ../Init1.c \
 ../Keys.c \
@@ -59,6 +60,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+Controller.o \
 display_funktionen.o \
 Init1.o \
 Keys.o \
@@ -74,6 +76,7 @@ TWI_ATMEGA.o \
 WS2812.o
 
 OBJS_AS_ARGS +=  \
+Controller.o \
 display_funktionen.o \
 Init1.o \
 Keys.o \
@@ -89,6 +92,7 @@ TWI_ATMEGA.o \
 WS2812.o
 
 C_DEPS +=  \
+Controller.d \
 display_funktionen.d \
 Init1.d \
 Keys.d \
@@ -104,6 +108,7 @@ TWI_ATMEGA.d \
 WS2812.d
 
 C_DEPS_AS_ARGS +=  \
+Controller.d \
 display_funktionen.d \
 Init1.d \
 Keys.d \
@@ -132,6 +137,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+./Controller.o: .././Controller.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -O0 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega88pa -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega88pa" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./display_funktionen.o: .././display_funktionen.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0

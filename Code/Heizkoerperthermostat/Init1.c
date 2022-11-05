@@ -42,6 +42,8 @@ void GerneralInit(void){
 	
 }
 
+
+
 //void CAN_Filter_Init(void)
 //{
 	////Description:		can filter

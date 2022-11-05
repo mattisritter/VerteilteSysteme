@@ -136,6 +136,12 @@
     <CleanTarget>clean</CleanTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controller.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Controller.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="display_funktionen.c">
       <SubType>compile</SubType>
     </Compile>
