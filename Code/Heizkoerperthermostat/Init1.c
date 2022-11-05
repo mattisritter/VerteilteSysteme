@@ -24,11 +24,21 @@ void GerneralInit(void){
 	//--------------------------------
 	Display_Init();
 	LED_Init();
-	//CAN_Filter_Init();
-	//InitTimer2CTC();
+	
 	WS2812_Init();
 	keys_Init();
 	Timer1_Init();
+	
+	//Calculate TWI register clock=========================================================
+	unsigned int F_CPU = 20/*[MHz]*/;			//Clock of uC_Board in Hz
+	unsigned int TWI_SCL_FREQ = 400/*[kHz]*/;	//needed TWI frequency for fast speed TWI
+	unsigned int itwi_clock = (((F_CPU*1000 / TWI_SCL_FREQ)- 16) / 2 + 1);
+	unsigned char uctwi_clock = (unsigned char)itwi_clock;
+	//=====================================================================================	
+	TWI_Master_Init(uctwi_clock);
+
+	//CAN_Filter_Init();
+	//InitTimer2CTC();
 	
 }
 

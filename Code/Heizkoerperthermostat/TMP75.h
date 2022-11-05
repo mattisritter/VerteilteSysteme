@@ -17,7 +17,7 @@
 
 
 //Defines
-#define TMP75_DEVICE_TYPE_ADDRESS 0
+#define TMP75_DEVICE_TYPE_ADDRESS 0x00
 
 //Deklaration of functions
 
