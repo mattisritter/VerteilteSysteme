@@ -28,6 +28,7 @@ void GerneralInit(void){
 	WS2812_Init();
 	keys_Init();
 	Timer1_Init();
+	Servo_Init();
 	
 	//Calculate TWI register clock=========================================================
 	unsigned int F_CPU = 20/*[MHz]*/;			//Clock of uC_Board in Hz

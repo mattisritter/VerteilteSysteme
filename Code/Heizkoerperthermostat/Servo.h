@@ -9,8 +9,15 @@
 #ifndef SERVO_H_
 #define SERVO_H_
 
+// include's
+#include <avr/io.h>
 
+//declaration of variable's
 
+	
+// definition of function's
+void Servo_Init(void);
+void Servo_Set_Position(unsigned char ucPosition);
 
 
 #endif /* SERVO_H_ */
