@@ -18,7 +18,7 @@ void GerneralInit(void){
 	//Return_parameter:	void
 	//Version:			1
 	//Date :			27.10.2022
-	//Autor:			Moritz
+	//Author:			Moritz
 	//Source:			
 	//Status:			not testet
 	//--------------------------------

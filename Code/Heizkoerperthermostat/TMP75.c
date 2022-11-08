@@ -62,44 +62,10 @@ int TMP75_Get_Temperature(void)
 	//Return_parameter:	Temperature with one decimal number
 	//Version:			1
 	//Date :			4.11.22
-	//Autor:			Moritz
+	//Author:			Moritz
 	//Source:			
 	//Status:			released
 	//--------------------------------	
-	//int iTempC;		//Return value 
-	//unsigned char ucNegFlag = 0;	//Gets one if temp is negative
-	//double dTempComma; //helps dealing with decimal
-	//
-	//iTempC = iTemperature /256; //change to degree celcius
-	//dTempComma = iTemperature /256.00;
-	//if (iTempC < 0)/*Turns neg number to positive for rounding*/
-	//{
-		//iTempC = iTempC *(-1);
-		//dTempComma = dTempComma *(-1);
-		//ucNegFlag = 1;
-	//}
-	////round in 0,5 steps------------
-	//dTempComma = dTempComma - iTempC; //only comma value remains
-	//if (dTempComma < 0.25)
-	//{
-		//dTempComma = 0;
-	//}
-	//else if (dTempComma < 0.75)
-	//{
-		//dTempComma = 0.5;
-	//}
-	//else
-	//{
-		//dTempComma = 1;
-	//}
-	//iTempC = (iTempC + dTempComma) *10;
-	////------------------------------------
-	//if (ucNegFlag == 1) /*Makes neg number neg*/
-	//{
-		//iTempC = iTempC * (-1);
-	//}
-//
-	//return iTempC;
 	if (iTemperature >> 15)
 	{
 		iTemperature = (~iTemperature+1) * (-1);
@@ -114,7 +80,7 @@ void Disp_PrintTemperature(int ui2print){
 	//Return_parameter:	Temperature with one decimal number
 	//Version:			1
 	//Date :			4.11.22
-	//Autor:			Moritz
+	//Author:			Moritz
 	//Source:
 	//Status:			released
 	//--------------------------------
@@ -177,7 +143,7 @@ void Disp_PrintTarget(int ui2print, unsigned char CANStatus){
 	//Return_parameter:	none
 	//Version:			1
 	//Date :			4.11.22
-	//Autor:			Moritz
+	//Author:			Moritz
 	//Source:
 	//Status:			released
 	//--------------------------------

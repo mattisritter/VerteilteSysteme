@@ -26,7 +26,7 @@ void TempController(int actualTemp, int targetTemp)
 	//Return_parameter:	None
 	//Version:			1
 	//Date :			4.11.22
-	//Autor:			Moritz
+	//Author:			Moritz
 	//Source:
 	//Status:			released
 	//--------------------------------

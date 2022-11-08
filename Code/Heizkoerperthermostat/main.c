@@ -18,7 +18,7 @@ int main(void)
 	unsigned char ucCANStatus = CAN_NOT_RECEIVED;
 	int iTargetTemp = 230;	//Initial set of target
 							//2 avoid comma value is multiplied with 10
-	
+	int iActualTemp;
 	//Can
 	MCP2515_Init(MCP2515_1, BAUDRATE_250_KBPS);
 	//MCP2515_Set_Filter_Mask(MCP2515_1, &sFilter);
@@ -26,14 +26,16 @@ int main(void)
 	
 	while (1)
 	{
+		if (Timer1_get_100msState() == TIMER_TRIGGERED)	/*Prevent tmp75 from overheating*/
+		{
+			TMP75_Read_Temperature();
+			iActualTemp = TMP75_Get_Temperature();	//Asks for temp value;
+			Disp_PrintTemperature(iActualTemp);			//prints to display
+		}
 				
 		if(Timer1_get_10msState() == TIMER_TRIGGERED)
 		{
-			TMP75_Read_Temperature();
-			int iActualTemp = TMP75_Get_Temperature();	//Asks for temp value;
-			Disp_PrintTemperature(iActualTemp);			//prints to display
 			unsigned char ucKeyStatus = keys_get_state();	//Asks for key status
-			
 			switch(ucCANStatus)
 			{
 				case CAN_NOT_RECEIVED:

@@ -7,7 +7,7 @@
 
 #include "Servo.h"
 
-unsigned char ucServoPosition[6] = {44, 38, 30, 23, 16, 9};
+unsigned char ucServoPosition[6] = {44, 38, 30, 23, 16, 10};
 
 void Servo_Init(void)
 
@@ -17,9 +17,9 @@ void Servo_Init(void)
 	//Return_parameter:	void
 	//Version:			1
 	//Date :			31.10.2022
-	//Autor:			Mattis Ritter
+	//Author:			Mattis Ritter
 	//Source:
-	//Status:			not testet
+	//Status:			released
 	//--------------------------------
 	DDRD |= (1 << DDD6); //Port B Bit 1 – PWM-Ausgang
 	TCCR0A = (1 << WGM00) | (1 << WGM01) | (1 << COM0A1); //Fast-PWM, Clear OC0A on compare match, set OC0A at BOTTOM, (non-inverting mode)
@@ -34,9 +34,9 @@ void Servo_Set_Position(unsigned char ucPosition)
 	//Return_parameter:	void
 	//Version:			1
 	//Date :			31.10.2022
-	//Autor:			Mattis Ritter
+	//Author:			Mattis Ritter
 	//Source:
-	//Status:			not testet
+	//Status:			released
 	//--------------------------------
 	
 	OCR0A = ucServoPosition[ucPosition];
