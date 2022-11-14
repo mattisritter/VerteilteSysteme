@@ -14,6 +14,7 @@ int iTemperature;
 uint8_t ucdevice_address =  0b1001000; //all address pins to gnd/  address according to book: 0x90;
 uint8_t uctemp2read = 0b00000000;	//Read temperature register
 
+
 //Definition of funcitons
 //======================================================================================
 uint8_t TMP75_Read_Temperature(void)
@@ -70,137 +71,175 @@ int TMP75_Get_Temperature(void)
 	{
 		iTemperature = (~iTemperature+1) * (-1);
 	}
-	return (iTemperature >> 8) * 10 + ((iTemperature >> 7) & 1) * 5;
+	return (iTemperature >> 8) * 10 + (iTemperature & 0b11110000) * 5/128;
 }
 //======================================================================================
 //=====================================================================================================
-void Disp_PrintTemperature(int ui2print){
-	//Description:		Prints actual temp
-	//Call_parameter:	void
-	//Return_parameter:	Temperature with one decimal number
-	//Version:			1
-	//Date :			4.11.22
-	//Author:			Moritz
-	//Source:
-	//Status:			released
-	//--------------------------------
-	//Prefill of array-----------------------------
-	unsigned char ucDisp[16] = " Actual:      C ";
-	//---------------------------------------------
-	//Handling negative numbers-------------------------------------
+//void Disp_PrintTemperature(int ui2print){
+	////Description:		Prints actual temp
+	////Call_parameter:	void
+	////Return_parameter:	Temperature with one decimal number
+	////Version:			1
+	////Date :			4.11.22
+	////Author:			Moritz
+	////Source:
+	////Status:			released
+	////--------------------------------
+	////Prefill of array-----------------------------
+	//unsigned char ucDisp[16] = " Actual:    . C ";
+	////---------------------------------------------
+	////Handling negative numbers-------------------------------------
+	//unsigned char ucNegFlag = 0;	//rememberes if number negative
+	//if (ui2print < 0)
+	//{
+		//ui2print = ui2print *(-1);
+		//ucNegFlag = 1;
+		//
+	//}
+	////---------------------------------------------------------------
+	////add temp value to array---------------------------------------------------------------------
+	//for(unsigned char i = 0; i < 6; i++){
+		//if (i == 1)
+		//{
+			//i++;
+		//}
+		////Geht stelle für stelle der int Zahl durch und schreibt sie in array, von hinten beginnend
+		//ucDisp[(13 - i)] = (char)(ui2print % 10) + 48;
+		//ui2print = ui2print / 10;
+	//}
+	////---------------------------------------------------------------------------------------------
+	////Replace zeros by spaces-----------------------------------------------------------------------
+	//unsigned char ucNotZero = 0; //varaible to break while loop at first number not 0
+	//unsigned char ucPosDispArray = 8; //Position in array for while loop
+	//while (ucNotZero == 0)
+	//{
+		////Breaks if number is not 0 or last digit is reached
+		//if((ucDisp[ucPosDispArray] != '0') || (ucPosDispArray >= 11) )
+		//{
+			//ucNotZero = 1;
+			//if (ucNegFlag == 1) /*showing - if at negative temp*/
+			//{
+				//ucDisp[(ucPosDispArray-1)] = '-';
+			//}
+		//}
+		//else if (ucDisp[ucPosDispArray] == '0')
+		//{
+			//ucDisp[ucPosDispArray] = ' ';
+			//ucPosDispArray++;
+		//}
+	//}
+	////------------------------------------------------------------------------------------------------
+	////Print to Display-----------------------------------------------
+	//Display_SetCursor(0,0);
+	//Display_Print(ucDisp,16);
+	//Display_SetCursor(2,0);		//Platzieren des Cursors auserhalb
+	////---------------------------------------------------------------
+//}
+////=====================================================================================================
+////=====================================================================================================
+//void Disp_PrintTarget(int ui2print, unsigned char CANStatus){
+	////Description:		Print target temp
+	////Call_parameter:	target temp , status if can already received
+	////Return_parameter:	none
+	////Version:			1
+	////Date :			4.11.22
+	////Author:			Moritz
+	////Source:
+	////Status:			released
+	////--------------------------------
+	////Prefill of array-----------------------------
+	//unsigned char ucDisp[16] = " Target:    . C ";
+	//if (CANStatus == 111)
+	//{
+		//ucDisp[0] = '[';
+		//ucDisp[15] = ']';
+	//}
+	//
+	////---------------------------------------------
+	////Handling negative numbers-------------------------------------
+	//unsigned char ucNegFlag = 0;	//rememberes if number negative
+	//if (ui2print < 0)
+	//{
+		//ui2print = ui2print *(-1);
+		//ucNegFlag = 1;
+	//}
+	////---------------------------------------------------------------
+	////add temp value to array---------------------------------------------------------------------
+	//for(unsigned char i = 0; i < 6; i++){
+		//if (i == 1)
+		//{
+			//i++;
+		//}
+		////Geht stelle für stelle der int Zahl durch und schreibt sie in array, von hinten beginnend
+		//ucDisp[(13 - i)] = (char)(ui2print % 10) + 48;
+		//ui2print = ui2print / 10;
+	//}
+	////---------------------------------------------------------------------------------------------
+	////Replace zeros by spaces-----------------------------------------------------------------------
+	//unsigned char ucNotZero = 0; //varaible to break while loop at first number not 0
+	//unsigned char ucPosDispArray = 8; //Position in array for while loop
+	//while (ucNotZero == 0)
+	//{
+		////Breaks if number is not 0 or last digit is reached
+		//if((ucDisp[ucPosDispArray] != '0') || (ucPosDispArray >= 10) )
+		//{
+			//ucNotZero = 1;
+			//if (ucNegFlag == 1) /*showing - if at negative temp*/
+			//{
+				//ucDisp[(ucPosDispArray-1)] = '-';
+			//}
+		//}
+		//else if (ucDisp[ucPosDispArray] == '0')
+		//{
+			//ucDisp[ucPosDispArray] = ' ';
+			//ucPosDispArray++;
+		//}
+	//}
+	////------------------------------------------------------------------------------------------------
+	////Print to Display-----------------------------------------------
+	//Display_SetCursor(1,0);
+	//Display_Print(ucDisp,16);
+	//Display_SetCursor(2,0);		//Platzieren des Cursors auserhalb
+	////---------------------------------------------------------------
+//}
+////=====================================================================================================
+void Display_Output(int iTemp2print, unsigned char ucLine, unsigned char ucCAN)
+{
+	unsigned char ucDisp[2][16] = {" Actual:   0.0C ", " Target:   0.0C "};
+	unsigned char j = 0;
 	unsigned char ucNegFlag = 0;	//rememberes if number negative
-	if (ui2print < 0)
+	if (ucCAN == 111)
 	{
-		ui2print = ui2print *(-1);
-		ucNegFlag = 1;
-		
+		ucDisp[2][0] = '[';
+		ucDisp[2][15] = ']';
 	}
-	//---------------------------------------------------------------
-	//add temp value to array---------------------------------------------------------------------
-	for(unsigned char i = 0; i < 6; i++){
-		if (i == 1)
+	if (iTemp2print < 0)
+	{
+		iTemp2print = iTemp2print *(-1);
+		ucNegFlag = 1;		
+	}
+	while (iTemp2print != 0)
+	{
+		if (j == 1)
 		{
-			ucDisp[(13-i)] = '.';
-			i++;
+			j++;
 		}
 		//Geht stelle für stelle der int Zahl durch und schreibt sie in array, von hinten beginnend
-		ucDisp[(13 - i)] = (char)(ui2print % 10) + 48;
-		ui2print = ui2print / 10;
+		ucDisp[ucLine][(13 - j)] = (char)(iTemp2print % 10) + 48;
+		iTemp2print = iTemp2print / 10;
+		j++;
 	}
-	//---------------------------------------------------------------------------------------------
-	//Replace zeros by spaces-----------------------------------------------------------------------
-	unsigned char ucNotZero = 0; //varaible to break while loop at first number not 0
-	unsigned char ucPosDispArray = 8; //Position in array for while loop
-	while (ucNotZero == 0)
+	if (ucNegFlag == 1)
 	{
-		//Breaks if number is not 0 or last digit is reached
-		if((ucDisp[ucPosDispArray] != '0') || (ucPosDispArray >= 11) )
+		if (j == 1)
 		{
-			ucNotZero = 1;
-			if (ucNegFlag == 1) /*showing - if at negative temp*/
-			{
-				ucDisp[(ucPosDispArray-1)] = '-';
-			}
+			j += 2;
 		}
-		else if (ucDisp[ucPosDispArray] == '0')
-		{
-			ucDisp[ucPosDispArray] = ' ';
-			ucPosDispArray++;
-		}
+		ucDisp[ucLine][(13 - j)] = '-';
 	}
-	//------------------------------------------------------------------------------------------------
 	//Print to Display-----------------------------------------------
-	Display_SetCursor(0,0);
-	Display_Print(ucDisp,16);
+	Display_SetCursor(ucLine,0);
+	Display_Print(ucDisp[ucLine],16);
 	Display_SetCursor(2,0);		//Platzieren des Cursors auserhalb
 	//---------------------------------------------------------------
 }
-//=====================================================================================================
-//=====================================================================================================
-void Disp_PrintTarget(int ui2print, unsigned char CANStatus){
-	//Description:		Print target temp
-	//Call_parameter:	target temp , status if can already received
-	//Return_parameter:	none
-	//Version:			1
-	//Date :			4.11.22
-	//Author:			Moritz
-	//Source:
-	//Status:			released
-	//--------------------------------
-	//Prefill of array-----------------------------
-	unsigned char ucDisp[16] = " Target:      C ";
-	if (CANStatus == 111)
-	{
-		ucDisp[0] = '[';
-		ucDisp[15] = ']';
-	}
-	
-	//---------------------------------------------
-	//Handling negative numbers-------------------------------------
-	unsigned char ucNegFlag = 0;	//rememberes if number negative
-	if (ui2print < 0)
-	{
-		ui2print = ui2print *(-1);
-		ucNegFlag = 1;
-	}
-	//---------------------------------------------------------------
-	//add temp value to array---------------------------------------------------------------------
-	for(unsigned char i = 0; i < 6; i++){
-		if (i == 1)
-		{
-			ucDisp[(13-i)] = '.';
-			i++;
-		}
-		//Geht stelle für stelle der int Zahl durch und schreibt sie in array, von hinten beginnend
-		ucDisp[(13 - i)] = (char)(ui2print % 10) + 48;
-		ui2print = ui2print / 10;
-	}
-	//---------------------------------------------------------------------------------------------
-	//Replace zeros by spaces-----------------------------------------------------------------------
-	unsigned char ucNotZero = 0; //varaible to break while loop at first number not 0
-	unsigned char ucPosDispArray = 8; //Position in array for while loop
-	while (ucNotZero == 0)
-	{
-		//Breaks if number is not 0 or last digit is reached
-		if((ucDisp[ucPosDispArray] != '0') || (ucPosDispArray >= 10) )
-		{
-			ucNotZero = 1;
-			if (ucNegFlag == 1) /*showing - if at negative temp*/
-			{
-				ucDisp[(ucPosDispArray-1)] = '-';
-			}
-		}
-		else if (ucDisp[ucPosDispArray] == '0')
-		{
-			ucDisp[ucPosDispArray] = ' ';
-			ucPosDispArray++;
-		}
-	}
-	//------------------------------------------------------------------------------------------------
-	//Print to Display-----------------------------------------------
-	Display_SetCursor(1,0);
-	Display_Print(ucDisp,16);
-	Display_SetCursor(2,0);		//Platzieren des Cursors auserhalb
-	//---------------------------------------------------------------
-}
-//=====================================================================================================

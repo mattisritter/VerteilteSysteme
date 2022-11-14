@@ -30,7 +30,8 @@ int main(void)
 		{
 			TMP75_Read_Temperature();
 			iActualTemp = TMP75_Get_Temperature();	//Asks for temp value;
-			Disp_PrintTemperature(iActualTemp);			//prints to display
+			//Disp_PrintTemperature(iActualTemp);			//prints to display
+			Display_Output(iActualTemp, 0, 255);
 		}
 				
 		if(Timer1_get_10msState() == TIMER_TRIGGERED)
@@ -39,7 +40,8 @@ int main(void)
 			switch(ucCANStatus)
 			{
 				case CAN_NOT_RECEIVED:
-				Disp_PrintTarget(iTargetTemp, CAN_NOT_RECEIVED); //Prints target
+				//Disp_PrintTarget(iTargetTemp, CAN_NOT_RECEIVED); //Prints target
+				Display_Output(iTargetTemp, 1, ucCANStatus);
 				//Test if changes wished--------------
 				if (ucKeyStatus == S2_PRESSED)
 				{

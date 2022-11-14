@@ -357,7 +357,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x15fa
+.text           0x00000000     0x147c
  *(.vectors)
  .vectors       0x00000000       0x34 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
                 0x00000000                __vector_default
@@ -522,113 +522,110 @@ END GROUP
  .text.LED_Init
                 0x00000742       0x22 LED.o
                 0x00000742                LED_Init
- .text.main     0x00000764       0x9e main.o
+ .text.main     0x00000764       0xa4 main.o
                 0x00000764                main
  .text.MCP2515_Init
-                0x00000802       0x8e MCP2515_HHN.o
-                0x00000802                MCP2515_Init
+                0x00000808       0x8e MCP2515_HHN.o
+                0x00000808                MCP2515_Init
  .text.MCP2515_Write_Reg
-                0x00000890       0x92 MCP2515_HHN.o
-                0x00000890                MCP2515_Write_Reg
+                0x00000896       0x92 MCP2515_HHN.o
+                0x00000896                MCP2515_Write_Reg
  .text.MCP2515_Change_Reg
-                0x00000922       0x6e MCP2515_HHN.o
-                0x00000922                MCP2515_Change_Reg
+                0x00000928       0x6e MCP2515_HHN.o
+                0x00000928                MCP2515_Change_Reg
  .text.MCP2515_Set_OpMode
-                0x00000990       0x52 MCP2515_HHN.o
-                0x00000990                MCP2515_Set_OpMode
+                0x00000996       0x52 MCP2515_HHN.o
+                0x00000996                MCP2515_Set_OpMode
  .text.MCP2515_Change_ClkOut
-                0x000009e2       0x52 MCP2515_HHN.o
-                0x000009e2                MCP2515_Change_ClkOut
+                0x000009e8       0x52 MCP2515_HHN.o
+                0x000009e8                MCP2515_Change_ClkOut
  .text.MCP2515_Set_Baudrate
-                0x00000a34       0x6a MCP2515_HHN.o
-                0x00000a34                MCP2515_Set_Baudrate
+                0x00000a3a       0x6a MCP2515_HHN.o
+                0x00000a3a                MCP2515_Set_Baudrate
  .text.Servo_Init
-                0x00000a9e       0x42 Servo.o
-                0x00000a9e                Servo_Init
+                0x00000aa4       0x42 Servo.o
+                0x00000aa4                Servo_Init
  .text.Servo_Set_Position
-                0x00000ae0       0x2c Servo.o
-                0x00000ae0                Servo_Set_Position
+                0x00000ae6       0x2c Servo.o
+                0x00000ae6                Servo_Set_Position
  .text.SPI_Master_Init
-                0x00000b0c       0x92 SPI.o
-                0x00000b0c                SPI_Master_Init
+                0x00000b12       0x92 SPI.o
+                0x00000b12                SPI_Master_Init
  .text.SPI_Master_SlaveSelectInit
-                0x00000b9e       0x7e SPI.o
-                0x00000b9e                SPI_Master_SlaveSelectInit
+                0x00000ba4       0x7e SPI.o
+                0x00000ba4                SPI_Master_SlaveSelectInit
  .text.SPI_Master_Start
-                0x00000c1c       0x58 SPI.o
-                0x00000c1c                SPI_Master_Start
+                0x00000c22       0x58 SPI.o
+                0x00000c22                SPI_Master_Start
  .text.SPI_Master_Stop
-                0x00000c74       0x56 SPI.o
-                0x00000c74                SPI_Master_Stop
+                0x00000c7a       0x56 SPI.o
+                0x00000c7a                SPI_Master_Stop
  .text.SPI_Master_Write
-                0x00000cca       0x34 SPI.o
-                0x00000cca                SPI_Master_Write
+                0x00000cd0       0x34 SPI.o
+                0x00000cd0                SPI_Master_Write
  .text.Timer1_Init
-                0x00000cfe       0x52 Timer1.o
-                0x00000cfe                Timer1_Init
+                0x00000d04       0x52 Timer1.o
+                0x00000d04                Timer1_Init
  .text.__vector_11
-                0x00000d50       0x68 Timer1.o
-                0x00000d50                __vector_11
+                0x00000d56       0x68 Timer1.o
+                0x00000d56                __vector_11
  .text.Timer1_get_10msState
-                0x00000db8       0x20 Timer1.o
-                0x00000db8                Timer1_get_10msState
+                0x00000dbe       0x20 Timer1.o
+                0x00000dbe                Timer1_get_10msState
  .text.Timer1_get_100msState
-                0x00000dd8       0x20 Timer1.o
-                0x00000dd8                Timer1_get_100msState
+                0x00000dde       0x20 Timer1.o
+                0x00000dde                Timer1_get_100msState
  .text.__vector_7
-                0x00000df8       0x68 Timer2.o
-                0x00000df8                __vector_7
+                0x00000dfe       0x68 Timer2.o
+                0x00000dfe                __vector_7
  .text.TMP75_Read_Temperature
-                0x00000e60      0x118 TMP75.o
-                0x00000e60                TMP75_Read_Temperature
+                0x00000e66      0x118 TMP75.o
+                0x00000e66                TMP75_Read_Temperature
  .text.TMP75_Get_Temperature
-                0x00000f78       0x74 TMP75.o
-                0x00000f78                TMP75_Get_Temperature
- .text.Disp_PrintTemperature
-                0x00000fec      0x16c TMP75.o
-                0x00000fec                Disp_PrintTemperature
- .text.Disp_PrintTarget
-                0x00001158      0x17c TMP75.o
-                0x00001158                Disp_PrintTarget
+                0x00000f7e       0x7c TMP75.o
+                0x00000f7e                TMP75_Get_Temperature
+ .text.Display_Output
+                0x00000ffa      0x15c TMP75.o
+                0x00000ffa                Display_Output
  .text.TWI_Master_Init
-                0x000012d4       0x2a TWI_ATMEGA.o
-                0x000012d4                TWI_Master_Init
+                0x00001156       0x2a TWI_ATMEGA.o
+                0x00001156                TWI_Master_Init
  .text.TWI_Master_Start
-                0x000012fe       0x28 TWI_ATMEGA.o
-                0x000012fe                TWI_Master_Start
+                0x00001180       0x28 TWI_ATMEGA.o
+                0x00001180                TWI_Master_Start
  .text.TWI_Master_Stop
-                0x00001326       0x1a TWI_ATMEGA.o
-                0x00001326                TWI_Master_Stop
+                0x000011a8       0x1a TWI_ATMEGA.o
+                0x000011a8                TWI_Master_Stop
  .text.TWI_Master_Transmit
-                0x00001340       0x38 TWI_ATMEGA.o
-                0x00001340                TWI_Master_Transmit
+                0x000011c2       0x38 TWI_ATMEGA.o
+                0x000011c2                TWI_Master_Transmit
  .text.TWI_Master_Read_Ack
-                0x00001378       0x2e TWI_ATMEGA.o
-                0x00001378                TWI_Master_Read_Ack
+                0x000011fa       0x2e TWI_ATMEGA.o
+                0x000011fa                TWI_Master_Read_Ack
  .text.TWI_Master_Read_NAck
-                0x000013a6       0x2e TWI_ATMEGA.o
-                0x000013a6                TWI_Master_Read_NAck
+                0x00001228       0x2e TWI_ATMEGA.o
+                0x00001228                TWI_Master_Read_NAck
  .text.__vector_24
-                0x000013d4       0x64 TWI_ATMEGA.o
-                0x000013d4                __vector_24
+                0x00001256       0x64 TWI_ATMEGA.o
+                0x00001256                __vector_24
  .text.WS2812_Init
-                0x00001438       0x42 WS2812.o
-                0x00001438                WS2812_Init
+                0x000012ba       0x42 WS2812.o
+                0x000012ba                WS2812_Init
  .text.WS2812_Set_Colour
-                0x0000147a      0x12e WS2812.o
-                0x0000147a                WS2812_Set_Colour
+                0x000012fc      0x12e WS2812.o
+                0x000012fc                WS2812_Set_Colour
  .text.libgcc.div
-                0x000015a8       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_udivmodhi4.o)
-                0x000015a8                __udivmodhi4
+                0x0000142a       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_udivmodhi4.o)
+                0x0000142a                __udivmodhi4
  .text.libgcc.div
-                0x000015d0       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_divmodhi4.o)
-                0x000015d0                _div
-                0x000015d0                __divmodhi4
-                0x000015f6                . = ALIGN (0x2)
+                0x00001452       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_divmodhi4.o)
+                0x00001452                _div
+                0x00001452                __divmodhi4
+                0x00001478                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000015f6        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
-                0x000015f6                _exit
-                0x000015f6                exit
+ .fini9         0x00001478        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
+                0x00001478                _exit
+                0x00001478                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -647,11 +644,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000015f6        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
+ .fini0         0x00001478        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
  *(.fini0)
-                0x000015fa                _etext = .
+                0x0000147c                _etext = .
 
-.data           0x00800100       0x6e load address 0x000015fa
+.data           0x00800100       0x6c load address 0x0000147c
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -704,76 +701,76 @@ END GROUP
                 0x0080014b                ucdevice_address
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x0080014c       0x22 TMP75.o
+ .rodata        0x0080014c       0x20 TMP75.o
  *(.rodata*)
  *(.gnu.linkonce.r*)
-                0x0080016e                . = ALIGN (0x2)
-                0x0080016e                _edata = .
-                0x0080016e                PROVIDE (__data_end, .)
+                0x0080016c                . = ALIGN (0x2)
+                0x0080016c                _edata = .
+                0x0080016c                PROVIDE (__data_end, .)
 
-.bss            0x0080016e       0x1b
-                0x0080016e                PROVIDE (__bss_start, .)
+.bss            0x0080016c       0x1b
+                0x0080016c                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.ucFlag10ms
-                0x0080016e        0x1 Timer1.o
-                0x0080016e                ucFlag10ms
- .bss.ucCNt_1s  0x0080016f        0x1 Timer1.o
-                0x0080016f                ucCNt_1s
+                0x0080016c        0x1 Timer1.o
+                0x0080016c                ucFlag10ms
+ .bss.ucCNt_1s  0x0080016d        0x1 Timer1.o
+                0x0080016d                ucCNt_1s
  .bss.ucFlag_1s
-                0x00800170        0x1 Timer1.o
-                0x00800170                ucFlag_1s
+                0x0080016e        0x1 Timer1.o
+                0x0080016e                ucFlag_1s
  .bss.ucCNt_100ms
-                0x00800171        0x1 Timer1.o
-                0x00800171                ucCNt_100ms
+                0x0080016f        0x1 Timer1.o
+                0x0080016f                ucCNt_100ms
  .bss.ucFlag_100ms
-                0x00800172        0x1 Timer1.o
-                0x00800172                ucFlag_100ms
+                0x00800170        0x1 Timer1.o
+                0x00800170                ucFlag_100ms
  .bss.uc10MsFlag
-                0x00800173        0x1 Timer2.o
-                0x00800173                uc10MsFlag
+                0x00800171        0x1 Timer2.o
+                0x00800171                uc10MsFlag
  .bss.uc100MsFlag
-                0x00800174        0x1 Timer2.o
-                0x00800174                uc100MsFlag
+                0x00800172        0x1 Timer2.o
+                0x00800172                uc100MsFlag
  .bss.uc10MsCnt
-                0x00800175        0x1 Timer2.o
-                0x00800175                uc10MsCnt
+                0x00800173        0x1 Timer2.o
+                0x00800173                uc10MsCnt
  .bss.uc100MsCnt
-                0x00800176        0x1 Timer2.o
-                0x00800176                uc100MsCnt
- .bss.uc1sFlag  0x00800177        0x1 Timer2.o
-                0x00800177                uc1sFlag
+                0x00800174        0x1 Timer2.o
+                0x00800174                uc100MsCnt
+ .bss.uc1sFlag  0x00800175        0x1 Timer2.o
+                0x00800175                uc1sFlag
  .bss.uctemp2read
-                0x00800178        0x1 TMP75.o
-                0x00800178                uctemp2read
+                0x00800176        0x1 TMP75.o
+                0x00800176                uctemp2read
  .bss.ucTWI_INT_Flag
-                0x00800179        0x1 TWI_ATMEGA.o
-                0x00800179                ucTWI_INT_Flag
+                0x00800177        0x1 TWI_ATMEGA.o
+                0x00800177                ucTWI_INT_Flag
  *(COMMON)
- COMMON         0x0080017a        0x4 Keys.o
-                0x0080017a                ucS3_old
-                0x0080017b                ucS4_old
-                0x0080017c                ucS1_old
-                0x0080017d                ucS2_old
- COMMON         0x0080017e        0x2 TMP75.o
-                0x0080017e                iTemperature
- COMMON         0x00800180        0x1 TWI_ATMEGA.o
-                0x00800180                ucTWSR_Register
- COMMON         0x00800181        0x8 WS2812.o
-                0x00800181                ucPin
-                0x00800182                PtrLedNumber
-                0x00800184                ucPort
-                0x00800185                PtrColourList
-                0x00800187                PtrPort
-                0x00800189                PROVIDE (__bss_end, .)
-                0x000015fa                __data_load_start = LOADADDR (.data)
-                0x00001668                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800178        0x4 Keys.o
+                0x00800178                ucS3_old
+                0x00800179                ucS4_old
+                0x0080017a                ucS1_old
+                0x0080017b                ucS2_old
+ COMMON         0x0080017c        0x2 TMP75.o
+                0x0080017c                iTemperature
+ COMMON         0x0080017e        0x1 TWI_ATMEGA.o
+                0x0080017e                ucTWSR_Register
+ COMMON         0x0080017f        0x8 WS2812.o
+                0x0080017f                ucPin
+                0x00800180                PtrLedNumber
+                0x00800182                ucPort
+                0x00800183                PtrColourList
+                0x00800185                PtrPort
+                0x00800187                PROVIDE (__bss_end, .)
+                0x0000147c                __data_load_start = LOADADDR (.data)
+                0x000014e8                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800189        0x0
+.noinit         0x00800187        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800189                _end = .
+                0x00800187                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -851,7 +848,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x418
+.debug_aranges  0x00000000      0x410
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x20 Controller.o
@@ -876,16 +873,16 @@ END GROUP
  .debug_aranges
                 0x000002f0       0x40 Timer2.o
  .debug_aranges
-                0x00000330       0x38 TMP75.o
+                0x00000330       0x30 TMP75.o
  .debug_aranges
-                0x00000368       0x80 TWI_ATMEGA.o
+                0x00000360       0x80 TWI_ATMEGA.o
  .debug_aranges
-                0x000003e8       0x30 WS2812.o
+                0x000003e0       0x30 WS2812.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x263b
+.debug_info     0x00000000     0x25b2
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
  .debug_info    0x000005f4      0x251 Controller.o
@@ -899,11 +896,11 @@ END GROUP
  .debug_info    0x00001c47      0x1bb SPI.o
  .debug_info    0x00001e02      0x141 Timer1.o
  .debug_info    0x00001f43      0x13e Timer2.o
- .debug_info    0x00002081      0x219 TMP75.o
- .debug_info    0x0000229a      0x20a TWI_ATMEGA.o
- .debug_info    0x000024a4      0x197 WS2812.o
+ .debug_info    0x00002081      0x190 TMP75.o
+ .debug_info    0x00002211      0x20a TWI_ATMEGA.o
+ .debug_info    0x0000241b      0x197 WS2812.o
 
-.debug_abbrev   0x00000000     0x101a
+.debug_abbrev   0x00000000     0x1011
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
  .debug_abbrev  0x000005a2       0xd1 Controller.o
@@ -917,11 +914,11 @@ END GROUP
  .debug_abbrev  0x00000c2d       0xa8 SPI.o
  .debug_abbrev  0x00000cd5       0x7c Timer1.o
  .debug_abbrev  0x00000d51       0x7a Timer2.o
- .debug_abbrev  0x00000dcb       0xe2 TMP75.o
- .debug_abbrev  0x00000ead       0xa5 TWI_ATMEGA.o
- .debug_abbrev  0x00000f52       0xc8 WS2812.o
+ .debug_abbrev  0x00000dcb       0xd9 TMP75.o
+ .debug_abbrev  0x00000ea4       0xa5 TWI_ATMEGA.o
+ .debug_abbrev  0x00000f49       0xc8 WS2812.o
 
-.debug_line     0x00000000     0x1fea
+.debug_line     0x00000000     0x1ebf
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
  .debug_line    0x00000133      0x137 Controller.o
@@ -935,11 +932,11 @@ END GROUP
  .debug_line    0x00001470      0x159 SPI.o
  .debug_line    0x000015c9      0x199 Timer1.o
  .debug_line    0x00001762      0x191 Timer2.o
- .debug_line    0x000018f3      0x35c TMP75.o
- .debug_line    0x00001c4f      0x28c TWI_ATMEGA.o
- .debug_line    0x00001edb      0x10f WS2812.o
+ .debug_line    0x000018f3      0x231 TMP75.o
+ .debug_line    0x00001b24      0x28c TWI_ATMEGA.o
+ .debug_line    0x00001db0      0x10f WS2812.o
 
-.debug_frame    0x00000000      0xd30
+.debug_frame    0x00000000      0xd10
  *(.debug_frame)
  .debug_frame   0x00000000       0x34 Controller.o
  .debug_frame   0x00000034      0x334 display_funktionen.o
@@ -952,11 +949,11 @@ END GROUP
  .debug_frame   0x00000818       0xb4 SPI.o
  .debug_frame   0x000008cc       0xc0 Timer1.o
  .debug_frame   0x0000098c       0xc0 Timer2.o
- .debug_frame   0x00000a4c       0x94 TMP75.o
- .debug_frame   0x00000ae0      0x1dc TWI_ATMEGA.o
- .debug_frame   0x00000cbc       0x74 WS2812.o
+ .debug_frame   0x00000a4c       0x74 TMP75.o
+ .debug_frame   0x00000ac0      0x1dc TWI_ATMEGA.o
+ .debug_frame   0x00000c9c       0x74 WS2812.o
 
-.debug_str      0x00000000     0x10b8
+.debug_str      0x00000000     0x1097
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
  .debug_str     0x00000208      0x1cf Controller.o
@@ -981,14 +978,14 @@ END GROUP
                                 0x21a (size before relaxing)
  .debug_str     0x00000dc8       0x85 Timer2.o
                                 0x1ea (size before relaxing)
- .debug_str     0x00000e4d       0xe3 TMP75.o
-                                0x25b (size before relaxing)
- .debug_str     0x00000f30      0x117 TWI_ATMEGA.o
+ .debug_str     0x00000e4d       0xc2 TMP75.o
+                                0x230 (size before relaxing)
+ .debug_str     0x00000f0f      0x117 TWI_ATMEGA.o
                                 0x2be (size before relaxing)
- .debug_str     0x00001047       0x71 WS2812.o
+ .debug_str     0x00001026       0x71 WS2812.o
                                 0x24a (size before relaxing)
 
-.debug_loc      0x00000000     0x1934
+.debug_loc      0x00000000     0x18ed
  *(.debug_loc)
  .debug_loc     0x00000000       0x48 Controller.o
  .debug_loc     0x00000048      0x65e display_funktionen.o
@@ -1001,9 +998,9 @@ END GROUP
  .debug_loc     0x00000fd3      0x168 SPI.o
  .debug_loc     0x0000113b      0x14e Timer1.o
  .debug_loc     0x00001289      0x14e Timer2.o
- .debug_loc     0x000013d7      0x111 TMP75.o
- .debug_loc     0x000014e8      0x38e TWI_ATMEGA.o
- .debug_loc     0x00001876       0xbe WS2812.o
+ .debug_loc     0x000013d7       0xca TMP75.o
+ .debug_loc     0x000014a1      0x38e TWI_ATMEGA.o
+ .debug_loc     0x0000182f       0xbe WS2812.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1023,7 +1020,7 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x338
+.debug_ranges   0x00000000      0x330
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x10 Controller.o
  .debug_ranges  0x00000010       0xd0 display_funktionen.o
@@ -1036,9 +1033,9 @@ END GROUP
  .debug_ranges  0x000001f0       0x30 SPI.o
  .debug_ranges  0x00000220       0x30 Timer1.o
  .debug_ranges  0x00000250       0x30 Timer2.o
- .debug_ranges  0x00000280       0x28 TMP75.o
- .debug_ranges  0x000002a8       0x70 TWI_ATMEGA.o
- .debug_ranges  0x00000318       0x20 WS2812.o
+ .debug_ranges  0x00000280       0x20 TMP75.o
+ .debug_ranges  0x000002a0       0x70 TWI_ATMEGA.o
+ .debug_ranges  0x00000310       0x20 WS2812.o
 
 .debug_macro
  *(.debug_macro)
