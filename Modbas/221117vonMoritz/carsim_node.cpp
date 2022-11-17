@@ -83,17 +83,17 @@ private:
     switch(msg.cmd)
     {
     case madmsgs::CarInputs::CMD_HALT:
-      u.at(1) = 0;
+      u.at(1) = 0.0F;
       break;
 
     case madmsgs::CarInputs::CMD_FORWARD:
-      if(msg.pedals > 1)
+      if(msg.pedals > 1.0F)
       {
-        u.at(1) = 1;
+        u.at(1) = 1.0F;
       }
-      else if(msg.pedals < 0)
+      else if(msg.pedals < 0.0F)
       {
-        u.at(1) = 0;
+        u.at(1) = 0.0F;
       }
       else
       {
@@ -102,13 +102,13 @@ private:
       break;
 
     case madmsgs::CarInputs::CMD_REVERSE:
-      if(msg.pedals < -1)
+      if(msg.pedals < -1.0F)
       {
-        u.at(1) = -1;
+        u.at(1) = -1.0F;
       }
-      else if(msg.pedals > 0)
+      else if(msg.pedals > 0.0F)
       {
-        u.at(1) = 0;
+        u.at(1) = 0.0F;
       }
       else
       {
@@ -118,21 +118,33 @@ private:
 
     case madmsgs::CarInputs::CMD_SLOW:
         /*Todo: Frage ob bei langsamfahrt pedal signal weiter gegeben werden kann*/
-      u.at(1) = msg.pedals;
+      if(msg.pedals > 0.075F)  //Value that is evalutated in simulation, car is not using fast dynamic model
+      {
+        u.at(1) = 0.075F;
+      }
+      else if(msg.pedals < -0.075F)
+      {
+        u.at(1) = -0.075F;
+      }
+      else
+      {
+        u.at(1) = msg.pedals;
+      }
+
       break;
 
-    default: /*Backup if no siganl received, car supposed to stop*/
-      u.at(1) = 0;
+    default: /*Backup: if no siganl received, car supposed to stop*/
+      u.at(1) = 0.0F;
       break;
     }
 
-    if(msg.steering > 1)
+    if(msg.steering > 1.0F)
     {
-      u.at(2) = 1;
+      u.at(2) = 1.0F;
     }
-    else if(msg.steering < -1)
+    else if(msg.steering < -1.0F)
     {
-      u.at(2) = -1;
+      u.at(2) = -1.0F;
     }
     else
     {
@@ -150,6 +162,7 @@ private:
 */
 int main(int argc, char **argv)
 {
+
   const float samplingTime = CarParameters::p()->Ta; // the constant sample time [ s ]
   ros::init(argc, argv, "carsim_node"); // initialize ROS
   // instantiate class SineNode and
@@ -157,6 +170,9 @@ int main(int argc, char **argv)
   CarSimNode node(samplingTime);
   // define sampling rate as the inverse of the sample time
   ros::Rate loopRate(static_cast<double>(1.0F / samplingTime));
+
+  //CarPlant::init();
+
   // loop while ROS is running
   while (ros::ok()) {
     // call the method step() of the SineNode instance node
