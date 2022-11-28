@@ -16,13 +16,11 @@ int main(void)
 {
 	GerneralInit();
 	unsigned char ucCANStatus = CAN_NOT_RECEIVED;
-	int iTargetTemp = 230;	//Initial set of target
-							//2 avoid comma value is multiplied with 10
+	int iTargetTemp = 230;	//Initial set of target to avoid comma value is multiplied with 10
 	int iActualTemp;
 	//Can
 	MCP2515_Init(MCP2515_1, BAUDRATE_250_KBPS);
 	//MCP2515_Set_Filter_Mask(MCP2515_1, &sFilter);
-	
 	
 	while (1)
 	{
@@ -30,7 +28,6 @@ int main(void)
 		{
 			TMP75_Read_Temperature();
 			iActualTemp = TMP75_Get_Temperature();	//Asks for temp value;
-			//Disp_PrintTemperature(iActualTemp);			//prints to display
 			Display_Output(iActualTemp, 0, 255);
 		}
 				
@@ -40,7 +37,6 @@ int main(void)
 			switch(ucCANStatus)
 			{
 				case CAN_NOT_RECEIVED:
-				//Disp_PrintTarget(iTargetTemp, CAN_NOT_RECEIVED); //Prints target
 				Display_Output(iTargetTemp, 1, ucCANStatus);
 				//Test if changes wished--------------
 				if (ucKeyStatus == S2_PRESSED)
@@ -61,45 +57,6 @@ int main(void)
 				iTargetTemp = iTargetTemp + 0; //moritz:platzhalter
 				break;
 			}
-			
-			
-	
-			
-			//if (i == 0)
-			//{
-				//WS2812_Set_Colour(uGreen,2);
-				//i=1;
-			//}
-			//else if (i == 1)
-			//{
-				//WS2812_Set_Colour(uBrightGreen,2);
-				//i=2;
-			//}
-			//else if (i == 2)
-			//{
-				//WS2812_Set_Colour(uYellow,2);
-				//i=3;
-			//}
-			//else if (i == 3)
-			//{
-				//WS2812_Set_Colour(uOrange,2);
-				//i=4;
-			//}
-			//else if (i == 4)
-			//{
-				//WS2812_Set_Colour(uMagenta,2);
-				//i=5;
-			//}
-			//else if (i == 5)
-			//{
-				//WS2812_Set_Colour(uRed,2);
-				//i=0;
-			//}
-			
-				
-				
-			
-			
 		}
 		
 		
