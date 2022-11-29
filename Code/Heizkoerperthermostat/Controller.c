@@ -3,59 +3,58 @@
  *
  * Created: 05.11.2022 13:01:33
  *  Author: Moritz
+ * Mulitple position controller with hysteresis
  */ 
 
 //Includes
 #include "Controller.h"
 
 //Variables
-//Color definition ===== g  r  b =============================
-uint8_t uColor[6][3] = {{7, 0 ,0},  /*green*/
-						{5, 2 ,0},  /*brightgreen*/
-						{3, 4, 0},  /*yellow*/
-						{2, 4, 1},  /*orange*/
-						{0, 4, 3},  /*magenta*/
-						{0, 7, 0}}; /*red*/
-//============================================================
 
-//Definition of funcitons
-void TempController(int actualTemp, int targetTemp)
+
+//Definition of functions
+unsigned char TempController(int actualTemp, int targetTemp, unsigned char stepOld, unsigned char ucHysteresis)
 {
 	//Description:		Controls heating
-	//Call_parameter:	actual temp, target temp
-	//Return_parameter:	None
+	//Call_parameter:	actual temp, target temp, old heating step
+	//Return_parameter:	step
 	//Version:			1
 	//Date :			4.11.22
 	//Author:			Moritz
 	//Source:
 	//Status:			released
 	//--------------------------------
-	unsigned char ucStep;
 	int iDelta = targetTemp - actualTemp;
-	if (iDelta <= 20)/*Heating Step 1*/
+	// Step 0
+	if (iDelta < (0 - ucHysteresis) )
 	{
-		ucStep = 0;
+		return 0;
 	}
-	else if (iDelta <= 40)/*Heating Step 2*/
+	// Step 1
+	else if (iDelta >= (0 + ucHysteresis) && iDelta < (20 - ucHysteresis) )
 	{
-		ucStep = 1;
+		return 1;
 	}
-	else if (iDelta <= 60)/*Heating Step 3*/
+	// Step 2
+	else if (iDelta >= (20 + ucHysteresis) && iDelta < (40 - ucHysteresis))
 	{
-		ucStep = 2;
+		return 2;
 	}
-	else if (iDelta <= 80)/*Heating Step 4*/
+	// Step 3
+	else if (iDelta >= (40 + ucHysteresis) && iDelta < (60 - ucHysteresis))
 	{
-		ucStep = 3;
+		return 3;
 	}
-	else if (iDelta <= 100)/*Heating Step 5*/
+	// Step 4
+	else if (iDelta >= (60 + ucHysteresis) && iDelta < (80 - ucHysteresis))
 	{
-		ucStep = 4;
+		return 4;
 	}
-	else if (iDelta <= 120)/*Heating Step 6*/
+	// Step 5
+	else if (iDelta >= (80 + ucHysteresis))
 	{
-		ucStep = 5;	
+		return 5;
 	}
-	WS2812_Set_Colour(uColor[ucStep],2);
-	Servo_Set_Position(ucStep);
+	// default	
+	return stepOld;	
 }

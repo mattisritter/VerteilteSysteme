@@ -17,9 +17,7 @@
 
 
 //Deklaration of functions
-void TempController(int actualTemp, int targetTemp);
-
-
+unsigned char TempController(int actualTemp, int targetTemp, unsigned char stepOld, unsigned char ucHysteresis);
 
 
 #endif /* CONTROLLER_H_ */

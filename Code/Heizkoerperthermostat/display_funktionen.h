@@ -38,6 +38,7 @@ void Display_Transfer4BitData(unsigned char Data);
 void Display_Write(unsigned char ASCII_of_char);
 void Display_Print(unsigned char* text2print, unsigned char length);
 void Display_GenerateNewChar(unsigned char address, unsigned char* Pattern_New_Char);
+void Display_Output(int iTemp2print, unsigned char ucLine, unsigned char ucCAN);
 
 #pragma GCC pop_options
 

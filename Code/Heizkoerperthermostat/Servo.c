@@ -2,7 +2,7 @@
  * Servo.c
  *
  * Created: 24.10.2022 11:17:59
- *  Author: matti
+ *  Author: Mattis Ritter
  */ 
 
 #include "Servo.h"
@@ -27,10 +27,10 @@ void Servo_Init(void)
 	OCR0A = ucServoPosition[0]; //Pulsweite auf 2.5ms setzen --> Stellung 0
 }
 
-void Servo_Set_Position(unsigned char ucPosition)
+void Servo_Step(unsigned char ucPosition)
 {
 	//Description:		sets servo position
-	//Call_parameter:	ucPosition: heater position from 0 to 6
+	//Call_parameter:	ucPosition: heater position from 0 to 5
 	//Return_parameter:	void
 	//Version:			1
 	//Date :			31.10.2022

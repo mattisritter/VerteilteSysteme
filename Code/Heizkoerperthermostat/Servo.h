@@ -2,7 +2,7 @@
  * Servo.h
  *
  * Created: 24.10.2022 11:17:37
- *  Author: matti
+ *  Author: Mattis Ritter
  */ 
 
 
@@ -17,7 +17,7 @@
 	
 // definition of function's
 void Servo_Init(void);
-void Servo_Set_Position(unsigned char ucPosition);
+void Servo_Step(unsigned char ucPosition);
 
 
 #endif /* SERVO_H_ */

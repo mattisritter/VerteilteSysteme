@@ -57,5 +57,6 @@ typedef struct
 void WS2812_Init(void);
 void WS2812_set_off(void);
 void WS2812_Set_Colour(uint8_t *uccolour_list, uint16_t ucled_number);
+void WS2812_Step(unsigned char ucStep);
 
 #endif /* WS2812_H_ */

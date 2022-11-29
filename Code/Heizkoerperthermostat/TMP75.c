@@ -15,6 +15,7 @@ uint8_t ucdevice_address =  0b1001000; //all address pins to gnd/  address accor
 uint8_t uctemp2read = 0b00000000;	//Read temperature register
 
 
+
 //Definition of funcitons
 //======================================================================================
 uint8_t TMP75_Read_Temperature(void)
@@ -74,55 +75,3 @@ int TMP75_Get_Temperature(void)
 	return (iTemperature >> 8) * 10 + (iTemperature & 0b11110000) * 5/128;
 }
 //======================================================================================
-//======================================================================================
-void Display_Output(int iTemp2print, unsigned char ucLine, unsigned char ucCAN)
-{
-	//Description:		prints temperature to display
-	//Call_parameter:	iTemp2print: temperature to print
-	//					ucLine: line in which is printed
-	//					ucCAN: CAN status
-	//Return_parameter:	void
-	//Version:			1
-	//Date :			10.11.2022
-	//Author:			Mattis Ritter
-	//Source:
-	//Status:			released
-	//--------------------------------
-	unsigned char ucDisp[2][16] = {" Actual:   0.0C ", " Target:   0.0C "};
-	unsigned char j = 0;
-	unsigned char ucNegFlag = 0;	//rememberes if number negative
-	if (ucCAN == 111)
-	{
-		ucDisp[2][0] = '[';
-		ucDisp[2][15] = ']';
-	}
-	if (iTemp2print < 0)
-	{
-		iTemp2print = iTemp2print *(-1);
-		ucNegFlag = 1;		
-	}
-	while (iTemp2print != 0)
-	{
-		if (j == 1)
-		{
-			j++;
-		}
-		//Geht stelle für stelle der int Zahl durch und schreibt sie in array, von hinten beginnend
-		ucDisp[ucLine][(13 - j)] = (char)(iTemp2print % 10) + 48;
-		iTemp2print = iTemp2print / 10;
-		j++;
-	}
-	if (ucNegFlag == 1)
-	{
-		if (j == 1)
-		{
-			j += 2;
-		}
-		ucDisp[ucLine][(13 - j)] = '-';
-	}
-	//Print to Display-----------------------------------------------
-	Display_SetCursor(ucLine,0);
-	Display_Print(ucDisp[ucLine],16);
-	Display_SetCursor(2,0);		//Platzieren des Cursors auserhalb
-	//---------------------------------------------------------------
-}

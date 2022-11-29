@@ -19,12 +19,9 @@
 //Defines
 #define TMP75_DEVICE_TYPE_ADDRESS 0x00
 
-//Deklaration of functions
-
+//Declaration of functions
 uint8_t TMP75_Read_Temperature(void);
 int TMP75_Get_Temperature(void);
-//void Disp_PrintTemperature(int ui2print);
-//void Disp_PrintTarget(int ui2print, unsigned char CANStatus);
 void Display_Output(int iTemp2print, unsigned char ucLine, unsigned char ucCAN);
 
 

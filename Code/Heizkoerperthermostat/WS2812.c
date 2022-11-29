@@ -58,6 +58,14 @@ uint8_t *PtrColourList, ucPin;
 volatile uint8_t ucPort;
 uint16_t *PtrLedNumber, PtrPort;
 extern WS2812_pin WS2812_1;
+//Color definition ===== g  r  b =============================
+uint8_t uColor[6][3] = {{0, 0 ,7},  /*blue*/
+						{7, 0 ,0},  /*green*/
+						{3, 4, 0},  /*yellow*/
+						{2, 4, 1},  /*orange*/
+						{0, 4, 3},  /*magenta*/
+						{0, 7, 0}}; /*red*/
+//============================================================
 
 
 //uint8_t ucTresetTime[2] = {PRESCALER_64, 9};	//52µs @ 12,288MHz
@@ -218,4 +226,17 @@ void WS2812_Set_Colour(uint8_t *uccolour_list, uint16_t uiled_number)
 				"pop	r19"	"\n\t"
 				"sei" //die Interrupts werden aktiviert
 	::);
+}
+
+void WS2812_Step(unsigned char ucStep){
+	//Description:		sets LED color
+	//Call_parameter:	ucStep: heater position from 0 to 5
+	//Return_parameter:	void
+	//Version:			1
+	//Date :			31.10.2022
+	//Author:			Mattis Ritter
+	//Source:
+	//Status:			released
+	//--------------------------------
+	WS2812_Set_Colour(uColor[ucStep],2);
 }
