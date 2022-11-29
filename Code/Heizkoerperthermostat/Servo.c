@@ -38,6 +38,5 @@ void Servo_Set_Position(unsigned char ucPosition)
 	//Source:
 	//Status:			released
 	//--------------------------------
-	
 	OCR0A = ucServoPosition[ucPosition];
 }
