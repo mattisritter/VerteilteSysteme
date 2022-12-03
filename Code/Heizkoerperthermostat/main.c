@@ -95,7 +95,6 @@ int main(void)
 			//if(MCP2515_Check_Message(MCP2515_1, &sRecFrame) == MESSAGE_RECEIVED)
 			//{//es wird geprüft ob eine Botschaft über CAN empfangen wurde
 				////wenn ja, wird die Botschaft in sRecFrame gespeichert
-				////PORTD ^= 1 << PD6; //dient nur zum Testen
 				//if(sRecFrame.ulID == 0x401)//eine Botschaft mit der ID 0x11 wurde empfangen
 				//{
 					// iTarget = (int)sRecFrame.ucDat*10;

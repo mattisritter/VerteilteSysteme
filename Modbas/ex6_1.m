@@ -57,3 +57,37 @@ u = v_s*tsim;           % Rampe
 figure(3);
 clf;
 lsim(G_Wp, u, tsim), grid on;
+
+%% Stabilität
+[r,gain] = rlocus(G_Wp);
+for i = 1:length(gain)
+    if real(r(2,i)) > 0 
+       disp('kpmax = ');
+       disp(gain(i-1));
+       break;
+    end 
+end
+
+%% Generierung des Führungssignals
+vmax = 0.5; % v^* [m/s]
+x0 = 0; % [m]
+xs = 1; % x^* [m]
+[c,te] = cd_refpoly_vmax(vmax, x0, xs);
+t = 0:0.01:te;
+cff = cd_refpoly_ff(c, k, T, Tt, kr, Ti);
+uvp1 = polyval(cff, t);
+wp = polyval(c, t);
+wpd = polyder(wp);
+wpdd = polyder(wpd);
+figure(4);
+clf;
+plot(t,uvp1, t,wp);
+figure(5);
+clf;
+plot(t(2:end-1),wpd);
+figure(6);
+clf;
+plot(t(3:end-1),wpdd);
+figure(7);
+clf;
+lsim(G_Wp, wp, t), grid on;
