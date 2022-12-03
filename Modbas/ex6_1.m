@@ -37,7 +37,6 @@ G_Rp = kp;                              % Regler
 G_0p = minreal(G_Sp*G_Rp);              % offene Strecke
 G_Wp = minreal(G_0p/(1+G_0p));          % Führungsübertragung
 
-
 %% Bodediagramm der offenen Strecke Geschwindigkeitsregler
 figure(1);
 clf;
@@ -53,10 +52,13 @@ em = si.Overshoot;      % Überschwingweite [%]
 %% Rampenantwort Positionsregler
 v_s = 0.1;              % Soll Geschwindigkeit [m/s]
 tsim = 0:0.01:10;       % Zeitintervall für die Rampe
-u = v_s*tsim;           % Rampe
+u = v_s*tsim;           % Definition der Rampe als Eingangssignal
+
+% Plot der Position im Vergleich y zum Eingangssignal
 figure(3);
 clf;
-lsim(G_Wp, u, tsim), grid on;
+lsim(G_Wp, u, tsim); grid on;
+legend('y(t)');
 
 %% Stabilität
 [r,gain] = rlocus(G_Wp);
@@ -68,26 +70,41 @@ for i = 1:length(gain)
     end 
 end
 
-%% Generierung des Führungssignals
-vmax = 0.5; % v^* [m/s]
-x0 = 0; % [m]
-xs = 1; % x^* [m]
+%% Generierung des Führungssignals und Vorsteuersignal des Positionsreglers
+vmax = 0.5; % Maximale Soll-Geschwindigkeit v* [m/s]
+x0 = 0;     % Startposition [m]
+xs = 1;     % Soll-Bogenlänge x* [m]
+
+% Berechnung der Koeffizienten c für das Führungssignal wp und
+% der Endzeit te
 [c,te] = cd_refpoly_vmax(vmax, x0, xs);
-t = 0:0.01:te;
+% Berechnung der Koeffizienten cff für die Online-Vorsteuerung uvp1
 cff = cd_refpoly_ff(c, k, T, Tt, kr, Ti);
+
+t = 0:0.05:te; % Definiton des Zeitintervalls
+
+% Bestimmung der Polynome
 uvp1 = polyval(cff, t);
 wp = polyval(c, t);
-wpd = polyder(wp);
-wpdd = polyder(wpd);
+cd = polyder(c);    % Koeffizienten von wpd
+wpd = polyval(cd, t);
+cdd = polyder(cd);  % Koeffizienten von wpdd
+wpdd = polyval(cdd, t);
+
+% Plot für Signal uvp1 für die Online-Vorsteuerung
 figure(4);
 clf;
-plot(t,uvp1, t,wp);
+plot(t,uvp1); grid on;
+legend('uvp1(t)');
+% Plot für das Führungssignal wp und die Ableitungen wpd und wpdd
 figure(5);
 clf;
-plot(t(2:end-1),wpd);
+plot(t,wp, t,wpd, t,wpdd); grid on; 
+legend('wp(t)', 'wpd(t)', 'wpdd(t)');
+
+% Plot des Position y im Vergleich zum Führungsignal
 figure(6);
 clf;
-plot(t(3:end-1),wpdd);
-figure(7);
-clf;
-lsim(G_Wp, wp, t), grid on;
+lsim(G_Wp, wp, t); grid on;
+legend('y(t)');
+
