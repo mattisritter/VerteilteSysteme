@@ -1,0 +1,120 @@
+#ifndef PATHCONTROLLER_H
+#define PATHCONTROLLER_H
+
+#include <ros/ros.h>
+#include "CarParameters.h"
+#include "Spline.h"
+
+#pragma once
+// include STL array type
+#include <array>
+// include STL vector type
+#include <vector>
+#include <cmath>
+
+class PathController{
+public:
+  /**
+  * @brief Only constructor
+  */
+  PathController() // copy parameters to member variables
+  {
+
+  }
+
+  void init(std::vector<float>& breaks, std::array<std::vector<float>, 2>& s, std::vector<uint32_t>& segmentIDs, modbas::Spline& spline)
+  {
+    spline = modbas::Spline(breaks, s.at(0), s.at(1), segmentIDs);
+  }
+
+  void sigRef(boost::array<float, 2>& sActual, float& vs, modbas::Spline& spline)
+  {
+    std::array<float, 2> sA ;
+    sA.at(0)= sActual.at(0);
+    sA.at(1)= sActual.at(1);
+    int k = spline.getNearest(sA, xs, dist);
+
+    spline.interpolate(xs, ys, yds, ydds, -1);
+    xh = xs + vs * p->deltaTt; //xhat = xshould + vshould * Tt;
+    spline.interpolate(xh, yh, ydh, yddh, -1);
+
+    sS = ys;
+    psiS = std::atan2(yds.at(0), yds.at(1)); //9.2
+    float sign = 0.0F;
+    if (ydh.at(0)*yddh.at(1)-yddh.at(0)*ydh.at(1) >= 0) sign = 1.0F;
+    else sign = -1.0F;
+    kappaH = sign*std::sqrt(yddh.at(0)*yddh.at(0) + yddh.at(1)*yddh.at(1)); //9.5
+  }
+
+  void sigFB(boost::array<float, 2>& sActual, float& vActual, float& psiActual, float& vs)
+  {
+    sc2e = (sActual.at(1)-sS.at(1))*std::cos(psiS) - (sActual.at(0)-sS.at(0))*std::sin(psiS); //9.6
+    psie = modbas::Utils::normalizeRad(psiActual - psiS); //9.8
+    float vE = 0.1F;
+    if(vs >= 0 && vs <= vE) vs = vE;
+    else if(vs < 0 && vs >= -vE) vs = -vE;
+    deltae = -sc2e*p->l/p->pathTw/p->pathTw/vs/vs - 2.0F*psie*p->l/p->pathTw/vs;
+  }
+
+  void sigFF()
+  {
+    deltaS = std::atan(p->l*kappaH);
+  }
+
+  void step(float& delta)
+  {
+    delta = deltaS+deltae;
+    delta = delta/p->deltaMax;
+    if (delta >= 1.0F)       /*limit control signal to 1*/
+    {
+      delta = 1.0F;
+    }
+    else if (delta <= -1.0F) /*limit controll signal to -1*/
+    {
+      delta = -1.0F;
+    }
+  }
+
+  float getValue()
+  {
+    return dist;
+  }
+
+private:
+  //Parameters
+  float xs;
+  float dist;
+  std::array<float, 2> ys;
+  std::array<float, 2> yds;
+  std::array<float, 2> ydds;
+  float xh;
+  std::array<float, 2> yh;
+  std::array<float, 2> ydh;
+  std::array<float, 2> yddh;
+
+  //Inputs
+//  boost::array<float, 2> sActual;
+//  float vActual;
+//  float psiActual;
+//  float vs;
+//  std::vector<float> breaks;
+//  std::array<std::vector<float>, 2> s;
+//  std::vector<uint32_t> segmentIDs;
+
+  //variables for sigRef
+  std::array<float, 2> sS;
+  float psiS;
+  float kappaH;
+
+  //variables for sigFB
+  float sc2e;
+  float psie;
+  float deltae;
+
+  //variables for sigFF
+  float deltaS;
+  modbas::Spline spline1();
+
+  CarParameters* p=CarParameters::p();//Access to Car Parameters
+};
+#endif // PATHCONTROLLER_H
