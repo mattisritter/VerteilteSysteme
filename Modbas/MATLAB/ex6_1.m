@@ -115,8 +115,8 @@ legend('y(t)');
 %% TEST 
 t2 = 0:tA:2*te;
 G_Vp1 = s/(Ti*s+1);
-uvp12 = [uvp1, ones(size(uvp1)).*xs];
-wp2 = [wp, ones(size(wp)).*xs];
+uvp12 = [uvp1, ones(size(uvp1)).*xs+x0];
+wp2 = [wp, ones(size(wp)).*xs+x0];
 uvp = transpose(lsim(G_Vp1, uvp12, t2));
 y = transpose(lsim(G_Wp, wp2+uvp, t2));
 figure(8); clf;
