@@ -102,7 +102,7 @@ private:
   std::array<float, 2> ys; // interpolated spline coordinaties at xs
   std::array<float, 2> yds; // interpolated tangential vector
   std::array<float, 2> ydds; // interpolated second derivative
-  // lookahed point
+  // lookahead point
   float xh; // lookahead arcposition on spline
   std::array<float, 2> yh; // interpolated spline coordinaties at xh
   std::array<float, 2> ydh; // interpolated tangential vector

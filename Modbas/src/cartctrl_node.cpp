@@ -33,7 +33,7 @@ public:
     // create subscriber for outputsExtSub and driveManeuverSub
     outputsExtSub = node.subscribe("/mad/caroutputsext", 1, &CarCtrlNode::inputsCallbackOutputsExt, this);
     driveManeuverSub = node.subscribe("/mad/car0/navi/maneuver", 1, &CarCtrlNode::inputsCallbackDriveManeuver, this);
-    // create publisher for inputsPub
+    // create publisher for inputsPub, debugPub and testPub
     inputsPub = node.advertise<madmsgs::CarInputs>("/mad/carinputs", 1);
     debugPub = node.advertise<std_msgs::Float32>("/mad/car0/ctrl/debug/wp", 1);
     testPub = node.advertise<std_msgs::Float32>("/mad/car0/ctrl/test/x", 1);
@@ -129,20 +129,20 @@ private:
   ros::Subscriber driveManeuverSub; /**< The /mad/car0/navi/maneuver topic subscriber */
   ros::Publisher inputsPub; /**< The /mad/carinputs topic publisher */
   ros::Publisher debugPub; /**< The /mad/car0/ctrl/debug/wp topic publisher */
-  ros::Publisher testPub;
+  ros::Publisher testPub;  /**< The /mad/car0/ctrl/test/x topic publisher */
   const float samplingTime = 0.0F; /**< The sample time [s] */
   //car outputs
   float v = 0.0F; //actual speed of the rear axle [m/s]
   float x = 0.0F; //actual arcposition [m] (calculated as integral of v)
-  float v_1 = v; //old sped for integration
-  boost::array<float, 2> y {{0.0F, 0.0F}}; //cartesian center position [ m ]
+  float v_1 = v; //old speed for integration
+  boost::array<float, 2> y {{ 0.0F, 0.0F }}; //cartesian center position [ m ]
   float psi = 0.0F; //yaw angle [rad]
   //drive maneuver
   uint type = 0; //type of drive maneuver
   float vs = 0.0F; //max speed [m/s]
   float xs = 0.0F; //end of park maneuver [m]
   std::vector<float> breaks { 0.0F };
-  std::array<std::vector<float>, 2> s { {{0.0F}, {0.0F}} };
+  std::array<std::vector<float>, 2> s { { { 0.0F }, { 0.0F } } };
   std::vector<uint32_t> segmentIDs { 0 };
   // Speed Controller
   float wv = 0.0F; // reference speed [m/s]
@@ -180,7 +180,7 @@ private:
     v = msgOutputsExt.v; // actual speed v [m/s]
     calculateX(v); // calculate arcposition x [m] as integral of v
     psi = msgOutputsExt.psi; // actual yaw angle [rad]
-    y = msgOutputsExt.s; // actual cartesian center position [m] (s1,s2)T
+    y = msgOutputsExt.s; // actual cartesian center position [m] (s1, s2)T
 
   }
 
@@ -191,7 +191,7 @@ private:
   void inputsCallbackDriveManeuver(const madmsgs::DriveManeuver& msgDriveManeuver)
   {
     vs = msgDriveManeuver.vmax;  // max speed [m/s]
-    type = msgDriveManeuver.type;  //T ype of maneuver
+    type = msgDriveManeuver.type;  //Type of maneuver
     xs = msgDriveManeuver.xManeuverEnd; // target arc length [m] in case of PARK
     // waypoints for spline gerneration
     breaks = msgDriveManeuver.breaks;
