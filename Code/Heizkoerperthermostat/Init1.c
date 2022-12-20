@@ -1,27 +1,27 @@
-/*
- * Init1.c
- *
- * Created: 26.10.2022 20:38:13
- *  Author: Moritz
+/**
+ * @file Init1.c
+ * @brief C file to initiate modules
+ * @date 26.10.2022 20:38:01
+ * @author Hoehnel and Ritter
  */ 
 
-//Includes
+//Includes======================================================
 #include "Init1.h"
 
-//Variables
+//Variables=====================================================
 
-//Definition of funcitons
-
+//Definition of functions=======================================
+/** @brief Execute all inits
+* @param[in] None
+* @return None
+*/
+//Version:			1
+//Date :			27.10.2022
+//Author:			Moritz
+//Source:
+//Status:			ok
+//--------------------------------
 void GerneralInit(void){
-	//Description:		execute all inits
-	//Call_parameter:	void
-	//Return_parameter:	void
-	//Version:			1
-	//Date :			27.10.2022
-	//Author:			Moritz
-	//Source:			
-	//Status:			not testet
-	//--------------------------------
 	Display_Init();
 	LED_Init();
 	
@@ -40,7 +40,6 @@ void GerneralInit(void){
 
 	//CAN_Filter_Init();
 	//InitTimer2CTC();
-	
 }
 
 
@@ -71,18 +70,19 @@ void GerneralInit(void){
 	//}
 //}
 
-
+/** @brief Changes hex to ascii
+* @param[in] unsigned_char input:  Element to convert 
+* @param[out] unsigned_char output: Converted element
+* @return None
+*/
+//Version:			1
+//Date :			27.10.2022
+//Autor:			meroth
+//Source:			Ilias
+//Status:			ok
+//--------------------------------
 void HexToAscii(unsigned char input, unsigned char* output)
 {
-	//Description:		Wandelt hex to ascii
-	//Call_parameter:	void
-	//Return_parameter:	void
-	//Version:			1
-	//Date :			27.10.2022
-	//Autor:			meroth
-	//Source:			Ilias
-	//Status:			not testet
-	//--------------------------------
 	char c;
 	c=input & 0x0f;
 	if (c<10) output[1]=c+48;

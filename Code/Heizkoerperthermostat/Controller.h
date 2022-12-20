@@ -1,8 +1,8 @@
-/*
- * Controller.h
- *
- * Created: 05.11.2022 13:01:15
- *  Author: Moritz
+/**
+ * @file Controller.h
+ * @brief Include File for Software Controller for thermostat
+ * @date 05.11.2022 13:01:15
+ * @author Hoehnel and Ritter 
  */ 
 
 

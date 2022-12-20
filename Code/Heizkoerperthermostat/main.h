@@ -1,8 +1,8 @@
-/*
- * main.h
- *
- * Created: 26.10.2022 19:54:57
- *  Author: Moritz
+/**
+ * @file main.h
+ * @brief Include file for main
+ * @date 26.10.2022 19:54:57
+ * @author Hoehnel and Ritter
  */ 
 
 
@@ -28,19 +28,19 @@
 #include "Timer1.h"
 
 //Defines
-#define CAN_NOT_RECEIVED 101
-#define CAN_RECEIVED 111
+#define CAN_NOT_RECEIVED 101 /**<define that 101, no message received via can*/
+#define CAN_RECEIVED 111 /**<define that 111, message received via can*/
 
 //Definition von ws2812_1
 WS2812_pin WS2812_1 =	{/*DDR register*/	&DDRD,
 						/*PORT register*/	&PORTD,
-						/*Pin*/				PD2};
+						/*Pin*/				PD2}; /**<define that WS2812 is using PD2 of PORT D*/
 						
 //
 MCP2515_pins  MCP2515_1 = {{/*CS_DDR*/	&DDRB,
 						    /*CS_PORT*/		&PORTB,
 							/*CS_pin*/		PB3,
-							/*CS_state*/	ON}};
+							/*CS_state*/	ON}}; /**<define that MCP2515 is using PB3 of PORT B*/
 	
 	
 ////Deklaration of global variables

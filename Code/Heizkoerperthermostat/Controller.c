@@ -1,29 +1,32 @@
-/*
- * Controller.c
- *
- * Created: 05.11.2022 13:01:33
- *  Author: Moritz
- * Mulitple position controller with hysteresis
+/**
+ * @file Controller.c
+ * @brief C file to implement Mulitple position controller with hysteresis
+ * @date 05.11.2022 13:01:33
+ * @author Hoehnel and Ritter
+ * 
  */ 
 
-//Includes
+//Includes======================================================
 #include "Controller.h"
 
-//Variables
+//Variables=====================================================
 
 
-//Definition of functions
+//Definition of functions=======================================
+/** @brief Initialization of keys
+* @param[in] int actualTemp: Measured temperature
+* @param[in] int targetTemp: target Temp: Wished temperature
+* @param[in] unsigned_char stepOld: Previous heating step
+* @param[in] unsigned_char ucHysteresis: Variable to implement hysteresis
+* @return [unsigned char] Value which heating should be at
+*/
+//Date :			4.11.22
+//Author:			Moritz
+//Source:
+//Status:			released
+//--------------------------------
 unsigned char TempController(int actualTemp, int targetTemp, unsigned char stepOld, unsigned char ucHysteresis)
 {
-	//Description:		Controls heating
-	//Call_parameter:	actual temp, target temp, old heating step
-	//Return_parameter:	step
-	//Version:			1
-	//Date :			4.11.22
-	//Author:			Moritz
-	//Source:
-	//Status:			released
-	//--------------------------------
 	int iDelta = targetTemp - actualTemp;
 	// Step 0
 	if (iDelta < (0 - ucHysteresis) )

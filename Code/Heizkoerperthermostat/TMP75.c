@@ -1,35 +1,34 @@
-/*
- * TMP75.c
- *
- * Created: 26.10.2022 20:07:28
- *  Author: Moritz
+/**
+ * @file TMP75.c
+ * @brief C file to measure temperature with TMP75
+ * @section Comment
+ * Communication with TMP75 via I^2C
+ * @date 26.10.2022 20:07:03
+ * @author Hoehnel and Ritter
  */ 
 
 
-//Includes
+//Includes======================================================
 #include "TMP75.h"
 
-//Variables
+//Variables=====================================================
 int iTemperature;
-uint8_t ucdevice_address =  0b1001000; //all address pins to gnd/  address according to book: 0x90;
-uint8_t uctemp2read = 0b00000000;	//Read temperature register
+uint8_t ucdevice_address =  0b1001000; /**<Device address: all address pins to gnd*/  //address according to book: 0x90;
+uint8_t uctemp2read = 0b00000000;	/**<Select register to read: Read temperature register*/
 
-
-
-//Definition of funcitons
-//======================================================================================
+//Definition of functions=======================================
+/** @brief Read temperature from TMP75
+* @param[in] None
+* @return [uint8_t] Value of Temperature measurement
+*/
+//Version:			1
+//Date :			220408
+//Autor:			Meroth, Sora
+//Source:			Sensornetzwerke In Theorie Und Praxis
+//Status:			modified by Moritz
+//--------------------------------
 uint8_t TMP75_Read_Temperature(void)
 {
-	//Description:		Read temperature from TMP75
-	//Call_parameter:	ucdevice_address, uctemp2read register adress
-	//Return_parameter:	TMP75_Read_Temperature
-	//Version:			1
-	//Date :			220408
-	//Autor:			Meroth, Sora
-	//Source:			Sensornetzwerke In Theorie Und Praxis
-	//Status:			modified by Moritz
-	//--------------------------------
-	
 	uint8_t ucDeviceAddress, ucTempHigh, ucTempLow;
 	//Adresse des TMP75-Temperatursensors bilden
 	ucDeviceAddress = (ucdevice_address << 1) | TMP75_DEVICE_TYPE_ADDRESS;
@@ -57,17 +56,18 @@ uint8_t TMP75_Read_Temperature(void)
 }
 //======================================================================================
 //======================================================================================
+/** @brief Get method to get current temperature value
+* @param[in] None
+* @return [int] Last read temperature, with one decimal number
+*/
+//Version:			1
+//Date :			4.11.22
+//Author:			Moritz
+//Source:
+//Status:			released
+//--------------------------------
 int TMP75_Get_Temperature(void)
 {
-	//Description:		Read temperature from TMP75
-	//Call_parameter:	void
-	//Return_parameter:	Temperature with one decimal number
-	//Version:			1
-	//Date :			4.11.22
-	//Author:			Moritz
-	//Source:			
-	//Status:			released
-	//--------------------------------	
 	if (iTemperature >> 15)
 	{
 		iTemperature = (~iTemperature+1) * (-1);

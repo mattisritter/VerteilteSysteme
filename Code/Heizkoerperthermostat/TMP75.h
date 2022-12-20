@@ -1,9 +1,10 @@
-/*
- * TMP75.h
- *
- * Created: 26.10.2022 20:07:03
- *  Author: Moritz
+/**
+ * @file TMP75.h
+ * @brief Include file to measure temperature with TMP75
+ * @section Comment
  * Communication with TMP75 via I^2C
+ * @date 26.10.2022 20:07:03
+ * @author Hoehnel and Ritter
  */ 
 
 

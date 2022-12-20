@@ -1,24 +1,21 @@
-/*
- * LED.h
- *
- * Created: 30.03.2022 12:17:13
- *  Author: Moritz Hoehnel
-  Funktion: Steuerung LED
+/**
+ * @file LED.h
+ * @brief Include file to control LEDs
+ * @date 30.03.2022 12:17:13
+ * @author Hoehnel and Ritter
  */ 
 
 
 #ifndef LED_H_
 #define LED_H_
 
-//include
+//Includes
 #include <avr/io.h>
 
+//Defines
 
 
-//define
-
-
-//Deklaration der Fnen
+//Declaration of funktions
 void LED_Init(void);
 //void LED_gn_on(void);
 //void LED_gn_off(void);

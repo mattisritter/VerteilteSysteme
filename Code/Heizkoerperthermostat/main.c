@@ -1,21 +1,25 @@
-/*
- * Heizkoerperthermostat.c
- *
- * Created: 01.10.2022 10:35:38
- * Author : matti
+/**
+ * @file Heizkoerperthermostat main.c
+ * @brief C file for main
+ * @date 26.10.2022 19:54:57
+ * @author Hoehnel and Ritter
  */ 
 
-//Includes
+//Includes======================================================
 #include "main.h"
 
-//Variables
-unsigned char ucStep = 0;
-unsigned char ucH = 5;
-unsigned char ucStepOld = 0;
-int iTargetTemp = 230;	//Initial set of target to avoid comma value is multiplied with 10
-int iActualTemp;
+//Variables=====================================================
+unsigned char ucStep = 0; /**<Variable that stores the heating step*/
+unsigned char ucH = 5; /**<Variable to implement hysteresis*/
+unsigned char ucStepOld = 0; /**<Variable that stores the old value of heating step*/
+int iTargetTemp = 230;	/**<Initial set of target; To avoid comma value it is multiplied with 10*/
+int iActualTemp; /**<Current temperature*/
 
-//Main function
+//Main function=====================================================
+/** @brief Main function
+* @param[in] None
+* @return None
+*/
 int main(void)
 {
 	GerneralInit();
@@ -35,11 +39,10 @@ int main(void)
 	while (1)
 	{
 		// measure actual temperature
-		if (Timer1_get_100msState() == TIMER_TRIGGERED)	/*Prevent tmp75 from overheating*/
+		if (Timer1_get_100msState() == TIMER_TRIGGERED)	/*Prevent tmp75 from overheating, only start every 100ms*/
 		{
 			TMP75_Read_Temperature();
-			
-			
+						
 			iActualTemp = TMP75_Get_Temperature();	//Asks for temp value;
 			Display_Output(iActualTemp, 0, 255);
 			// heating controller
