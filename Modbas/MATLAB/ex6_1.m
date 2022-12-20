@@ -65,7 +65,7 @@ legend('y(t)');
 %% Stabilität
 figure(4);
 clf;
-rlocus(G_Wp);
+rlocus(G_Wp); grid on;
 [r,gain] = rlocus(G_Wp);
 for i = 1:length(gain)
     if real(r(2,i)) > 0 
