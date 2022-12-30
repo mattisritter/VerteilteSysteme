@@ -15,9 +15,32 @@ public:
   */
   PositionController()
   {
-    uVpk = 0.0F; //initialize output with zero
-    uVpk_1 = 0.0F ; // initialize delayed output with zero
   }
+
+  void init(const float x)
+  {
+    t = 0.0F;
+    x0 = x;
+  }
+
+  void step(const float xs, const float vs, const float x, float& up)
+  {
+
+    float uVp = 0.0F;
+    float uRp = 0.0F;
+    referenceSignal(xs, vs, t, wp, uVp1); // calulate Reference Signals
+    feedforwardCtrl(uVp1, uVp); // online feed forward control
+    float ep = wp - x;
+    positionCtrl(ep, uRp);
+    up = uVp + uRp; // calculate control signal for position control
+
+    t += p->Tak;
+  }
+
+  float getwp(){return wp;}
+  float getuvp1(){return uVp1;}
+
+private:
   /**
   * @brief calculates the reference signals
   * @param[in] xs end of maneuver [m]
@@ -25,9 +48,9 @@ public:
   * @param[in] x0 start position of maneuver [m]
   * @param[in] t time [s]
   * @param[out] wp reference signal for position controller
-  * @param[out] uVp1 input signal for feedforward controller 
+  * @param[out] uVp1 input signal for feedforward controller
   */
-  void referenceSignal(const float xs, const float vs, const float x0, const float t, float& wp, float& uVp1)
+  void referenceSignal(const float xs, const float vs, const float t, float& wp, float& uVp1)
   {
    const float te = 15.0F * xs /  8.0F / vs; // Endtime of parking maneuver
    // freezes signals to end position of parking maneuver if t > te
@@ -38,43 +61,31 @@ public:
    }
    else
    {
-     // Array that stores coefficients for wp
-     std::array <float, 6> c = {0.0F, 0.0F, 0.0F, 0.0F, 0.0F};
-     c.at(5) =  65536.0F * vs * vs * vs * vs * vs
-                         / xs / xs / xs / xs / 253125.0F;
-     c.at(4) =  -4096.0F * vs * vs * vs * vs
-                         / xs / xs / xs / 3375.0F;
-     c.at(3) =   1024.0F * vs * vs * vs
-                         / xs / xs / 675.0F;
+     // Array that stores coefficients for uVp1
+     std::array<float, 6> c = {0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F};
+     c.at(5) = 65536.0F * vs * vs * vs * vs * vs / (xs * xs * xs * xs * 253125.0F);
+     c.at(4) = -4096.0F * vs * vs * vs * vs / (xs * xs * xs * 3375.0F);
+     c.at(3) =  1024.0F * vs * vs * vs / (xs * xs * 675.0F);
      c.at(2) = 0.0F;
      c.at(1) = 0.0F;
      c.at(0) = x0;
-     // calculation of reference signal for position controller
-     wp = c.at(5) * t * t * t * t * t
-         + c.at(4) * t * t * t * t
-         + c.at(3) * t * t * t
-         + c.at(2) * t * t
-         + c.at(1) * t
-         + c.at(0);
 
      // Array that stores coefficients for uVp1
-     std::array <float, 6> cff = {0.0F, 0.0F, 0.0F, 0.0F, 0.0F};
+     std::array<float, 6> cff = {0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F};
+     // precalculation
+     const float a1 = p->Ti * (1.0F / (p->k * p->kr) + 1.0F);
+     const float a2 = p->Ti * (p->T + p->Tt) / (p->k * p->kr);
+     const float a3 = p->Ti * p->T * p->Tt / (p->k * p->kr);
      cff.at(5) = c.at(5);
-     cff.at(4) = c.at(4) + 5.0F * p->Ti * c.at(5) * ((1 / p->k / p->kr) + 1);
-     cff.at(3) = c.at(3) + 4.0F * p->Ti * c.at(4) * ((1 / p->k / p->kr) + 1) + 20.0F * p->Ti * c.at(5) * (p->T + p->Tt) / p->k / p->kr;
-     cff.at(2) = c.at(2) + 3.0F * p->Ti * c.at(3) * ((1 / p->k / p->kr) + 1) + 12.0F * p->Ti * c.at(4) * (p->T + p->Tt) / p->k / p->kr
-         + 60.0f * p->T * p-> Ti * p->Tt * c.at(5) / p->k / p->kr;
-     cff.at(1) = c.at(1) + 2.0F * p->Ti * c.at(2) * ((1 / p->k / p->kr) + 1) + 6.0F * p->Ti * c.at(3) * (p->T + p->Tt) / p->k / p->kr
-         + 24.0f * p->T * p-> Ti * p->Tt * c.at(4) / p->k / p->kr;
-     cff.at(0) = c.at(0) + p->Ti * c.at(1) * ((1 / p->k / p->kr) + 1) + 2.0F * p->Ti * c.at(2) * (p->T + p->Tt) / p->k / p->kr
-         + 6.0f * p->T * p-> Ti * p->Tt * c.at(3) / p->k / p->kr;
+     cff.at(4) = c.at(4) + 5.0F * c.at(5) * a1;
+     cff.at(3) = c.at(3) + 4.0F * c.at(4) * a1 + 20.0F * c.at(5) * a2;
+     cff.at(2) = c.at(2) + 3.0F * c.at(3) * a1 + 12.0F * c.at(4) * a2 + 60.0F * a3 * c.at(5);
+     cff.at(1) = c.at(1) + 2.0F * c.at(2) * a1 +  6.0F * c.at(3) * a2 + 24.0F * a3 * c.at(4);
+     cff.at(0) = c.at(0) + 1.0F * c.at(1) * a1 +  2.0F * c.at(2) * a2 +  6.0F * a3 * c.at(3);
+     // calculation of reference signal for position controller
+     wp = ((((c.at(5) * t + c.at(4)) * t + c.at(3)) * t + c.at(2)) * t + c.at(1)) * t + c.at(0);
      // calculation of reference signal for feedforward controller
-     uVp1 = cff.at(5) * t * t * t * t * t
-         + cff.at(4) * t * t * t * t
-         + cff.at(3) * t * t * t
-         + cff.at(2) * t * t
-         + cff.at(1) * t
-         + cff.at(0);
+     uVp1 = ((((cff.at(5) * t + cff.at(4)) * t + cff.at(3)) * t + cff.at(2)) * t + cff.at(1)) * t + cff.at(0);
    }
   }
 
@@ -82,16 +93,16 @@ public:
   * @brief feedforward controller
   * @param[in] uVp1k time discrete value of input signal
   * @param[in] uVp1k_1 last value of uVp1k
-  * @param[out] uVp output signal from feedforward controller 
+  * @param[out] uVp output signal from feedforward controller
   */
-  void feedforwardCtrl(const float uVp1k, float& uVp1k_1, float& uVp)
+  void feedforwardCtrl(const float uVp1k, float& uVp)
   {
-    uVpk = (2.0F * uVp1k - 2.0F * uVp1k_1 - (p->Tak - 2.0F * p->Ti) * uVpk_1)/(p->Tak + 2.0F * p->Ti);
-    uVp1k_1 = uVp1k; // save last value
-    uVpk_1= uVpk; // save last value
+    uVpk = (2.0F * uVp1k - 2.0F * uVp1km1 - (p->Tak - 2.0F * p->Ti) * uVpkm1) / (p->Tak + 2.0F * p->Ti);
+    uVp1km1 = uVp1k; // save last value
+    uVpkm1= uVpk; // save last value
     uVp = uVpk; // assign time discrete value to the output of the feedforward controller
   }
-  
+
   /**
   * @brief execute one single step
   * @param[in] ep control deviation [m]
@@ -102,11 +113,17 @@ public:
     uRp = p->kp * ep; //Calculate uRp
   }
 
-private:
-  float uVpk; // time discrete value of uVp
-  float uVpk_1; // last value of uVpk
+  float t = 0.0F;
+  float x0 = 0.0F;
+  float uVpk = 0.0F;
+  float uVpkm1 = 0.0F;
+  float uVp1km1 = 0.0F;
 
-  CarParameters* p=CarParameters::p();//Access to Car Parameters
+  float wp = 0.0F;
+  float uVp1 = 0.0F;
+
+  CarParameters* p=CarParameters::p(); // access to Car Parameters
 };
 
 #endif // POSITIONCONTROLLER_H
+

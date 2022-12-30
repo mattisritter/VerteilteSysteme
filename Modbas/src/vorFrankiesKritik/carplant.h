@@ -20,7 +20,7 @@
 
 class CarPlant{
 public:
-  using InputsType = std::array<float, 2>; /**< type definition for model input */
+  using InputsType = std::array<float, 3>; /**< type definition for model input */
   using StatesType = std::array<float, 7>; /**< type definition for model states */
   using OutputsType = std::array<float, 6>; /**< type definition for model output */
   /**
@@ -32,11 +32,19 @@ public:
     u.fill(0.0F); // initialize input vector with zeros
 
     // prefill deques with zeros
-    const std::size_t Tt = static_cast<std::size_t> (p->uTt/p->Ta);
-    unDeque.resize( Tt, 0.0F );
-    deltanDeque.resize( Tt, 0.0F );
+    unDeque.resize( 3, 0.0F );
+    deltanDeque.resize( 3, 0.0F );
   }
 
+  /**
+* @brief initializes model by initial conditions (IC)
+* @param[in] x0 initial model state vector
+*/
+//  void init(/*const StatesType& x0*/)
+//  {
+//    t = 0.0F; // initialize simulation time to zero
+//    x = p->x0; // copy initial vector to state vector
+//  }
   /**
 * @brief execute one single integration step
 * @param[in] u input vector
@@ -46,12 +54,12 @@ public:
   void step(const InputsType& u, OutputsType& y, const float dt)
   {
     // time delay of pedals and steering
-    unDeque.push_front(u.at(0));
-    deltanDeque.push_front(u.at(1));
-    un_Tt = unDeque.back();
-    deltan_Tt = deltanDeque.back();
+    unDeque.push_front(u.at(1));
+    deltanDeque.push_front(u.at(2));
     unDeque.pop_back();
     deltanDeque.pop_back();
+    un_Tt = unDeque.at(2);
+    deltan_Tt = deltanDeque.at(2);
 
     // calculating the side slip angle for diffrent models
     float beta = 0.0F;
@@ -85,7 +93,7 @@ public:
 * @param[out] xd the current differential of the state vector
 * @param[in] t the current simulation time
 */
-  void operator()(const StatesType& x, StatesType& xd, float)
+  void operator()(const StatesType& x, StatesType& xd, float t)
   {
     const float delta = p->deltaMax * deltan_Tt; // steering angle (5.18)
     if (std::abs(x.at(0)) > p->speedMin)
@@ -94,7 +102,6 @@ public:
      // slip angle of front (5.19) and rear wheel (5.20)
      float alphaf = 0.0F;
      float alphar = 0.0F;
-
      if (x.at(0) > 0.0F)
      {
        alphaf = -std::atan((x.at(5) + p->lf * x.at(4)) / x.at(0)) + delta;
@@ -144,7 +151,7 @@ public:
 
 private:
   boost::numeric::odeint::runge_kutta4<StatesType> solver; /**< the Runge Kutta solver parameterized with states vector type */
-  InputsType u; // system input (pedals, steering)
+  InputsType u; // system input (cmd, pedals, steering)
   StatesType x; // system state (vc1, s1, s2, psi, omega, vc2, x)
   float t = 0.0F; // simulation time [s]
 

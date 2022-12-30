@@ -56,7 +56,7 @@ public:
     // output the message on the topic /CarOutsputsExt and /CarOutsputs
     outputsExtPub.publish(carOutputsExtMsg);
 
-    if (counterCarOutputs >= 10) /*message is published every 10ms*/
+    if (counterCarOutputs >= 9) /*message is published every 10ms*/
     {
       outputsPub.publish(carOutputsMsg);
       counterCarOutputs = 0;
@@ -73,10 +73,10 @@ private:
   ros::Publisher outputsExtPub; /**< The /mad/car0/sim/caroutputsext topic publisher */
   ros::Publisher outputsPub; /**< The /mad/caroutputs topic publisher */
   const float samplingTime = 0.0F; /**< The sample time [s] */
-  ModelType::InputsType u { { 0.0F, 0.0F } }; /**< The input signal of the model */
+  ModelType::InputsType u { { 0.0F, 0.0F, 0.0F} }; /**< The input signal of the model */
   ModelType model {};
 
-  int8_t counterCarOutputs = 0; // counter for sending Message every 10ms
+  int counterCarOutputs = 0; // counter for sending Message every 10ms
   /**
 * @brief callback for u topic, u is the input to the model
 * @param[in] msg The ROS message
@@ -84,62 +84,63 @@ private:
   void inputsCallback(const madmsgs::CarInputs& msg)
   {
     // copy the input signal to the member variable u
+    u.at(0) = msg.cmd;
     switch (msg.cmd)
     {
     case madmsgs::CarInputs::CMD_HALT:
-      u.at(0) = 0.0F;
+      u.at(1) = 0.0F;
       break;
 
     case madmsgs::CarInputs::CMD_FORWARD:
       if (msg.pedals > 1.0F)
       {
-        u.at(0) = 1.0F;
+        u.at(1) = 1.0F;
       }
       else if (msg.pedals < 0.0F)
       {
-        u.at(0) = 0.0F;
+        u.at(1) = 0.0F;
       }
       else
       {
-        u.at(0) = msg.pedals;
+        u.at(1) = msg.pedals;
       }
       break;
 
     case madmsgs::CarInputs::CMD_REVERSE:
       if (msg.pedals < -1.0F)
       {
-        u.at(0) = -1.0F;
+        u.at(1) = -1.0F;
       }
       else if (msg.pedals > 0.0F)
       {
-        u.at(0) = 0.0F;
+        u.at(1) = 0.0F;
       }
       else
       {
-        u.at(0) = msg.pedals;
+        u.at(1) = msg.pedals;
       }
       break;
 
     case madmsgs::CarInputs::CMD_SLOW:
-      u.at(0) = msg.pedals;
+      u.at(1) = msg.pedals;
       break;
 
     default: /*Backup: if no siganl received, car supposed to stop*/
-      u.at(0) = 0.0F;
+      u.at(1) = 0.0F;
       break;
     }
 
     if (msg.steering > 1.0F)
     {
-      u.at(1) = 1.0F;
+      u.at(2) = 1.0F;
     }
     else if (msg.steering < -1.0F)
     {
-      u.at(1) = -1.0F;
+      u.at(2) = -1.0F;
     }
     else
     {
-      u.at(1) = msg.steering;
+      u.at(2) = msg.steering;
     }
   }
 };

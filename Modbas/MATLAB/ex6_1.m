@@ -20,6 +20,7 @@ kr = Ti/k * sqrt(omegaD^2 + omegaD^4 * T^2) / sqrt(Ti^2*omegaD^2 + 1);
 kp = 1;                 % Verstärkung des Positionsregler [1/s]  
 % Abtastung
 tA = 20e-3;
+
 %% Übertragungsfunktionen
 s = tf('s');
 % Geschwindigkeitsregler
@@ -42,6 +43,7 @@ G_Wp = minreal(G_0p/(1+G_0p));          % Führungsübertragung
 figure(1);
 clf;
 margin(G_0);            % Bodediagramm mit Phasen- und Amplitudenrand
+
 %% Sprungantwort Führungsverhalten Geschwindigkeitsregler
 figure(2);
 clf;

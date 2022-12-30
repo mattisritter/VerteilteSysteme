@@ -15,50 +15,55 @@ public:
   */
   SpeedController()
   {
+    uvik_1 = 0.0F ; // initialize output Delay with zero
   }
 
   /**
   * @brief execute one single step
-  * @param[in] wv reference speed [m/s]
-  * @param[in] v speed [m/s]
+  * @param[in] ev control deviation
   * @param[out] uv control variable
   */
-  void step(const float wv, const float v, float& uv)
+  void step(const float& ev, float& uv)
   {
-    const float ev = wv - v;
     float uvk = 0.0F; // time discrete control signal
     const float uvpk = p->kr * ev; // time discrete p-part
 
     // Clamping-Anti-Windup
-    if (hold == false)
+    if (hold == 0)
     {
-      uvikm1 = uvikm1 + p->kr * p->Tak * ev / p->Ti; // time discrete i-part
+      const float uvik = uvik_1 + p->kr * p->Tak * ev / p->Ti; // time discrete i-part
+      uvk = uvpk + uvik;
+      uvik_1 = uvik;
     }
-    uvk = uvpk + uvikm1;
+    else
+    {
+      // As ek=0 -> equation result equals uvik_1 -> Calculation is performed with uvik_1
+      uvk = uvpk + uvik_1;
+    }
 
     // Limit output signal and start clamping anti windup
     if (uvk >= 1.0F)       /*limit control signal to 1*/
     {
       uv = 1.0F;
-      hold = true;
+      hold = 1;
     }
     else if (uvk <= -1.0F) /*limit control signal to -1*/
     {
       uv = -1.0F;
-      hold = true;
+      hold = 1;
     }
     else                   /*Pass control signal*/
     {
       uv = uvk;
-      hold = false;
+      hold = 0;
     }
   }
 
 private:
-  float uvikm1 = 0.0F; // last value of uvik
-  bool hold = false; // Flag, 1 if Anti-Windup is activated
+  float uvik_1; // last value of uvik
+  bool hold = 0; // Flag, 1 if Anti-Windup is activated
   
-  const CarParameters* const p=CarParameters::p(); // Access to Car Parameters
+  CarParameters* p=CarParameters::p(); // Access to Car Parameters
 };
 
 #endif // SPEEDCONTROLLER_H
