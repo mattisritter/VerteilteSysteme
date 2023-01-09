@@ -35,10 +35,6 @@ public:
 
   /**
    * @brief calcualtion and limitation of control signal
-   * @param[in] spline
-   * @param[in] s actual cartesian center position [m]
-   * @param[in] psi yaw angle [rad]
-   * @param[in] vs max speed [m/s]
    * @param[out] delta control signal for steering
    */
   void step(modbas::Spline& spline, boost::array<float, 2>& s, const float psi, const float vs, float& delta)
@@ -96,9 +92,9 @@ private:
     std::array<float, 2> s; //convert boost::array to std::array
     s.at(0)= sActual.at(0);
     s.at(1)= sActual.at(1);
-    int k = spline.getNearest(s, xs, dist);
+    /*int k = */spline.getNearest(s, xs, dist);
 
-    spline.interpolate(xs, ys, yds, ydds, k); // interpolate spline at nearest point
+    spline.interpolate(xs, ys, yds, ydds, -1); // interpolate spline at nearest point
     xh = xs + vs * p->Tt; // calculate future arcposition to compensate deadtime
     spline.interpolate(xh, yh, ydh, yddh, -1); // interpolates spline at lookahead point
 

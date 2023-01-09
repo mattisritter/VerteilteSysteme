@@ -84,16 +84,13 @@ private:
   void inputsCallback(const madmsgs::CarInputs& msg)
   {
     // copy the input signal to the member variable u
-    // limit pedal input depending on the command message
     switch (msg.cmd)
     {
     case madmsgs::CarInputs::CMD_HALT:
-      // set pedal input to 0
       u.at(0) = 0.0F;
       break;
 
     case madmsgs::CarInputs::CMD_FORWARD:
-      // limit pedal input to [0, 1]
       if (msg.pedals > 1.0F)
       {
         u.at(0) = 1.0F;
@@ -109,7 +106,6 @@ private:
       break;
 
     case madmsgs::CarInputs::CMD_REVERSE:
-      // limit pedal input to [-1, 0]
       if (msg.pedals < -1.0F)
       {
         u.at(0) = -1.0F;
@@ -125,16 +121,14 @@ private:
       break;
 
     case madmsgs::CarInputs::CMD_SLOW:
-      // pass pedal input
       u.at(0) = msg.pedals;
       break;
 
-    default:
-      // Backup: if no siganl received, car supposed to stop
+    default: /*Backup: if no siganl received, car supposed to stop*/
       u.at(0) = 0.0F;
       break;
     }
-    // limit steering input to [-1, 1]
+
     if (msg.steering > 1.0F)
     {
       u.at(1) = 1.0F;
@@ -170,12 +164,12 @@ int main(int argc, char **argv)
 
   // loop while ROS is running
   while (ros::ok()) {
-    // call the method step() of the CarsimNode instance node
+    // call the method step() of the SineNode instance node
     node.step();
     // pass control to ROS for background tasks
     ros::spinOnce();
     // wait for next sampling point
-    // neighbor sampling points have a time distance of 2ms
+    // neighbor sampling points have a time distance of 100ms
     loopRate.sleep();
   }
   // return success

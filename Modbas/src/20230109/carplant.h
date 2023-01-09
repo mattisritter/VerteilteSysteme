@@ -28,7 +28,7 @@ public:
 */
   CarPlant() // copy parameters to member variables
   {
-    x.fill(0.0F);//p->x0; // initialize state vector with initial values
+    x = p->x0; // initialize state vector with initial values
     u.fill(0.0F); // initialize input vector with zeros
 
     // prefill deques with zeros
@@ -41,17 +41,17 @@ public:
 * @brief execute one single integration step
 * @param[in] u input vector
 * @param[out] y output vector
-* @param[in] dt sample time [s]
+* @param[in] dt sample time
 */
   void step(const InputsType& u, OutputsType& y, const float dt)
   {
     // time delay of pedals and steering
-    unDeque.push_back(u.at(0));
-    deltanDeque.push_back(u.at(1));
-    un_Tt = unDeque.front();
-    deltan_Tt = deltanDeque.front();
-    unDeque.pop_front();
-    deltanDeque.pop_front();
+    unDeque.push_front(u.at(0));
+    deltanDeque.push_front(u.at(1));
+    un_Tt = unDeque.back();
+    deltan_Tt = deltanDeque.back();
+    unDeque.pop_back();
+    deltanDeque.pop_back();
 
     // calculating the side slip angle for diffrent models
     float beta = 0.0F;
@@ -83,7 +83,7 @@ public:
 * This operator is called by Runge Kutta internally.
 * @param[in] x the current state vector
 * @param[out] xd the current differential of the state vector
-* @param[in] t the current simulation time (unused)
+* @param[in] t the current simulation time
 */
   void operator()(const StatesType& x, StatesType& xd, float)
   {
@@ -100,7 +100,7 @@ public:
        alphaf = -std::atan((x.at(5) + p->lf * x.at(4)) / x.at(0)) + delta;
        alphar = -std::atan((x.at(5) - p->lr * x.at(4)) / x.at(0));
      }
-     else if (x.at(0) < 0.0F)
+     else
      {
        alphaf = std::atan((x.at(5) + p->lf * x.at(4)) / x.at(0)) - delta;
        alphar = std::atan((x.at(5) - p->lr * x.at(4)) / x.at(0));
@@ -154,8 +154,8 @@ private:
   std::deque <float> unDeque;
   std::deque <float> deltanDeque;
   // time delayed input signals
-  float un_Tt = 0.0F; // delayed pedals signal: u_n(t-Tt)
-  float deltan_Tt = 0.0F; // delayed steering signal: delta_n(t-Tt)
+  float un_Tt = 0.0F; // delayed pedals signal: un(t-Tt)
+  float deltan_Tt = 0.0F; // delayed steering signal: deltan(t-Tt)
 };
 
 #endif // CARPLANT_H

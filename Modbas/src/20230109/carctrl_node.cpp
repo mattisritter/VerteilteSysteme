@@ -52,7 +52,6 @@ public:
     std_msgs::Float32 wvMsg;
     std_msgs::Float32 testMsg;
     //output variables
-    calculateX(v, x); // calculate arcposition x [m] as integral of v
     // Speed Controller
     float uv = 0.0F; // control signal for pedals
     // Position Controller
@@ -65,24 +64,34 @@ public:
     {
       pathController.step(spline, y, psi, vs, delta);
       // set reference signal for speed controller to max speed of maneuver
-      wv = vs;
-      carInputsMsg.steering = delta;
-    }
 
-    //Position Controller
-    if (type == madmsgs::DriveManeuver::TYPE_PARK)
-    {
-      positionController.step(xs, vs, x, up);
-      wv = up; //set reference signal for speed controller to control signal of position controller
+      carInputsMsg.steering = delta;
+
+      //Position Controller
+      if (type == madmsgs::DriveManeuver::TYPE_PARK)
+      {
+        positionController.step(xs, vs, x, up);
+        wv = up; //set reference signal for speed controller to control signal of position controller
+      }
+      else
+      {
+        wv = vs;
+      }
     }
 
     // Speed Controller (always active)
     speedController.step(wv, v, uv);
     carInputsMsg.pedals = uv; // copy the output signal to the message
 
+
     // creating cmd message
+    // Drive mode parking
+    if (type == madmsgs::DriveManeuver::TYPE_PARK)
+    {
+      carInputsMsg.cmd = madmsgs::CarInputs::CMD_SLOW;
+    }
     // Drive mode forward
-    if (wv >= 0.0F)
+    else if (wv >= 0.0F)
     {
       carInputsMsg.cmd = madmsgs::CarInputs::CMD_FORWARD;
     }
@@ -91,13 +100,6 @@ public:
     {
       carInputsMsg.cmd = madmsgs::CarInputs::CMD_REVERSE;
     }
-    // Drive mode parking
-    if (type == madmsgs::DriveManeuver::TYPE_PARK)
-    {
-      carInputsMsg.cmd = madmsgs::CarInputs::CMD_SLOW;
-    }
-
-
     testMsg.data = x; // x
     debugMsg.data = positionController.getwp(); // wp
     wvMsg.data = wv;
@@ -109,6 +111,8 @@ public:
     uvpPub.publish(uvpMsg);
     wvPub.publish(wvMsg);
     testPub.publish(testMsg);
+
+    //t += CarParameters::p()->Tak;    // increase elapsed time
   }
 
 private:
@@ -134,10 +138,12 @@ private:
   float vs = 0.0F; // max speed [m/s]
   float xs = 0.0F; // end of park maneuver [m]
   std::vector<float> breaks { 0.0F };
-  std::array<std::vector<float>, 2> s { { { 0.0F }, { 0.0F } } }; // actual cartesian center position [m] (s1, s2)^T
+  std::array<std::vector<float>, 2> s { { { 0.0F }, { 0.0F } } };
   std::vector<uint32_t> segmentIDs { 0 };
   // Speed Controller
   float wv = 0.0F; // reference speed [m/s]
+  // Position Controller
+  //float wp = 0.0F; // reference signal [m]
   // Path Controller
   modbas::Spline spline; // default constructor of a spline
 
@@ -149,12 +155,11 @@ private:
   /**
  * @brief integration of speed v [m/s] to calculate arcposition x [m]
  * @param[in] v speed [m/s]
- * @param[out] x arcposition [m]
  */
-  void calculateX(const float v, float& x)
+  void calculateX(const float v, float& x, float& vm1)
   {
     x += CarParameters::p()->Tak * (v + vm1) / 2.0F; // trapezodial rule
-    vm1 = v;
+    vm1 = v; //vkm1
   }
   /**
  * @brief callback for CarOutputsExt
@@ -163,6 +168,7 @@ private:
   void inputsCallbackOutputsExt(const madmsgs::CarOutputsExt& msgOutputsExt)
   {
     v = msgOutputsExt.v; // actual speed v [m/s]
+    calculateX(v, x, vm1); // calculate arcposition x [m] as integral of v
     psi = msgOutputsExt.psi; // actual yaw angle [rad]
     y = msgOutputsExt.s; // actual cartesian center position [m] (s1, s2)^T
   }
@@ -181,9 +187,11 @@ private:
     s.at(0) = msgDriveManeuver.s1;
     s.at(1) = msgDriveManeuver.s2;
     segmentIDs = msgDriveManeuver.segments;
-    // initialize position Controller
-    positionController.init(x, xs, vs);
-    // initialize path Controller
+    // Position Controller
+    positionController.init(x);
+    //t = 0.0F; // reset time [s]
+    //x0 = x; // set x0 [m] to current arcposition
+    // Path Controller
     pathController.init(breaks, s, segmentIDs, spline);
   }
 };
@@ -208,12 +216,12 @@ int main(int argc, char **argv)
 
   // loop while ROS is running
   while (ros::ok()) {
-    // call the method step() of the CarctrlNode instance node
+    // call the method step() of the SineNode instance node
     node.step();
     // pass control to ROS for background tasks
     ros::spinOnce();
     // wait for next sampling point
-    // neighbor sampling points have a time distance of 20ms
+    // neighbor sampling points have a time distance of 100ms
     loopRate.sleep();
   }
   // return success
