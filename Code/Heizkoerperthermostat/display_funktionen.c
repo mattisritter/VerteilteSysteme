@@ -575,10 +575,10 @@ void Display_Output(int iTemp2print, unsigned char ucLine, unsigned char ucCAN)
 	unsigned char ucDisp[2][16] = {" Actual:   0.0C ", " Target:   0.0C "};
 	unsigned char j = 0;
 	unsigned char ucNegFlag = 0;	//rememberes if number negative
-	if (ucCAN == 111)
+	if (ucCAN == 0)
 	{
-		ucDisp[2][0] = '[';
-		ucDisp[2][15] = ']';
+		ucDisp[1][0] = '[';
+		ucDisp[1][15] = ']';
 	}
 	if (iTemp2print < 0)
 	{

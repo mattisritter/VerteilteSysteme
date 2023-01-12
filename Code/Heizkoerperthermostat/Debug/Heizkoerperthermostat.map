@@ -5,7 +5,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_divmodhi4.o)
                               display_funktionen.o (__divmodhi4)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
-                              C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o (exit)
+                              c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o (exit)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_copy_data.o)
                               display_funktionen.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_clear_bss.o)
@@ -32,8 +32,8 @@ ucS2_old            0x1               Keys.o
 
 Discarded input sections
 
- .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
- .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
  .text          0x00000000        0x0 Controller.o
  .data          0x00000000        0x0 Controller.o
  .bss           0x00000000        0x0 Controller.o
@@ -54,15 +54,6 @@ Discarded input sections
  .text          0x00000000        0x0 Keys.o
  .data          0x00000000        0x0 Keys.o
  .bss           0x00000000        0x0 Keys.o
- .data.ucS1_new
-                0x00000000        0x1 Keys.o
- .data.ucS2_new
-                0x00000000        0x1 Keys.o
- .data.ucS3_new
-                0x00000000        0x1 Keys.o
- .text.keys_get_state
-                0x00000000       0x8e Keys.o
- COMMON         0x00000000        0x3 Keys.o
  .text          0x00000000        0x0 LED.o
  .data          0x00000000        0x0 LED.o
  .bss           0x00000000        0x0 LED.o
@@ -99,8 +90,6 @@ Discarded input sections
  .text          0x00000000        0x0 Timer1.o
  .data          0x00000000        0x0 Timer1.o
  .bss           0x00000000        0x0 Timer1.o
- .text.Timer1_get_10msState
-                0x00000000       0x20 Timer1.o
  .text          0x00000000        0x0 Timer2.o
  .data          0x00000000        0x0 Timer2.o
  .bss           0x00000000        0x0 Timer2.o
@@ -229,7 +218,7 @@ user_signatures  0x00850000         0x00000400         rw !x
 Linker script and memory map
 
 Address of section .data set to 0x800100
-LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
 LOAD Controller.o
 LOAD display_funktionen.o
 LOAD Init1.o
@@ -251,7 +240,7 @@ START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4\libm.a
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4\libc.a
-LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4\libatmega88pa.a
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4\libatmega88pa.a
 END GROUP
                 0x00000000                __TEXT_REGION_ORIGIN__ = DEFINED (__TEXT_REGION_ORIGIN__)?__TEXT_REGION_ORIGIN__:0x0
                 [0x00800100]                __DATA_REGION_ORIGIN__ = DEFINED (__DATA_REGION_ORIGIN__)?__DATA_REGION_ORIGIN__:0x800060
@@ -353,9 +342,9 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1cdc
+.text           0x00000000     0x1dec
  *(.vectors)
- .vectors       0x00000000       0x34 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+ .vectors       0x00000000       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
                 0x00000000                __vector_default
                 0x00000000                __vectors
  *(.vectors)
@@ -383,13 +372,13 @@ END GROUP
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000034        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+ .init0         0x00000034        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
                 0x00000034                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000034        0xc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+ .init2         0x00000034        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
  *(.init2)
  *(.init3)
  *(.init3)
@@ -408,10 +397,10 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x00000066        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+ .init9         0x00000066        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
  *(.init9)
  *(.text)
- .text          0x0000006a        0x2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+ .text          0x0000006a        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
                 0x0000006a                __vector_22
                 0x0000006a                __vector_1
                 0x0000006a                __vector_12
@@ -515,134 +504,140 @@ END GROUP
  .text.keys_Init
                 0x0000083a       0x22 Keys.o
                 0x0000083a                keys_Init
+ .text.keys_get_state
+                0x0000085c       0x8e Keys.o
+                0x0000085c                keys_get_state
  .text.LED_Init
-                0x0000085c       0x22 LED.o
-                0x0000085c                LED_Init
- .text.main     0x0000087e      0x1aa main.o
-                0x0000087e                main
+                0x000008ea       0x22 LED.o
+                0x000008ea                LED_Init
+ .text.main     0x0000090c      0x20c main.o
+                0x0000090c                main
  .text.MCP2515_Init
-                0x00000a28       0x8e MCP2515_HHN.o
-                0x00000a28                MCP2515_Init
+                0x00000b18       0x8e MCP2515_HHN.o
+                0x00000b18                MCP2515_Init
  .text.MCP2515_Write_Reg
-                0x00000ab6       0x92 MCP2515_HHN.o
-                0x00000ab6                MCP2515_Write_Reg
+                0x00000ba6       0x92 MCP2515_HHN.o
+                0x00000ba6                MCP2515_Write_Reg
  .text.MCP2515_Change_Reg
-                0x00000b48       0x6e MCP2515_HHN.o
-                0x00000b48                MCP2515_Change_Reg
+                0x00000c38       0x6e MCP2515_HHN.o
+                0x00000c38                MCP2515_Change_Reg
  .text.MCP2515_Set_OpMode
-                0x00000bb6       0x52 MCP2515_HHN.o
-                0x00000bb6                MCP2515_Set_OpMode
+                0x00000ca6       0x52 MCP2515_HHN.o
+                0x00000ca6                MCP2515_Set_OpMode
  .text.MCP2515_Change_ClkOut
-                0x00000c08       0x52 MCP2515_HHN.o
-                0x00000c08                MCP2515_Change_ClkOut
+                0x00000cf8       0x52 MCP2515_HHN.o
+                0x00000cf8                MCP2515_Change_ClkOut
  .text.MCP2515_Set_Baudrate
-                0x00000c5a       0x6a MCP2515_HHN.o
-                0x00000c5a                MCP2515_Set_Baudrate
+                0x00000d4a       0x6a MCP2515_HHN.o
+                0x00000d4a                MCP2515_Set_Baudrate
  .text.MCP2515_Read_Status
-                0x00000cc4       0x62 MCP2515_HHN.o
-                0x00000cc4                MCP2515_Read_Status
+                0x00000db4       0x62 MCP2515_HHN.o
+                0x00000db4                MCP2515_Read_Status
  .text.MCP2515_Load_TXBuffer
-                0x00000d26       0x94 MCP2515_HHN.o
-                0x00000d26                MCP2515_Load_TXBuffer
+                0x00000e16       0x94 MCP2515_HHN.o
+                0x00000e16                MCP2515_Load_TXBuffer
  .text.MCP2515_Send_Message
-                0x00000dba      0x268 MCP2515_HHN.o
-                0x00000dba                MCP2515_Send_Message
+                0x00000eaa      0x268 MCP2515_HHN.o
+                0x00000eaa                MCP2515_Send_Message
  .text.MCP2515_RequestToSend
-                0x00001022       0x6e MCP2515_HHN.o
-                0x00001022                MCP2515_RequestToSend
+                0x00001112       0x6e MCP2515_HHN.o
+                0x00001112                MCP2515_RequestToSend
  .text.MCP2515_Read_RxStatus
-                0x00001090       0x62 MCP2515_HHN.o
-                0x00001090                MCP2515_Read_RxStatus
+                0x00001180       0x62 MCP2515_HHN.o
+                0x00001180                MCP2515_Read_RxStatus
  .text.MCP2515_Check_Message
-                0x000010f2      0x2a2 MCP2515_HHN.o
-                0x000010f2                MCP2515_Check_Message
+                0x000011e2      0x2a2 MCP2515_HHN.o
+                0x000011e2                MCP2515_Check_Message
  .text.MCP2515_Read_RxBuffer
-                0x00001394       0x9c MCP2515_HHN.o
-                0x00001394                MCP2515_Read_RxBuffer
+                0x00001484       0x9c MCP2515_HHN.o
+                0x00001484                MCP2515_Read_RxBuffer
  .text.Servo_Init
-                0x00001430       0x42 Servo.o
-                0x00001430                Servo_Init
+                0x00001520       0x42 Servo.o
+                0x00001520                Servo_Init
  .text.Servo_Step
-                0x00001472       0x2c Servo.o
-                0x00001472                Servo_Step
+                0x00001562       0x2c Servo.o
+                0x00001562                Servo_Step
  .text.SPI_Master_Init
-                0x0000149e       0x92 SPI.o
-                0x0000149e                SPI_Master_Init
+                0x0000158e       0x92 SPI.o
+                0x0000158e                SPI_Master_Init
  .text.SPI_Master_SlaveSelectInit
-                0x00001530       0x7e SPI.o
-                0x00001530                SPI_Master_SlaveSelectInit
+                0x00001620       0x7e SPI.o
+                0x00001620                SPI_Master_SlaveSelectInit
  .text.SPI_Master_Start
-                0x000015ae       0x58 SPI.o
-                0x000015ae                SPI_Master_Start
+                0x0000169e       0x58 SPI.o
+                0x0000169e                SPI_Master_Start
  .text.SPI_Master_Stop
-                0x00001606       0x56 SPI.o
-                0x00001606                SPI_Master_Stop
+                0x000016f6       0x56 SPI.o
+                0x000016f6                SPI_Master_Stop
  .text.SPI_Master_Write
-                0x0000165c       0x34 SPI.o
-                0x0000165c                SPI_Master_Write
+                0x0000174c       0x34 SPI.o
+                0x0000174c                SPI_Master_Write
  .text.Timer1_Init
-                0x00001690       0x52 Timer1.o
-                0x00001690                Timer1_Init
+                0x00001780       0x52 Timer1.o
+                0x00001780                Timer1_Init
  .text.__vector_11
-                0x000016e2       0x68 Timer1.o
-                0x000016e2                __vector_11
+                0x000017d2       0x68 Timer1.o
+                0x000017d2                __vector_11
+ .text.Timer1_get_10msState
+                0x0000183a       0x20 Timer1.o
+                0x0000183a                Timer1_get_10msState
  .text.Timer1_get_1sState
-                0x0000174a       0x20 Timer1.o
-                0x0000174a                Timer1_get_1sState
+                0x0000185a       0x20 Timer1.o
+                0x0000185a                Timer1_get_1sState
  .text.Timer1_get_100msState
-                0x0000176a       0x20 Timer1.o
-                0x0000176a                Timer1_get_100msState
+                0x0000187a       0x20 Timer1.o
+                0x0000187a                Timer1_get_100msState
  .text.__vector_7
-                0x0000178a       0x68 Timer2.o
-                0x0000178a                __vector_7
+                0x0000189a       0x68 Timer2.o
+                0x0000189a                __vector_7
  .text.TMP75_Read_Temperature
-                0x000017f2      0x118 TMP75.o
-                0x000017f2                TMP75_Read_Temperature
+                0x00001902      0x118 TMP75.o
+                0x00001902                TMP75_Read_Temperature
  .text.TMP75_Get_Temperature
-                0x0000190a       0x7c TMP75.o
-                0x0000190a                TMP75_Get_Temperature
+                0x00001a1a       0x7c TMP75.o
+                0x00001a1a                TMP75_Get_Temperature
  .text.TWI_Master_Init
-                0x00001986       0x2a TWI_ATMEGA.o
-                0x00001986                TWI_Master_Init
+                0x00001a96       0x2a TWI_ATMEGA.o
+                0x00001a96                TWI_Master_Init
  .text.TWI_Master_Start
-                0x000019b0       0x28 TWI_ATMEGA.o
-                0x000019b0                TWI_Master_Start
+                0x00001ac0       0x28 TWI_ATMEGA.o
+                0x00001ac0                TWI_Master_Start
  .text.TWI_Master_Stop
-                0x000019d8       0x1a TWI_ATMEGA.o
-                0x000019d8                TWI_Master_Stop
+                0x00001ae8       0x1a TWI_ATMEGA.o
+                0x00001ae8                TWI_Master_Stop
  .text.TWI_Master_Transmit
-                0x000019f2       0x38 TWI_ATMEGA.o
-                0x000019f2                TWI_Master_Transmit
+                0x00001b02       0x38 TWI_ATMEGA.o
+                0x00001b02                TWI_Master_Transmit
  .text.TWI_Master_Read_Ack
-                0x00001a2a       0x2e TWI_ATMEGA.o
-                0x00001a2a                TWI_Master_Read_Ack
+                0x00001b3a       0x2e TWI_ATMEGA.o
+                0x00001b3a                TWI_Master_Read_Ack
  .text.TWI_Master_Read_NAck
-                0x00001a58       0x2e TWI_ATMEGA.o
-                0x00001a58                TWI_Master_Read_NAck
+                0x00001b68       0x2e TWI_ATMEGA.o
+                0x00001b68                TWI_Master_Read_NAck
  .text.__vector_24
-                0x00001a86       0x64 TWI_ATMEGA.o
-                0x00001a86                __vector_24
+                0x00001b96       0x64 TWI_ATMEGA.o
+                0x00001b96                __vector_24
  .text.WS2812_Init
-                0x00001aea       0x42 WS2812.o
-                0x00001aea                WS2812_Init
+                0x00001bfa       0x42 WS2812.o
+                0x00001bfa                WS2812_Init
  .text.WS2812_Set_Colour
-                0x00001b2c      0x12e WS2812.o
-                0x00001b2c                WS2812_Set_Colour
+                0x00001c3c      0x12e WS2812.o
+                0x00001c3c                WS2812_Set_Colour
  .text.WS2812_Step
-                0x00001c5a       0x30 WS2812.o
-                0x00001c5a                WS2812_Step
+                0x00001d6a       0x30 WS2812.o
+                0x00001d6a                WS2812_Step
  .text.libgcc.div
-                0x00001c8a       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_udivmodhi4.o)
-                0x00001c8a                __udivmodhi4
+                0x00001d9a       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_udivmodhi4.o)
+                0x00001d9a                __udivmodhi4
  .text.libgcc.div
-                0x00001cb2       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_divmodhi4.o)
-                0x00001cb2                _div
-                0x00001cb2                __divmodhi4
-                0x00001cd8                . = ALIGN (0x2)
+                0x00001dc2       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_divmodhi4.o)
+                0x00001dc2                _div
+                0x00001dc2                __divmodhi4
+                0x00001de8                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001cd8        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
-                0x00001cd8                _exit
-                0x00001cd8                exit
+ .fini9         0x00001de8        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
+                0x00001de8                _exit
+                0x00001de8                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -661,11 +656,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001cd8        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
+ .fini0         0x00001de8        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
  *(.fini0)
-                0x00001cdc                _etext = .
+                0x00001dec                _etext = .
 
-.data           0x00800100       0x6c load address 0x00001cdc
+.data           0x00800100       0x6e load address 0x00001dec
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -675,108 +670,123 @@ END GROUP
  .data.ucRAM_OffsetAdresse
                 0x00800108        0x4 display_funktionen.o
                 0x00800108                ucRAM_OffsetAdresse
+ .data.ucS1_new
+                0x0080010c        0x1 Keys.o
+                0x0080010c                ucS1_new
+ .data.ucS2_new
+                0x0080010d        0x1 Keys.o
+                0x0080010d                ucS2_new
+ .data.ucS3_new
+                0x0080010e        0x1 Keys.o
+                0x0080010e                ucS3_new
  .data.WS2812_1
-                0x0080010c        0x5 main.o
-                0x0080010c                WS2812_1
+                0x0080010f        0x5 main.o
+                0x0080010f                WS2812_1
  .data.MCP2515_1
-                0x00800111        0x6 main.o
-                0x00800111                MCP2515_1
- .data.ucH      0x00800117        0x1 main.o
-                0x00800117                ucH
+                0x00800114        0x6 main.o
+                0x00800114                MCP2515_1
+ .data.ucH      0x0080011a        0x1 main.o
+                0x0080011a                ucH
  .data.iTargetTemp
-                0x00800118        0x2 main.o
-                0x00800118                iTargetTemp
+                0x0080011b        0x2 main.o
+                0x0080011b                iTargetTemp
  .data.ucBaudrate
-                0x0080011a       0x18 MCP2515_HHN.o
-                0x0080011a                ucBaudrate
+                0x0080011d       0x18 MCP2515_HHN.o
+                0x0080011d                ucBaudrate
  .data.ucServoPosition
-                0x00800132        0x6 Servo.o
-                0x00800132                ucServoPosition
+                0x00800135        0x6 Servo.o
+                0x00800135                ucServoPosition
  .data.ucdevice_address
-                0x00800138        0x1 TMP75.o
-                0x00800138                ucdevice_address
- .data.uColor   0x00800139       0x12 WS2812.o
-                0x00800139                uColor
+                0x0080013b        0x1 TMP75.o
+                0x0080013b                ucdevice_address
+ .data.uColor   0x0080013c       0x12 WS2812.o
+                0x0080013c                uColor
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x0080014b       0x20 display_funktionen.o
+ .rodata        0x0080014e       0x20 display_funktionen.o
  *(.rodata*)
  *(.gnu.linkonce.r*)
-                0x0080016c                . = ALIGN (0x2)
- *fill*         0x0080016b        0x1 
-                0x0080016c                _edata = .
-                0x0080016c                PROVIDE (__data_end, .)
+                0x0080016e                . = ALIGN (0x2)
+                0x0080016e                _edata = .
+                0x0080016e                PROVIDE (__data_end, .)
 
-.bss            0x0080016c       0x53
-                0x0080016c                PROVIDE (__bss_start, .)
+.bss            0x0080016e       0x57
+                0x0080016e                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.ucStep    0x0080016c        0x1 main.o
-                0x0080016c                ucStep
+ .bss.ucStep    0x0080016e        0x1 main.o
+                0x0080016e                ucStep
  .bss.ucStepOld
-                0x0080016d        0x1 main.o
-                0x0080016d                ucStepOld
+                0x0080016f        0x1 main.o
+                0x0080016f                ucStepOld
+ .bss.ucFlagCanReceived
+                0x00800170        0x1 main.o
+                0x00800170                ucFlagCanReceived
  .bss.ucFlag10ms
-                0x0080016e        0x1 Timer1.o
-                0x0080016e                ucFlag10ms
- .bss.ucCNt_1s  0x0080016f        0x1 Timer1.o
-                0x0080016f                ucCNt_1s
- .bss.ucFlag_1s
-                0x00800170        0x1 Timer1.o
-                0x00800170                ucFlag_1s
- .bss.ucCNt_100ms
                 0x00800171        0x1 Timer1.o
-                0x00800171                ucCNt_100ms
+                0x00800171                ucFlag10ms
+ .bss.ucCNt_1s  0x00800172        0x1 Timer1.o
+                0x00800172                ucCNt_1s
+ .bss.ucFlag_1s
+                0x00800173        0x1 Timer1.o
+                0x00800173                ucFlag_1s
+ .bss.ucCNt_100ms
+                0x00800174        0x1 Timer1.o
+                0x00800174                ucCNt_100ms
  .bss.ucFlag_100ms
-                0x00800172        0x1 Timer1.o
-                0x00800172                ucFlag_100ms
+                0x00800175        0x1 Timer1.o
+                0x00800175                ucFlag_100ms
  .bss.uc10MsFlag
-                0x00800173        0x1 Timer2.o
-                0x00800173                uc10MsFlag
- .bss.uc100MsFlag
-                0x00800174        0x1 Timer2.o
-                0x00800174                uc100MsFlag
- .bss.uc10MsCnt
-                0x00800175        0x1 Timer2.o
-                0x00800175                uc10MsCnt
- .bss.uc100MsCnt
                 0x00800176        0x1 Timer2.o
-                0x00800176                uc100MsCnt
- .bss.uc1sFlag  0x00800177        0x1 Timer2.o
-                0x00800177                uc1sFlag
+                0x00800176                uc10MsFlag
+ .bss.uc100MsFlag
+                0x00800177        0x1 Timer2.o
+                0x00800177                uc100MsFlag
+ .bss.uc10MsCnt
+                0x00800178        0x1 Timer2.o
+                0x00800178                uc10MsCnt
+ .bss.uc100MsCnt
+                0x00800179        0x1 Timer2.o
+                0x00800179                uc100MsCnt
+ .bss.uc1sFlag  0x0080017a        0x1 Timer2.o
+                0x0080017a                uc1sFlag
  .bss.uctemp2read
-                0x00800178        0x1 TMP75.o
-                0x00800178                uctemp2read
+                0x0080017b        0x1 TMP75.o
+                0x0080017b                uctemp2read
  .bss.ucTWI_INT_Flag
-                0x00800179        0x1 TWI_ATMEGA.o
-                0x00800179                ucTWI_INT_Flag
+                0x0080017c        0x1 TWI_ATMEGA.o
+                0x0080017c                ucTWI_INT_Flag
  *(COMMON)
- COMMON         0x0080017a       0x20 main.o
-                0x0080017a                iActualTemp
-                0x0080017c                sSendFrame
-                0x0080018b                sRecFrame
- COMMON         0x0080019a       0x1a MCP2515_HHN.o
-                0x0080019a                ucRxDataBuffer
-                0x008001a7                ucDataBuffer
- COMMON         0x008001b4        0x2 TMP75.o
-                0x008001b4                iTemperature
- COMMON         0x008001b6        0x1 TWI_ATMEGA.o
-                0x008001b6                ucTWSR_Register
- COMMON         0x008001b7        0x8 WS2812.o
-                0x008001b7                ucPin
-                0x008001b8                PtrLedNumber
-                0x008001ba                ucPort
-                0x008001bb                PtrColourList
-                0x008001bd                PtrPort
-                0x008001bf                PROVIDE (__bss_end, .)
-                0x00001cdc                __data_load_start = LOADADDR (.data)
-                0x00001d48                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080017d        0x3 Keys.o
+                0x0080017d                ucS3_old
+                0x0080017e                ucS1_old
+                0x0080017f                ucS2_old
+ COMMON         0x00800180       0x20 main.o
+                0x00800180                iActualTemp
+                0x00800182                sSendFrame
+                0x00800191                sRecFrame
+ COMMON         0x008001a0       0x1a MCP2515_HHN.o
+                0x008001a0                ucRxDataBuffer
+                0x008001ad                ucDataBuffer
+ COMMON         0x008001ba        0x2 TMP75.o
+                0x008001ba                iTemperature
+ COMMON         0x008001bc        0x1 TWI_ATMEGA.o
+                0x008001bc                ucTWSR_Register
+ COMMON         0x008001bd        0x8 WS2812.o
+                0x008001bd                ucPin
+                0x008001be                PtrLedNumber
+                0x008001c0                ucPort
+                0x008001c1                PtrColourList
+                0x008001c3                PtrPort
+                0x008001c5                PROVIDE (__bss_end, .)
+                0x00001dec                __data_load_start = LOADADDR (.data)
+                0x00001e5a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008001bf        0x0
+.noinit         0x008001c5        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008001bf                _end = .
+                0x008001c5                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -837,7 +847,7 @@ END GROUP
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40
  .note.gnu.avr.deviceinfo
-                0x00000000       0x40 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+                0x00000000       0x40 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
 
 .note.gnu.build-id
  *(.note.gnu.build-id)
@@ -888,59 +898,59 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x250d
+.debug_info     0x00000000     0x252d
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+ .debug_info    0x00000000      0x5f4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
  .debug_info    0x000005f4       0xc3 Controller.o
  .debug_info    0x000006b7      0x524 display_funktionen.o
  .debug_info    0x00000bdb      0x186 Init1.o
  .debug_info    0x00000d61      0x109 Keys.o
  .debug_info    0x00000e6a       0xc5 LED.o
- .debug_info    0x00000f2f      0x291 main.o
- .debug_info    0x000011c0      0x93f MCP2515_HHN.o
- .debug_info    0x00001aff       0xd5 Servo.o
- .debug_info    0x00001bd4      0x1bb SPI.o
- .debug_info    0x00001d8f      0x141 Timer1.o
- .debug_info    0x00001ed0      0x13e Timer2.o
- .debug_info    0x0000200e      0x106 TMP75.o
- .debug_info    0x00002114      0x20a TWI_ATMEGA.o
- .debug_info    0x0000231e      0x1ef WS2812.o
+ .debug_info    0x00000f2f      0x2b1 main.o
+ .debug_info    0x000011e0      0x93f MCP2515_HHN.o
+ .debug_info    0x00001b1f       0xd5 Servo.o
+ .debug_info    0x00001bf4      0x1bb SPI.o
+ .debug_info    0x00001daf      0x141 Timer1.o
+ .debug_info    0x00001ef0      0x13e Timer2.o
+ .debug_info    0x0000202e      0x106 TMP75.o
+ .debug_info    0x00002134      0x20a TWI_ATMEGA.o
+ .debug_info    0x0000233e      0x1ef WS2812.o
 
-.debug_abbrev   0x00000000      0xfa0
+.debug_abbrev   0x00000000      0xf98
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+ .debug_abbrev  0x00000000      0x5a2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
  .debug_abbrev  0x000005a2       0x64 Controller.o
  .debug_abbrev  0x00000606      0x16d display_funktionen.o
  .debug_abbrev  0x00000773       0xbf Init1.o
  .debug_abbrev  0x00000832       0x7c Keys.o
  .debug_abbrev  0x000008ae       0x51 LED.o
- .debug_abbrev  0x000008ff       0xed main.o
- .debug_abbrev  0x000009ec      0x151 MCP2515_HHN.o
- .debug_abbrev  0x00000b3d       0x9d Servo.o
- .debug_abbrev  0x00000bda       0xa8 SPI.o
- .debug_abbrev  0x00000c82       0x7c Timer1.o
- .debug_abbrev  0x00000cfe       0x7a Timer2.o
- .debug_abbrev  0x00000d78       0x8f TMP75.o
- .debug_abbrev  0x00000e07       0xa5 TWI_ATMEGA.o
- .debug_abbrev  0x00000eac       0xf4 WS2812.o
+ .debug_abbrev  0x000008ff       0xe5 main.o
+ .debug_abbrev  0x000009e4      0x151 MCP2515_HHN.o
+ .debug_abbrev  0x00000b35       0x9d Servo.o
+ .debug_abbrev  0x00000bd2       0xa8 SPI.o
+ .debug_abbrev  0x00000c7a       0x7c Timer1.o
+ .debug_abbrev  0x00000cf6       0x7a Timer2.o
+ .debug_abbrev  0x00000d70       0x8f TMP75.o
+ .debug_abbrev  0x00000dff       0xa5 TWI_ATMEGA.o
+ .debug_abbrev  0x00000ea4       0xf4 WS2812.o
 
-.debug_line     0x00000000     0x1e99
+.debug_line     0x00000000     0x1db5
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
- .debug_line    0x00000133       0xc9 Controller.o
- .debug_line    0x000001fc      0x65a display_funktionen.o
- .debug_line    0x00000856       0xdf Init1.o
- .debug_line    0x00000935      0x12f Keys.o
- .debug_line    0x00000a64       0xfc LED.o
- .debug_line    0x00000b60      0x179 main.o
- .debug_line    0x00000cd9      0x71d MCP2515_HHN.o
- .debug_line    0x000013f6       0xd6 Servo.o
- .debug_line    0x000014cc      0x159 SPI.o
- .debug_line    0x00001625      0x19a Timer1.o
- .debug_line    0x000017bf      0x191 Timer2.o
- .debug_line    0x00001950      0x191 TMP75.o
- .debug_line    0x00001ae1      0x28c TWI_ATMEGA.o
- .debug_line    0x00001d6d      0x12c WS2812.o
+ .debug_line    0x00000000       0x1a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
+ .debug_line    0x0000001a       0xc9 Controller.o
+ .debug_line    0x000000e3      0x65a display_funktionen.o
+ .debug_line    0x0000073d       0xdf Init1.o
+ .debug_line    0x0000081c      0x12f Keys.o
+ .debug_line    0x0000094b       0xfb LED.o
+ .debug_line    0x00000a46      0x1af main.o
+ .debug_line    0x00000bf5      0x71d MCP2515_HHN.o
+ .debug_line    0x00001312       0xd6 Servo.o
+ .debug_line    0x000013e8      0x159 SPI.o
+ .debug_line    0x00001541      0x19a Timer1.o
+ .debug_line    0x000016db      0x191 Timer2.o
+ .debug_line    0x0000186c      0x191 TMP75.o
+ .debug_line    0x000019fd      0x28c TWI_ATMEGA.o
+ .debug_line    0x00001c89      0x12c WS2812.o
 
 .debug_frame    0x00000000      0xd30
  *(.debug_frame)
@@ -959,36 +969,36 @@ END GROUP
  .debug_frame   0x00000ac0      0x1dc TWI_ATMEGA.o
  .debug_frame   0x00000c9c       0x94 WS2812.o
 
-.debug_str      0x00000000     0x108d
+.debug_str      0x00000000     0x1054
  *(.debug_str)
- .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega88pa/avr4/crtatmega88pa.o
+ .debug_str     0x00000000      0x208 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4/crtatmega88pa.o
  .debug_str     0x00000208      0x196 Controller.o
                                 0x1ca (size before relaxing)
  .debug_str     0x0000039e      0x2a9 display_funktionen.o
                                 0x437 (size before relaxing)
- .debug_str     0x00000647       0xed Init1.o
-                                0x211 (size before relaxing)
- .debug_str     0x00000734       0x51 Keys.o
+ .debug_str     0x00000647       0xa2 Init1.o
+                                0x22b (size before relaxing)
+ .debug_str     0x000006e9       0x51 Keys.o
                                 0x1da (size before relaxing)
- .debug_str     0x00000785       0x2e LED.o
+ .debug_str     0x0000073a       0x2e LED.o
                                 0x1b6 (size before relaxing)
- .debug_str     0x000007b3      0x11c main.o
-                                0x2a6 (size before relaxing)
- .debug_str     0x000008cf      0x38d MCP2515_HHN.o
+ .debug_str     0x00000768      0x12e main.o
+                                0x2d2 (size before relaxing)
+ .debug_str     0x00000896      0x38d MCP2515_HHN.o
                                 0x590 (size before relaxing)
- .debug_str     0x00000c5c       0x33 Servo.o
+ .debug_str     0x00000c23       0x33 Servo.o
                                 0x1c6 (size before relaxing)
- .debug_str     0x00000c8f       0xb4 SPI.o
+ .debug_str     0x00000c56       0xb4 SPI.o
                                 0x25d (size before relaxing)
- .debug_str     0x00000d43       0x8f Timer1.o
+ .debug_str     0x00000d0a       0x8f Timer1.o
                                 0x21a (size before relaxing)
- .debug_str     0x00000dd2       0x85 Timer2.o
+ .debug_str     0x00000d99       0x85 Timer2.o
                                 0x204 (size before relaxing)
- .debug_str     0x00000e57       0x89 TMP75.o
+ .debug_str     0x00000e1e       0x89 TMP75.o
                                 0x208 (size before relaxing)
- .debug_str     0x00000ee0      0x117 TWI_ATMEGA.o
+ .debug_str     0x00000ea7      0x117 TWI_ATMEGA.o
                                 0x2be (size before relaxing)
- .debug_str     0x00000ff7       0x96 WS2812.o
+ .debug_str     0x00000fbe       0x96 WS2812.o
                                 0x26d (size before relaxing)
 
 .debug_loc      0x00000000     0x1934

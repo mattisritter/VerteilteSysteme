@@ -28,8 +28,8 @@
 #include "Timer1.h"
 
 //Defines
-#define CAN_NOT_RECEIVED 101 /**<define that 101, no message received via can*/
-#define CAN_RECEIVED 111 /**<define that 111, message received via can*/
+#define CAN_NOT_RECEIVED 0 /**<define that 0, no message received via can*/
+#define CAN_RECEIVED 1 /**<define that 1, message received via can*/
 
 //Definition von ws2812_1
 WS2812_pin WS2812_1 =	{/*DDR register*/	&DDRD,

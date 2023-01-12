@@ -14,6 +14,7 @@ unsigned char ucH = 5; /**<Variable to implement hysteresis*/
 unsigned char ucStepOld = 0; /**<Variable that stores the old value of heating step*/
 int iTargetTemp = 230;	/**<Initial set of target; To avoid comma value it is multiplied with 10*/
 int iActualTemp; /**<Current temperature*/
+unsigned char ucFlagCanReceived = CAN_NOT_RECEIVED; /**<Flag that Can communicatoin has startet*/
 
 can_frame sSendFrame;
 can_frame sRecFrame;
@@ -26,15 +27,10 @@ can_frame sRecFrame;
 int main(void)
 {
 	GerneralInit();
-	unsigned char ucCANStatus = CAN_NOT_RECEIVED;
-	//CAN
-	MCP2515_Init(MCP2515_1, BAUDRATE_250_KBPS);
-	//CAN_Filter_Init();
-	//MCP2515_Set_Filter_Mask(MCP2515_1, &sFilter);
-	// short delay for TMP75 to settle --> not allowed
-// 	while (Timer1_get_10msState() == TIMER_RUNNING)
-// 	{	
-// 	}
+	//kann gelöscht werden:   unsigned char ucCANStatus = CAN_NOT_RECEIVED;
+	
+	MCP2515_Init(MCP2515_1, BAUDRATE_250_KBPS);//CAN
+
 	// Measurement for initializing first step
 	TMP75_Read_Temperature();
 	iActualTemp = TMP75_Get_Temperature();	//Asks for temp value;
@@ -47,15 +43,16 @@ int main(void)
 		{
 			TMP75_Read_Temperature();							
 			iActualTemp = TMP75_Get_Temperature();	//Asks for temp value;
-			Display_Output(iActualTemp, 0, 255);
+			Display_Output(iActualTemp, 0, ucFlagCanReceived);
 			
 			if(MCP2515_Check_Message(MCP2515_1, &sRecFrame) == MESSAGE_RECEIVED)
 			{//es wird geprüft ob eine Botschaft über CAN empfangen wurde
 				//wenn ja, wird die Botschaft in sRecFrame gespeichert
+				ucFlagCanReceived = CAN_RECEIVED;
 				if(sRecFrame.ulID == 0x401)//eine Botschaft mit der ID 0x401 wurde empfangen
 				{
 					iTargetTemp = (int)(sRecFrame.ucData[0]*10);
-					Display_Output(iTargetTemp, 1, 255);
+					Display_Output(iTargetTemp, 1, ucFlagCanReceived);
 				}
 			}
 			// heating controller
@@ -77,32 +74,23 @@ int main(void)
 			MCP2515_Send_Message(MCP2515_1, &sSendFrame);
 		}
 		
-		// set target temperature
-		//if(Timer1_get_10msState() == TIMER_TRIGGERED)
-		//{
-		//unsigned char ucKeyStatus = keys_get_state();	//Asks for key status
-		//switch(ucCANStatus)
-		//{
-		//case CAN_NOT_RECEIVED:
-		//Display_Output(iTargetTemp, 1, ucCANStatus);
-		////Test if changes wished--------------
-		//if (ucKeyStatus == S2_PRESSED)
-		//{
-		//iTargetTemp += 5;
-		//}
-		//else if (ucKeyStatus == S1_PRESSED)
-		//{
-		//iTargetTemp -= 5;
-		//}
-		//break;
-		//
-		//case CAN_RECEIVED:
-		//
-		//break;
-		//}
-		//}
-	}
-	
+		//set target temperature with keys
+		if((Timer1_get_10msState() == TIMER_TRIGGERED) && (ucFlagCanReceived == CAN_NOT_RECEIVED))
+		{
+			unsigned char ucKeyStatus = keys_get_state();	//Asks for key status
+		
+			if (ucKeyStatus == S2_PRESSED)
+			{
+				iTargetTemp += 5;
+			}
+			else if (ucKeyStatus == S1_PRESSED)
+			{
+				iTargetTemp -= 5;
+			}
+			
+			Display_Output(iTargetTemp, 1, ucFlagCanReceived);
+		}
+	}	
 }
 
 //void CAN_Filter_Init(void)
