@@ -26,35 +26,37 @@ public:
   void step(const float wv, const float v, float& uv)
   {
     const float ev = wv - v;
-    const float uvik = uvikm1 + p->kr * p->Tak * ev / p->Ti; // time discrete i-part
+    float uvk = 0.0F; // time discrete control signal
     const float uvpk = p->kr * ev; // time discrete p-part
 
-    uv = uvpk + uvik;
+    // Clamping-Anti-Windup
+    if (hold == false)
+    {
+      uvikm1 = uvikm1 + p->kr * p->Tak * ev / p->Ti; // time discrete i-part
+    }
+    uvk = uvpk + uvikm1;
 
     // Limit output signal and start clamping anti windup
-    if (uv > 1.0F)       /*limit control signal to 1*/
+    if (uvk >= 1.0F)       /*limit control signal to 1*/
     {
       uv = 1.0F;
+      hold = true;
     }
-    else if (uv < -1.0F) /*limit control signal to -1*/
+    else if (uvk <= -1.0F) /*limit control signal to -1*/
     {
       uv = -1.0F;
-
+      hold = true;
     }
     else                   /*Pass control signal*/
     {
-      uvikm1 = uvik; // continue i-part only if not in windup
-    }
-    // set control signal to zero if reference signal is also zero
-    if (wv == 0.0F)
-    {
-      uv = 0.0F;
-      uvikm1 = 0.0F;
+      uv = uvk;
+      hold = false;
     }
   }
 
 private:
   float uvikm1 = 0.0F; // last value of uvik
+  bool hold = false; // Flag, 1 if Anti-Windup is activated
   
   const CarParameters* const p=CarParameters::p(); // Access to Car Parameters
 };
