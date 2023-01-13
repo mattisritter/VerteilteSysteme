@@ -14,7 +14,7 @@ unsigned char ucH = 5; /**<Variable to implement hysteresis*/
 unsigned char ucStepOld = 0; /**<Variable that stores the old value of heating step*/
 int iTargetTemp = 230;	/**<Initial set of target; To avoid comma value it is multiplied with 10*/
 int iActualTemp; /**<Current temperature*/
-unsigned char ucFlagCanReceived = CAN_NOT_RECEIVED; /**<Flag that Can communicatoin has startet*/
+unsigned char ucFlagCanReceived = CAN_NOT_RECEIVED; /**<Flag that Can communication has startet*/
 
 can_frame sSendFrame;
 can_frame sRecFrame;
@@ -27,13 +27,12 @@ can_frame sRecFrame;
 int main(void)
 {
 	GerneralInit();
-	//kann gelöscht werden:   unsigned char ucCANStatus = CAN_NOT_RECEIVED;
 	
 	MCP2515_Init(MCP2515_1, BAUDRATE_250_KBPS);//CAN
 
 	// Measurement for initializing first step
 	TMP75_Read_Temperature();
-	iActualTemp = TMP75_Get_Temperature();	//Asks for temp value;
+	iActualTemp = TMP75_Get_Temperature();	// Asks for temp value;
 	ucStep = TempController(iActualTemp,iTargetTemp, ucStepOld, 0);	// without hysteresis
 	ucStepOld = ucStep; // save old heating step
 	while (1)
