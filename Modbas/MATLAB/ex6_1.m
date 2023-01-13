@@ -1,15 +1,16 @@
 %% MATLAB file zu Aufgabe 6.1 und 7.1
 clear all;
-%% Anforderungen an den Geschwindigkeitsregler
-phires_soll = 65;       % Phasenrand [°]
-Tm_soll = 1;            % Überschwingzeit [s]
-omegaD = pi/Tm_soll;    % Durchtrittskreisfrequenz [rad/s]
 
 %% Parameter
 % Streckenparameter
 Tt = 100e-3;            % Totzeit [s]
 T = 316e-3;             % Zeitkonstante der Strecke [s]
 k = 2.51;               % Verstärkung der Strecke [m/s]
+
+% Anforderungen an den Geschwindigkeitsregler
+phires_soll = 65;       % Phasenrand [°]
+Tm_soll = 1;            % Überschwingzeit [s]
+omegaD = pi/Tm_soll;    % Durchtrittskreisfrequenz [rad/s]
 
 % Geschwindigkeitsreglerparameter
 Ti = tan(phires_soll/180*pi + omegaD*Tt + atan(-1/omegaD/T) - 2*pi)/omegaD;
@@ -24,10 +25,10 @@ tA = 20e-3;
 %% Übertragungsfunktionen
 s = tf('s');
 % Geschwindigkeitsregler
-G_S = tf(k, [T, 1], 'Inputdelay', Tt);
-G_R = kr*(Ti*s+1)/Ti/s;
-G_0 = G_S*G_R;
-G_W = minreal(G_0/(1+G_0));
+G_S = tf(k, [T, 1], 'Inputdelay', Tt);  % Strecke
+G_R = kr*(Ti*s+1)/Ti/s;                 % Regler
+G_0 = G_S*G_R;                          % offene Strecke
+G_W = minreal(G_0/(1+G_0));             % Führungsübertragung
 % Approximierter Geschwindigkeitsregler
 G_S_ap = tf(k,[T*Tt, (T+Tt), 1]);       % Strecke
 G_R_ap = G_R;                           % Regler
@@ -35,9 +36,12 @@ G_0_ap = minreal(G_S_ap*G_R_ap);        % offene Strecke
 G_W_ap = minreal(G_0_ap/(1+G_0_ap));    % Führungsübertragung
 % Positionsregler
 G_Sp = minreal(G_W_ap/s);               % Strecke
-G_Rp = kp;                              % Regler
+G_Rp = tf(kp);                          % Regler
 G_0p = minreal(G_Sp*G_Rp);              % offene Strecke
 G_Wp = minreal(G_0p/(1+G_0p));          % Führungsübertragung
+% Vorsteuerung des Positionreglers
+G_Vp1 = tf( [1, 0], [Ti, 1]);           % Online-Vorsteuerung
+G_V = minreal(G_Vp1*G_Sp/(1+G_0p));     % Vorsteuerung
 
 %% Bodediagramm der offenen Strecke Geschwindigkeitsregler
 figure(1);
@@ -58,7 +62,7 @@ v_s = 0.1;              % Soll Geschwindigkeit [m/s]
 tsim = 0:0.01:10;       % Zeitintervall für die Rampe
 u = v_s*tsim;           % Definition der Rampe als Eingangssignal
 
-% Plot der Position im Vergleich y zum Eingangssignal
+% Plot der Position y im Vergleich zum Eingangssignal u
 figure(3);
 clf;
 lsim(G_Wp, u, tsim); grid on;
@@ -68,18 +72,19 @@ legend('y(t)');
 figure(4);
 clf;
 rlocus(G_Wp); grid on;
+% Berechnung der maximalen Verstärkung kp, sodass G_Wp noch stabil ist
 [r,gain] = rlocus(G_Wp);
 for i = 1:length(gain)
-    if real(r(2,i)) > 0 
-       kpmax = gain(i-1)
+    if real(r(2,i)) > 0 % Prüfen des Realteils der Polstelle
+       kpmax = gain(i-1)% Maximale Verstärkung kpmax [1/s]
        break;
     end 
 end
 
 %% Generierung des Führungssignals und Vorsteuersignal des Positionsreglers
-vmax = 0.5; % Maximale Soll-Geschwindigkeit v* [m/s]
-x0 = 0;     % Startposition [m]
-xs = 1;     % Soll-Bogenlänge x* [m]
+vmax = 0.5;     % Maximale Soll-Geschwindigkeit v* [m/s]
+x0 = 0;         % Startposition [m]
+xs = 1;         % Soll-Bogenlänge x* [m]
 
 % Berechnung der Koeffizienten c für das Führungssignal wp und
 % der Endzeit te
@@ -87,7 +92,7 @@ xs = 1;     % Soll-Bogenlänge x* [m]
 % Berechnung der Koeffizienten cff für die Online-Vorsteuerung uvp1
 cff = cd_refpoly_ff(c, k, T, Tt, kr, Ti);
 
-t = 0:tA:te; % Definiton des Zeitintervalls
+t = 0:tA:te;    % Definiton des Zeitintervalls
 
 % Bestimmung der Polynome
 uvp1 = polyval(cff, t);
@@ -105,23 +110,36 @@ legend('uvp1(t)');
 % Plot für das Führungssignal wp und die Ableitungen wpd und wpdd
 figure(6);
 clf;
-plot(t,wp, t,wpd, t,wpdd); grid on; 
-legend('wp(t)', 'wpd(t)', 'wpdd(t)');
-
-% Plot des Position y im Vergleich zum Führungsignal
+plot(t,wp); grid on; 
+legend('wp(t)');
 figure(7);
+clf;
+plot(t,wpd); grid on;
+legend('wpd(t)');
+figure(8);
+clf;
+plot(t,wpdd); grid on;
+legend('wpdd(t)');
+
+% Plot des Position y im Vergleich zum Führungsignal wp ohne Vorsteuerung
+figure(9);
 clf;
 lsim(G_Wp, wp, t); grid on;
 legend('y(t)');
 
-%% TEST 
-t2 = 0:tA:2*te;
-G_Vp1 = s/(Ti*s+1);
-uvp12 = [uvp1, ones(size(uvp1)).*xs+x0];
-wp2 = [wp, ones(size(wp)).*xs+x0];
-uvp = transpose(lsim(G_Vp1, uvp12, t2));
-y = transpose(lsim(G_Wp, wp2+uvp, t2));
-figure(8); clf;
-plot(t2,y, t2,wp2); grid on;
-figure(9); clf;
-lsim(G_Vp1, uvp12, t2); grid on;
+% Plot des Position y im Vergleich zum Vorsteuerungssignal uvp1 ohne
+% Führungssignal
+figure(10);
+clf;
+lsim(G_V, uvp1, t); grid on;
+legend('y(t)');
+
+% Polt der Position y mit Führungssignal wp und Vorsteuerung
+y1 = lsim(G_V, uvp1, t);
+y2 = lsim(G_Wp, wp, t);
+figure(11);
+clf;
+plot(t,y1+y2); grid on;
+legend('y(t)');
+
+

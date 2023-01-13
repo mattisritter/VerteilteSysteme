@@ -1,6 +1,14 @@
 function cff = cd_refpoly_ff(c, k, T, Tt, kr, Ti)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+% Berechnet die Koeffizienten für des Führungssignal uVp1 der Vorsteuerung 
+% Parameter Typ         Beschreibung
+% c         6x1 double  Koeffizienten des Führungssignals wp
+% k         1x1 double  Verstärkung der Strecke [m/s]
+% T         1x1 double  Zeitkonstante der Stecke [s]
+% Tt        1x1 double  Totzeit [s]
+% kr        1x1 double  Verstärung des Geschwindigkeitsreglers [s/m]
+% Ti        1x1 double  Zeitkonstante des Geschwindigkeitsreglers [s]
+% Rückgabe  Typ         Beschreibung
+% cff       6x1 double  Koeffizienten des Führungssignal uVp1
 a1 = Ti * (1/(k*kr) + 1);
 a2 = Ti*(T+Tt)/(k*kr);
 a3 = T*Ti*Tt/(k*kr);
