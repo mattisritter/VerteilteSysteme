@@ -40,7 +40,7 @@ WS2812_pin WS2812_1 =	{/*DDR register*/	&DDRD,
 MCP2515_pins  MCP2515_1 = {{/*CS_DDR*/		&DDRD,
 						    /*CS_PORT*/		&PORTD,
 							/*CS_pin*/		PD0,
-							/*CS_state*/	ON}}; /**<define that MCP2515 is using PB3 of PORT B*/
+							/*CS_state*/	ON}}; /**<define that MCP2515 is using PD0 of PORT D*/
 	
 	
 ////Deklaration of global variables

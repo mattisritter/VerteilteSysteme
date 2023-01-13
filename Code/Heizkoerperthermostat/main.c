@@ -46,17 +46,17 @@ int main(void)
 			Display_Output(iActualTemp, 0, ucFlagCanReceived);
 			
 			if(MCP2515_Check_Message(MCP2515_1, &sRecFrame) == MESSAGE_RECEIVED)
-			{//es wird geprüft ob eine Botschaft über CAN empfangen wurde
-				//wenn ja, wird die Botschaft in sRecFrame gespeichert
+			{
+				// check if a CAN message was received, if yes, save in sRecFrame
 				ucFlagCanReceived = CAN_RECEIVED;
-				if(sRecFrame.ulID == 0x401)//eine Botschaft mit der ID 0x401 wurde empfangen
+				if(sRecFrame.ulID == 0x401)// a message with the ID 0x401 was received
 				{
 					iTargetTemp = (int)(sRecFrame.ucData[0]*10);
 					Display_Output(iTargetTemp, 1, ucFlagCanReceived);
 				}
 			}
 			// heating controller
-			ucStep = TempController(iActualTemp,iTargetTemp, ucStepOld, ucH);
+			ucStep = TempController(iActualTemp, iTargetTemp, ucStepOld, ucH);
 			WS2812_Step(ucStep); // set LED color
 			Servo_Step(ucStep); // set servo position
 			ucStepOld = ucStep; // save old heating step		
@@ -68,9 +68,9 @@ int main(void)
 			sSendFrame.RTR_Bit = DATA_FRAME;
 			sSendFrame.ulID = 0x400;
 			sSendFrame.ucLength = 3;
-			sSendFrame.ucData[0] = (char)(iActualTemp/10);
-			sSendFrame.ucData[1] = (unsigned char)(iActualTemp%10);
-			sSendFrame.ucData[2] = ucStep;
+			sSendFrame.ucData[0] = (char)(iActualTemp/10); 
+			sSendFrame.ucData[1] = (unsigned char)(iActualTemp%10); 
+			sSendFrame.ucData[2] = ucStep; 
 			MCP2515_Send_Message(MCP2515_1, &sSendFrame);
 		}
 		
