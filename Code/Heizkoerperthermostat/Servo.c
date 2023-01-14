@@ -15,12 +15,10 @@ unsigned char ucServoPosition[6] = {44, 38, 30, 23, 16, 10}; /**<Defines six pos
 /** @brief Initialize servo by using Fast-PWM mode from Timer0
 * @param[in] None
 * @return None
+* @date 31.10.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Date :			31.10.2022
-//Author:			Mattis Ritter
-//Source:
-//Status:			released
 //--------------------------------
 void Servo_Init(void)
 {
@@ -33,12 +31,10 @@ void Servo_Init(void)
 /** @brief Set servo position
 * @param[in] unsigned_char ucPosition: Heater position from 0 to 5
 * @return None
+* @date 31.10.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Date :			31.10.2022
-//Author:			Mattis Ritter
-//Source:
-//Status:			released
 //--------------------------------
 void Servo_Step(unsigned char ucPosition)
 {

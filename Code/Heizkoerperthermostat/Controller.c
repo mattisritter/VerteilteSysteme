@@ -19,11 +19,10 @@
 * @param[in] unsigned_char stepOld: Previous heating step
 * @param[in] unsigned_char ucHysteresis: Variable to implement hysteresis
 * @return [unsigned char] Value which heating should be at
+* @date 4.11.22
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Date :			4.11.22
-//Author:			Moritz
-//Source:
-//Status:			released
 //--------------------------------
 unsigned char TempController(int actualTemp, int targetTemp, unsigned char stepOld, unsigned char ucHysteresis)
 {

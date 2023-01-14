@@ -20,12 +20,11 @@ uint8_t uctemp2read = 0b00000000;	/**<Select register to read: Read temperature 
 /** @brief Read temperature from TMP75
 * @param[in] None
 * @return [uint8_t] Value of Temperature measurement
+* @date 04.11.2022
+* @author Meroth, Sora
+* @version 1.0
 */
-//Version:			1
-//Date :			220408
-//Autor:			Meroth, Sora
 //Source:			Sensornetzwerke In Theorie Und Praxis
-//Status:			modified by Moritz
 //--------------------------------
 uint8_t TMP75_Read_Temperature(void)
 {
@@ -59,12 +58,10 @@ uint8_t TMP75_Read_Temperature(void)
 /** @brief Get method to get current temperature value
 * @param[in] None
 * @return [int] Last read temperature, with one decimal number
+* @date 04.11.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Date :			4.11.22
-//Author:			Moritz
-//Source:
-//Status:			released
 //--------------------------------
 int TMP75_Get_Temperature(void)
 {

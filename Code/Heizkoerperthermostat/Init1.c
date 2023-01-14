@@ -14,12 +14,10 @@
 /** @brief Execute all inits
 * @param[in] None
 * @return None
+* @date 27.10.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Date :			27.10.2022
-//Author:			Moritz
-//Source:
-//Status:			ok
 //--------------------------------
 void GerneralInit(void){
 	Display_Init();
@@ -74,12 +72,10 @@ void GerneralInit(void){
 * @param[in] unsigned_char input:  Element to convert 
 * @param[out] unsigned_char output: Converted element
 * @return None
+* @date 27.10.2022
+* @author Meroth
+* @version 1.0
 */
-//Version:			1
-//Date :			27.10.2022
-//Autor:			meroth
-//Source:			Ilias
-//Status:			ok
 //--------------------------------
 void HexToAscii(unsigned char input, unsigned char* output)
 {

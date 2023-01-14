@@ -17,11 +17,10 @@
 /** @brief Initialization of LEDs
 * @param[in] None
 * @return None
+* @date 30.03.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Date:			220330
-//Autor:			mh
-//Status:			ok
 //--------------------------------------------
 void LED_Init(void){
 	//DDRD |= 1 << PD6;
@@ -31,11 +30,10 @@ void LED_Init(void){
 /** @brief Switch on red LED
 * @param[in] None
 * @return None
+* @date 30.03.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Date:			220330
-//Autor:			mh
-//Status:			ok
 //--------------------------------------------
 void LED_rd_on(void){
 	PORTB |= 1 << PB2;
@@ -44,11 +42,10 @@ void LED_rd_on(void){
 /** @brief Switch off red LED
 * @param[in] None
 * @return None
+* @date 30.03.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Date:			220330
-//Autor:			mh
-//Status:			ok
 //--------------------------------------------
 void LED_rd_off(void){
 	PORTB &= ~(1 << PB2);
@@ -58,11 +55,10 @@ void LED_rd_off(void){
 /** @brief Toggle red LED
 * @param[in] None
 * @return None
+* @date 30.03.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Date:			220330
-//Autor:			mh
-//Status:			ok
 //--------------------------------------------
 void LED_rd_toggle(void){
 	PORTB ^= 1 << PB2;

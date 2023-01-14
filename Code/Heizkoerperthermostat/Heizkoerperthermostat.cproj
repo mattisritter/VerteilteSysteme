@@ -196,12 +196,6 @@
     <Compile Include="Timer1.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Timer2.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Timer2.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="TMP75.c">
       <SubType>compile</SubType>
     </Compile>

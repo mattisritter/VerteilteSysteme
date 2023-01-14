@@ -19,11 +19,10 @@ unsigned char ucFlag_100ms = 0; /**<Flag that becomes 1 every 100 ms*/
 /** @brief Initialization of timer1 with 10ms
 * @param[in] None
 * @return None
+* @date 27.04.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Datum:			220427
-//Autor:			mh
-//Status:			ok
 //-------------------------------------------------------------------
 void Timer1_Init(){
 	TCCR1A |= (1<<WGM11);					//CTC-Modus
@@ -35,11 +34,10 @@ void Timer1_Init(){
 /** @brief Interrupt service Routine triggered by timer
 * @param[in] vector Reset point of counter
 * @return None
+* @date 22.04.2022
+* @author Hoehnel and Ritter
+* @version 2.0
 */
-//Version:			2
-//Datum:			220427
-//Autor:			mh
-//Status:			ok
 //-------------------------------------------------------------------
 ISR(TIMER1_COMPA_vect){
 	ucFlag10ms = 1;			//wird jede 10ms gesetzt
@@ -60,11 +58,10 @@ ISR(TIMER1_COMPA_vect){
 /** @brief Says if 10ms have been passed
 * @param[in] None
 * @return [unsigned char] {TIMER_RUNNING, TIMER_TRIGGERED}
+* @date 27.04.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Datum:			220427
-//Autor:			mh
-//Status:			ok
 //-------------------------------------------------------------------
 unsigned char Timer1_get_10msState(){
 	if(ucFlag10ms == 1){
@@ -77,11 +74,10 @@ unsigned char Timer1_get_10msState(){
 /** @brief Says if 1000ms have been passed
 * @param[in] None
 * @return [unsigned char] {TIMER_RUNNING, TIMER_TRIGGERED}
+* @date 27.04.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Datum:			220427
-//Autor:			mh
-//Status:			ok
 //-------------------------------------------------------------------
 unsigned char Timer1_get_1sState(void){
 	if(ucFlag_1s == 1){
@@ -94,11 +90,10 @@ unsigned char Timer1_get_1sState(void){
 /** @brief Says if 100ms have been passed
 * @param[in] None
 * @return [unsigned char] {TIMER_RUNNING, TIMER_TRIGGERED}
+* @date 27.04.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Datum:			220427
-//Autor:			mh
-//Status:			ok
 //-------------------------------------------------------------------
 unsigned char Timer1_get_100msState(void){
 	if(ucFlag_100ms == 1){

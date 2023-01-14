@@ -23,18 +23,22 @@ can_frame sRecFrame;
 /** @brief Main function
 * @param[in] None
 * @return None
+* @date 14.01.2023
+* @author Hoehnel and Ritter
+* @version 1.0
 */
 int main(void)
 {
-	GerneralInit();
+	GerneralInit(); //Execute Init functioncs of modules
 	
 	MCP2515_Init(MCP2515_1, BAUDRATE_250_KBPS);//CAN
 
 	// Measurement for initializing first step
 	TMP75_Read_Temperature();
-	iActualTemp = TMP75_Get_Temperature();	// Asks for temp value;
-	ucStep = TempController(iActualTemp,iTargetTemp, ucStepOld, 0);	// without hysteresis
-	ucStepOld = ucStep; // save old heating step
+	iActualTemp = TMP75_Get_Temperature(); //Asks for temp value, inital measurement that should not be considered 
+	ucStep = TempController(iActualTemp,iTargetTemp, ucStepOld, 0);	//Value of Heating-Step without hysteresis
+	ucStepOld = ucStep; //Old heating step
+	
 	while (1)
 	{
 		// measure actual temperature

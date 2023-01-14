@@ -24,11 +24,10 @@ unsigned char ucS3_new = 0xFF;  /**<Variable for S3*/
 /** @brief Initialization of keys
 * @param[in] None
 * @return None
+* @date 08.04.2022
+* @author Hoehnel and Ritter
+* @version 1.0
 */
-//Version:			1
-//Date:			220408
-//Autor:			mh
-//Status:			ok
 //--------------------------------
 void keys_Init(void){
 
@@ -38,11 +37,10 @@ void keys_Init(void){
 /** @brief Gets current state of keys
 * @param[in] None
 * @return [unsigned char] says which key is pressed
+* @date 08.04.2022
+* @author Hoehnel and Ritter
+* @version 3.0
 */
-//Version:			3
-//Date:			220408
-//Autor:			mh
-//Status:			ok
 //----------------------------------------------------
 unsigned char keys_get_state(void){
 	ucS1_old = ucS1_new;

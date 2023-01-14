@@ -22,8 +22,6 @@ SPI.c
 
 Timer1.c
 
-Timer2.c
-
 TMP75.c
 
 TWI_ATMEGA.c
