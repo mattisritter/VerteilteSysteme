@@ -54,7 +54,7 @@ clf;
 step(G_W), grid on;  
 title('Sprungantwort des Geschwindigkeitsreglers');
 xlabel('t ');
-ylabel('v (meter/second)');
+ylabel('v (meter/seconds)');
 legend('v(t)');
 % Analyse der Sprungantwort
 si = stepinfo(G_W);
@@ -72,14 +72,13 @@ clf;
 lsim(G_Wp, u, tsim); grid on;
 title('Rampenantwort des Positionsreglers');
 xlabel('t ');
-ylabel('yp (meter)');
-legend('yp(t)');
+ylabel('y (meter)');
+legend('y(t)');
 
 %% Stabilität
 figure(4);
 clf;
 rlocus(G_Wp); grid on;
-title('Wurzelortskurven');
 % Berechnung der maximalen Verstärkung kp, sodass G_Wp noch stabil ist
 [r,gain] = rlocus(G_Wp);
 for i = 1:length(gain)
@@ -129,16 +128,16 @@ legend('wp(t)');
 figure(7);
 clf;
 plot(t,wpd); grid on;
-title('Erste Ableitung des Führungssignal wpd');
+title('Führungssignal der Vorsteuerung uVp1');
 xlabel('t (seconds)');
-ylabel('wpd (meter/second)');
+ylabel('uvp1 (meter)');
 legend('wpd(t)');
 figure(8);
 clf;
 plot(t,wpdd); grid on;
-title('Zweite Ableitung des Führungssignal wpd');
+title('Führungssignal der Vorsteuerung uVp1');
 xlabel('t (seconds)');
-ylabel('wpdd (meter/second^2)');
+ylabel('uvp1 (meter)');
 legend('wpdd(t)');
 
 % Plot des Position y im Vergleich zum Führungsignal wp ohne Vorsteuerung
@@ -154,15 +153,12 @@ clf;
 lsim(G_V, uvp1, t); grid on;
 legend('y(t)');
 
-% Plot der Position y mit Führungssignal wp und Vorsteuerung
+% Polt der Position y mit Führungssignal wp und Vorsteuerung
 y1 = lsim(G_V, uvp1, t);
 y2 = lsim(G_Wp, wp, t);
 figure(11);
 clf;
 plot(t,y1+y2); grid on;
-title('Position yp mit Führungssignal wp und Vorsteuerung');
-xlabel('t (seconds)');
-ylabel('yp (meter)');
-legend('yp(t)');
+legend('y(t)');
 
 
