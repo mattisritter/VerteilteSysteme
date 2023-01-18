@@ -47,7 +47,7 @@ G_V = minreal(G_Vp1*G_Sp/(1+G_0p));     % Vorsteuerung
 figure(1);
 clf;
 margin(G_0);            % Bodediagramm mit Phasen- und Amplitudenrand
-
+grid on;
 %% Sprungantwort Führungsverhalten Geschwindigkeitsregler
 figure(2);
 clf;
@@ -55,12 +55,13 @@ step(G_W), grid on;
 title('Sprungantwort des Geschwindigkeitsreglers');
 xlabel('t ');
 ylabel('v (meter/second)');
-legend('v(t)');
+hold on;
 % Analyse der Sprungantwort
 si = stepinfo(G_W);
 Tm = si.PeakTime       % Überschwingzeit [s]
 em = si.Overshoot      % Überschwingweite [%]
-
+plot(Tm, 1 + em / 100, 'kx', 'MarkerSize', 8);
+legend('v(t)', 'peak');
 %% Rampenantwort Positionsregler
 v_s = 0.1;              % Soll Geschwindigkeit [m/s]
 tsim = 0:0.01:10;       % Zeitintervall für die Rampe
@@ -78,17 +79,26 @@ legend('yp(t)');
 %% Stabilität
 figure(4);
 clf;
-rlocus(G_Wp); grid on;
+rlocus(G_0p); grid on;
 title('Wurzelortskurven');
 % Berechnung der maximalen Verstärkung kp, sodass G_Wp noch stabil ist
-[r,gain] = rlocus(G_Wp);
+[r,gain] = rlocus(G_0p);
 for i = 1:length(gain)
-    if real(r(2,i)) > 0 % Prüfen des Realteils der Polstelle
-       kpmax = gain(i-1)% Maximale Verstärkung kpmax [1/s]
+    if real(r(3,i)) > 0 % Prüfen des Realteils der Polstelle
+       kp1 = gain(i-1); % Untere Grenze
+       kp2 = gain(i);   % Obere Grenze
        break;
     end 
 end
-
+% Erneute Berechnung der maximalen Verstärkung
+kp12 = kp1:0.01:kp2;    % Abtastung 0.01
+r1 = rlocus(G_0p, kp12);
+for i = 1:length(kp12)
+    if real(r1(2,i)) > 0 % Prüfen des Realteils der Polstelle
+       kpmax = kp12(i-1) % Maximale Verstärkung kpmax [1/s]
+       break;
+    end 
+end
 %% Generierung des Führungssignals und Vorsteuersignal des Positionsreglers
 vmax = 0.5;     % Maximale Soll-Geschwindigkeit v* [m/s]
 x0 = 0;         % Startposition [m]
@@ -159,10 +169,15 @@ y1 = lsim(G_V, uvp1, t);
 y2 = lsim(G_Wp, wp, t);
 figure(11);
 clf;
-plot(t,y1+y2); grid on;
-title('Position yp mit Führungssignal wp und Vorsteuerung');
+yp = y1+y2;
+ep = wp-transpose(yp);
+plot(t ,yp, t, wp, '--', t, ep, '--'); grid on;
+title('Regelgröße yp');
 xlabel('t (seconds)');
 ylabel('yp (meter)');
-legend('yp(t)');
+legend('yp(t)', 'wp(t)', 'ep(t)');
+
+
+
 
 

@@ -17,12 +17,9 @@
 
 //Declaration of funktions
 void LED_Init(void);
-//void LED_gn_on(void);
-//void LED_gn_off(void);
 void LED_rd_on(void);
 void LED_rd_off(void);
 void LED_rd_toggle(void);
-//void LED_gn_toggle(void);
 
 
 

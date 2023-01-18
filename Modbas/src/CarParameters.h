@@ -172,10 +172,13 @@ public:
     int32_t carid = 0;
 
     // Speed Controller according to exercise 6.1
-    const float phires = modbas::Utils::deg2rad(65.0F); // phase margin [rad]
-    const float omegaD = modbas::Utils::pi; // gain crossover frequency [1/s]
-    const float Ti = 0.246829532980242F;//std::tan(phires + omegaD * Tt + std::atan(-1.0F / (omegaD * T)) - 2.0F * modbas::Utils::pi) / omegaD; // time constant for integral part [s]
-    const float kr = 0.344013616443002F;//Ti * omegaD * std::sqrt(T * T * omegaD * omegaD + 1) / (k * std::sqrt(Ti * Ti * omegaD * omegaD + 1));  // gain for speed controll [s/m]
+    //const float phires = modbas::Utils::deg2rad(65.0F); // phase margin [rad]
+    //const float omegaD = modbas::Utils::pi; // gain crossover frequency [1/s]
+    //const float Ti = std::tan(phires + omegaD * Tt + std::atan(-1.0F / (omegaD * T)) - 2.0F * modbas::Utils::pi) / omegaD; // time constant for integral part [s]
+    //const float kr = Ti * omegaD * std::sqrt(T * T * omegaD * omegaD + 1) / (k * std::sqrt(Ti * Ti * omegaD * omegaD + 1));  // gain for speed controll [s/m]
+    // use precalculated values
+    const float Ti = 0.246829532980242F; 
+    const float kr = 0.344013616443002F; 
 
     // Position Controller
     const float kp = 1.0F;

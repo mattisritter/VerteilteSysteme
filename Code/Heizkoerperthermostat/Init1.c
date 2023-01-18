@@ -35,38 +35,7 @@ void GerneralInit(void){
 	unsigned char uctwi_clock = (unsigned char)itwi_clock;
 	//=====================================================================================	
 	TWI_Master_Init(uctwi_clock);
-
-	//CAN_Filter_Init();
-	//InitTimer2CTC();
 }
-
-
-
-//void CAN_Filter_Init(void)
-//{
-	////Description:		can filter
-	////Call_parameter:	void
-	////Return_parameter:	void
-	////Version:			1
-	////Date :			27.10.2022
-	////Autor:			Sora
-	////Source:			Ilias
-	////Status:			not testet
-	////--------------------------------
-	//sFilter.Rec_Buff0_Rollover = ROLLOVER_ON;
-	//sFilter.RecBuff_ID[0] = STANDARD_ID;
-	//sFilter.RecBuff_ID[1] = STANDARD_ID;
-	//sFilter.Filter_RecBuff[0] = FILTER_ON;
-	//sFilter.Filter_RecBuff[1] = FILTER_ON;
-	//for(uint8_t ucI = 0; ucI < 6; ucI++)
-	//{
-		//sFilter.ulRecBuff_Filter[ucI] = ulReceiveFilter[ucI];
-	//}
-	//for(uint8_t ucI = 0; ucI < 2; ucI++)
-	//{
-		//sFilter.ulRecBuff_Mask[ucI] = ulReceiveMask[ucI];
-	//}
-//}
 
 /** @brief Changes hex to ascii
 * @param[in] unsigned_char input:  Element to convert 
@@ -87,32 +56,3 @@ void HexToAscii(unsigned char input, unsigned char* output)
 	if (c<10) output[0]=c+48;
 	else output[0]=c+55;
 }
-
-//void ShowMessage(can_frame *showFrame)
-//{
-	////Description:		shows message on board display
-	////Call_parameter:	void
-	////Return_parameter:	void
-	////Version:			1
-	////Date :			27.10.2022
-	////Autor:			meroth
-	////Source:			Ilias
-	////Status:			not testet
-	////--------------------------------
-	//unsigned char zeile1[16]="ID:0x       DL: ";
-	//unsigned char zeile2[16];
-	//HexToAscii(showFrame->ulID>>16, &zeile1[5]);
-	//HexToAscii(showFrame->ulID>>8, &zeile1[7]);
-	//HexToAscii(showFrame->ulID, &zeile1[9]);
-	//zeile1[15]=showFrame->ucLength+48;
-	//Display_Clear();
-	//Display_SetCursor(0,0);
-	//Display_Print(zeile1,16);
-	//for (int i=0; i<16;i++) zeile2[i]=' ';
-	//for (int i=0; i<showFrame->ucLength;i++)
-	//{
-		//HexToAscii(showFrame->ucData[i],&zeile2[i*2]);
-	//}
-	//Display_SetCursor(1,0);
-	//Display_Print(zeile2,16);
-//}

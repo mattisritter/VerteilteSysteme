@@ -9,6 +9,7 @@ function cff = cd_refpoly_ff(c, k, T, Tt, kr, Ti)
 % Ti        1x1 double  Zeitkonstante des Geschwindigkeitsreglers [s]
 % Rückgabe  Typ         Beschreibung
 % cff       6x1 double  Koeffizienten des Führungssignal uVp1
+cff = zeros(6,1);
 a1 = Ti * (1/(k*kr) + 1);
 a2 = Ti*(T+Tt)/(k*kr);
 a3 = T*Ti*Tt/(k*kr);

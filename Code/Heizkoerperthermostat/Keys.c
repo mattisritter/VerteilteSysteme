@@ -17,7 +17,6 @@ unsigned char ucS2_old; /**<Variable to store old value of S2*/
 unsigned char ucS2_new = 0xFF;  /**<Variable for S2*/
 unsigned char ucS3_old; /**<Variable to store old value of S2*/
 unsigned char ucS3_new = 0xFF;  /**<Variable for S3*/
-//unsigned char ucS4_old, ucS4_new = 0xFF;
 
 
 //Definition of functions=======================================
@@ -46,12 +45,10 @@ unsigned char keys_get_state(void){
 	ucS1_old = ucS1_new;
 	ucS2_old = ucS2_new;
 	ucS3_old = ucS3_new;
-	//ucS4_old = ucS4_new;
 	
 	ucS1_new = PIND & (1<<PD5);
 	ucS2_new = PIND & (1<<PD4);
 	ucS3_new = PIND & (1<<PD3);
-	//ucS4_new = PIND & (1<<PD2);
 	
 	if((!ucS1_new && ucS1_old)){
 		return S1_PRESSED;
@@ -64,10 +61,6 @@ unsigned char keys_get_state(void){
 	if((!ucS3_new && ucS3_old)){
 		return S3_PRESSED;
 	}
-	
-	//if((!ucS4_new && ucS4_old)){
-		//return S4_PRESSED;
-	//}
 	
 	return KEYS_NOT_PRESSED;
 }

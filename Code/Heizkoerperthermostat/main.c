@@ -95,20 +95,3 @@ int main(void)
 		}
 	}	
 }
-
-//void CAN_Filter_Init(void)
-//{
-	//sFilter.Rec_Buff0_Rollover = ROLLOVER_ON;
-	//sFilter.RecBuff_ID[0] = STANDARD_ID;
-	//sFilter.RecBuff_ID[1] = STANDARD_ID;
-	//sFilter.Filter_RecBuff[0] = FILTER_ON;
-	//sFilter.Filter_RecBuff[1] = FILTER_ON;
-	//for(uint8_t ucI = 0; ucI < 6; ucI++)
-	//{
-		//sFilter.ulRecBuff_Filter[ucI] = ulReceiveFilter[ucI];
-	//}
-	//for(uint8_t ucI = 0; ucI < 2; ucI++)
-	//{
-		//sFilter.ulRecBuff_Mask[ucI] = ulReceiveMask[ucI];
-	//}
-//}
