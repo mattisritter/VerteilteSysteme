@@ -1,0 +1,4 @@
+Establishing a Manufacturing Execution System with a Learning Factory
+
+
+Evaluate how to apply a Neueronal Network on a Learning Factory
