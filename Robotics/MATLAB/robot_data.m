@@ -15,7 +15,7 @@ tf = 10;        % end time [s]
 % define obstacle x-position and height
 obs = [0.2, 0.1];
 
-% define start point, via and end point
+% define start point, via and end point P(x,y)
 P = [0.10, 0.00 - offset;...
      0.15, 0.15 - offset;...
      0.30, 0.00 - offset];
@@ -29,10 +29,12 @@ mode = 'quintic';
 
 
 %% Calculations
+% timing
 ts = 1e-2;          % sample time [s]
 t = 0:ts:tf;        % time interval
 t01 = 0:ts:t1;      % time interval from start to via time
 t1f = ts:ts:tf-t1;  % time interval from via time to end
+
 % calculate joint angles for each point
 [theta1_0,theta2_0] = joint_coordinates(P(1,1),P(1,2),r1,r2,-1);
 [theta1_1,theta2_1] = joint_coordinates(P(2,1),P(2,2),r1,r2,-1);
@@ -97,9 +99,3 @@ patch(obstaclex, obstacley, zeros(4,1), 'FaceColor', 'r', 'EdgeColor', 'r');
 axis([0 0.4 -0.1 0.3]);
 axis manual;
 grid on;
-
-
-
-
-
-

@@ -7,7 +7,7 @@ thetaf = 65; % final joint angle [°]
 
 tf = 10; % finish time [s]
 
-ts = 1e-3; % sampling time [s]
+ts = 1e-2; % sampling time [s]
 t = 0:ts:tf; % time interval
 
 % polynomial coefficients
@@ -31,13 +31,13 @@ c5dd = polyder(c5d);
 acceleration5 = polyval(c5dd, t);
 
 % plots
-% plotting angle position for cubic and quintic trajectory
-figure(1);
+% plotting angle acceleration for cubic and quintic trajectory
+figure(3);
 clf;
-plot(t, trajectory3, t, trajectory5); grid on;
-title('Angle position for cubic and quintic trajectory');
+plot(t, acceleration3, t, acceleration5); grid on;
+title('Angle acceleration for cubic and quintic trajectory');
 xlabel('$t$ in $s$','Interpreter','latex');
-ylabel('$\theta$ in $^{\circ}$','Interpreter','latex');
+ylabel('$\ddot{\theta}$ in $^{\circ}/s^2$','Interpreter','latex');
 legend('cubic', 'quintic');
 
 % plotting angle velocity for cubic and quintic trajectory
@@ -49,17 +49,17 @@ xlabel('$t$ in $s$','Interpreter','latex');
 ylabel('$\dot{\theta}$ in $^{\circ}/s$','Interpreter','latex');
 legend('cubic', 'quintic');
 
-% plotting angle acceleration for cubic and quintic trajectory
-figure(3);
+% plotting angle position for cubic and quintic trajectory
+figure(1);
 clf;
-plot(t, acceleration3, t, acceleration5); grid on;
-title('Angle acceleration for cubic and quintic trajectory');
+plot(t, trajectory3, t, trajectory5); grid on;
+title('Angle position for cubic and quintic trajectory');
 xlabel('$t$ in $s$','Interpreter','latex');
-ylabel('$\ddot{\theta}$ in $^{\circ}/s^2$','Interpreter','latex');
+ylabel('$\theta$ in $^{\circ}$','Interpreter','latex');
 legend('cubic', 'quintic');
 
 %% with obstacle
-% add another constraint
+% parameters
 theta1 = 5; % via joint angle [°]
 
 t1 = 2; % via time [s]
@@ -109,6 +109,24 @@ acceleration5_via = [polyval(c51dd, t01), polyval(c52dd, t1f)];
 
 % plots
 % plotting angle acceleration for quartic and hexic trajectory
+figure(6);
+clf;
+plot(t, acceleration4, t, acceleration6, t, acceleration3_via, t, acceleration5_via); grid on;
+title('Angle acceleration for quartic and hexic trajectory');
+xlabel('$t$ in $s$','Interpreter','latex');
+ylabel('$\ddot{\theta}$ in $^{\circ}/s^2$','Interpreter','latex');
+legend('quartic', 'hexic', 'two cubic', 'two quintic');
+
+% plotting angle velocity for quartic and hexic trajectory
+figure(5);
+clf;
+plot(t, velocity4, t, velocity6, t, velocity3_via, t, velocity5_via); grid on;
+title('Angle velocity for quartic and hexic trajectory');
+xlabel('$t$ in $s$','Interpreter','latex');
+ylabel('$\ddot{\theta}$ in $^{\circ}/s^2$','Interpreter','latex');
+legend('quartic', 'hexic', 'two cubic', 'two quintic');
+
+% plotting angle position for quartic and hexic trajectory
 figure(4);
 clf;
 plot(t, trajectory4, t, trajectory6, t, trajectory3_via, t, trajectory5_via); grid on;
@@ -118,23 +136,3 @@ ylabel('$\ddot{\theta}$ in $^{\circ}/s^2$','Interpreter','latex');
 hold on;
 plot(t1, theta1, 'kx', 'MarkerSize', 10, 'LineWidth', 2);
 legend('quartic', 'hexic', 'two cubic', 'two quintic');
-
-% plotting angle acceleration for quartic and hexic trajectory
-figure(5);
-clf;
-plot(t, velocity4, t, velocity6, t, velocity3_via, t, velocity5_via); grid on;
-title('Angle velocity for quartic and hexic trajectory');
-xlabel('$t$ in $s$','Interpreter','latex');
-ylabel('$\ddot{\theta}$ in $^{\circ}/s^2$','Interpreter','latex');
-legend('quartic', 'hexic', 'two cubic', 'two quintic');
-
-% plotting angle acceleration for quartic and hexic trajectory
-figure(6);
-clf;
-plot(t, acceleration4, t, acceleration6, t, acceleration3_via, t, acceleration5_via); grid on;
-title('Angle acceleration for quartic and hexic trajectory');
-xlabel('$t$ in $s$','Interpreter','latex');
-ylabel('$\ddot{\theta}$ in $^{\circ}/s^2$','Interpreter','latex');
-legend('quartic', 'hexic', 'two cubic', 'two quintic');
-
-
