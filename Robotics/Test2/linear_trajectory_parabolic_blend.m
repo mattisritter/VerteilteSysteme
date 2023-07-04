@@ -1,54 +1,109 @@
 %% Linear trajectory with parabolic blend
 clear all;
 %% Parameters
-theta1 = 50;
-theta2 = 100;
-theta3 = 10;
-
-td12 = 2;
-td23 = 4;
+theta = [50 100 10]; % path points
+t = [0 2 6]; % timing for path points
+acc = [100 75 50]; % acceleration 
+td = diff(t); % time differnce between path points
+n = 1000; % number of segments of parabolic blend
+% predefinition of variables
+vel = zeros(size(td));
+tl = zeros(size(td));
+tb = zeros(size(theta));
+tbs = zeros(length(theta), n);
+c = zeros(length(theta), 3);
+cv = zeros(length(theta), 2);
+p = zeros(size(tbs));
+v = zeros(size(p));
+aq = zeros(size(theta));
 
 %% Calculations
-acc1 = sign(theta2-theta1) * 100;
-t1 = td12 - sqrt(td12^2 - 2 * (theta2-theta1) / acc1);
-
-acc3 = sign(theta3-theta2) * 50;
-t3 = td23 - sqrt(td23^2 - 2 * (theta3-theta2) / acc3);
-
-vel12 = (theta2-theta1) / (td12-t1/2);
-vel23 = (theta3-theta2) / (td23-t3/2);
-acc2 = sign(vel23-vel12) * 75;
-t2 = (vel23-vel12) / acc2;
-%t2 = 2 * min([td12-t1, td23-t3]);
-%acc2 = (vel23-vel12) / t2;
-t12 = td12 - t1 - t2/2;
-t23 = td23 - t3 - t2/2;
-
+% first segment
+acc(1) = sign(theta(2)-theta(1)) * acc(1);
+tb(1) = td(1) - sqrt(td(1)^2 - 2 * (theta(2)-theta(1)) / acc(1));
+tbs(1,:) = linspace(t(1), t(1)+tb(1), n);
+vel(1) = (theta(2)-theta(1)) / (td(1)-tb(1)/2);
+% last segment
+acc(end) = sign(theta(end-1)-theta(end)) * acc(end);
+tb(end) = td(end) - sqrt(td(end)^2 - 2 * (theta(end-1)-theta(end)) / acc(end));
+tbs(end,:) = linspace(t(end)-tb(end), t(end), n);
+vel(end) = (theta(end)-theta(end-1)) / (td(end)-tb(end)/2);
+% interior segments
+for k = 2:length(vel)-1
+    vel(k) = (theta(k+1)-theta(k)) / td(k);
+end
+for k = 2:length(acc)-1
+    acc(k) = sign(vel(k)-vel(k-1)) * acc(k);
+    tb(k) = (vel(k)-vel(k-1)) / acc(k);
+    tbs(k,:) = linspace(t(k)-tb(k)/2, t(k)+tb(k)/2, n);
+end
+% blend time interior segments
+for k = 2:length(tl)-1
+    tl(k) = td(k) - tb(k)/2 - tb(k+1)/2;
+end
+% blend time first segment
+tl(1) = td(1) - tb(1) - tb(2)/2;
+% blend time last segment
+tl(end) = td(end) - tb(end) - tb(end-1)/2;
 %% Trajectory
-ts = 1e-4;
-tp1 = 0:ts:t1;
-c1 = parabolic_blend(0, t1, theta1, NaN, 0, vel12);
-p1 = polyval(c1, tp1);
-tp2 = td12-t2/2:ts:td12+t2/2;
-c2 = parabolic_blend(td12-t2/2, td12+t2/2, p1(end)+t12*vel12, NaN, vel12, vel23);
-p2 = polyval(c2, tp2);
-tp3 = td12+td23-t3:ts:td12+td23;
-c3 = parabolic_blend(td12+td23-t3, td12+td23, NaN, theta3, vel23, 0);
-p3 = polyval(c3, tp3);
+c(1,:) = parabolic_blend(t(1), t(1)+tb(1), theta(1), 0, vel(1));
+p(1,:) = polyval(c(1,:), tbs(1,:));
+cv(1,:) = polyder(c(1,:));
+v(1,:) = polyval(cv(1,:), tbs(1,:));
+for k = 2:length(theta)-1
+    c(k,:) = parabolic_blend(t(k)-tb(k)/2, t(k)+tb(k)/2, p(k-1,end)+vel(k-1)*tl(k-1), vel(k-1), vel(k));
+    p(k,:) = polyval(c(k,:), tbs(k,:));
+    cv(k,:) = polyder(c(k,:));
+    v(k,:) = polyval(cv(k,:), tbs(k,:));
+end
+c(end,:) = parabolic_blend(t(end)-tb(end), t(end), p(end-1,end)+vel(end)*tl(end), vel(end), 0);
+p(end,:) = polyval(c(end,:), tbs(end,:));
+cv(end,:) = polyder(c(end,:));
+v(end,:) = polyval(cv(end,:), tbs(end,:));
 
 %% Visulization
 figure(1);
 clf;
 hold on;
 grid on;
-plot(0, theta1, 'kx', 'MarkerSize', 10, 'LineWidth', 2);
-plot(td12, theta2, 'kx', 'MarkerSize', 10, 'LineWidth', 2);
-plot(td12+td23, theta3, 'kx', 'MarkerSize', 10, 'LineWidth', 2);
-plot(tp1, p1, 'b');
-plot(tp2, p2, 'b');
-plot(tp3, p3, 'b');
-plot([tp1(end), tp2(1)], [p1(end), p2(1)], 'r');
-plot([tp2(end), tp3(1)], [p2(end), p3(1)], 'r');
+for k = 1:length(theta)
+    plot(t(k), theta(k), 'kx', 'MarkerSize', 10, 'LineWidth', 2);
+    plot(tbs(k,:), p(k,:), 'b');
+end
+for k = 1:length(td)
+    plot([tbs(k,end), tbs(k+1,1)], [p(k,end), p(k+1,1)], 'r');
+end
 xlabel('time [s]');
 ylabel('angle [°]');
+title('Linear Trajectroy with Parabolic Blends');
+
+figure(2);
+clf;
+hold on;
+grid on;
+for k = 1:length(theta)
+    plot(tbs(k,:), v(k,:), 'b');
+end
+for k = 1:length(td)
+    plot([tbs(k,end), tbs(k+1,1)], [vel(k), vel(k)], 'r');
+end
+xlabel('time [s]');
+ylabel('velocity [°/s]');
+title('Linear Trajectroy with Parabolic Blends');
+
+figure(3);
+clf;
+hold on;
+grid on;
+for k = 1:length(theta)
+    aq(k) = (v(k,end)-v(k,1)) / (tbs(k,end)-tbs(k,1));
+    plot([tbs(k,1), tbs(k,end)], [aq(k), aq(k)], 'b');
+end
+for k = 1:length(td)
+    plot([tbs(k,end), tbs(k+1,1)], [0, 0], 'r');
+    plot([tbs(k,end), tbs(k,end)], [aq(k), 0], 'k--');
+    plot([tbs(k+1,1), tbs(k+1,1)], [0, aq(k+1)], 'k--');
+end
+xlabel('time [s]');
+ylabel('acceleration [°/s^2]');
 title('Linear Trajectroy with Parabolic Blends');
