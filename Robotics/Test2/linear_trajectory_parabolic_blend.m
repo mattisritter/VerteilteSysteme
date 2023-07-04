@@ -1,9 +1,9 @@
 %% Linear trajectory with parabolic blend
 clear all;
 %% Parameters
-theta = [50 100 10]; % path points
-t = [0 2 6]; % timing for path points
-acc = [100 75 50]; % acceleration 
+theta = [80 5 40]; % path points
+t = [0 3 5]; % timing for path points
+acc = [25 25 25]; % acceleration 
 td = diff(t); % time differnce between path points
 n = 1000; % number of segments of parabolic blend
 % predefinition of variables
@@ -62,6 +62,7 @@ cv(end,:) = polyder(c(end,:));
 v(end,:) = polyval(cv(end,:), tbs(end,:));
 
 %% Visulization
+disp('Results:');
 figure(1);
 clf;
 hold on;
@@ -69,9 +70,13 @@ grid on;
 for k = 1:length(theta)
     plot(t(k), theta(k), 'kx', 'MarkerSize', 10, 'LineWidth', 2);
     plot(tbs(k,:), p(k,:), 'b');
+    disp(['Blend Time t', num2str(k), ': ', num2str(tb(k))]);
+    disp(['Acelleration a', num2str(k), ': ', num2str(acc(k))]);
 end
 for k = 1:length(td)
     plot([tbs(k,end), tbs(k+1,1)], [p(k,end), p(k+1,1)], 'r');
+    disp(['Linear Time t', num2str(k), num2str(k+1), ': ', num2str(tl(k))]);
+    disp(['Velocity v', num2str(k), num2str(k+1), ': ', num2str(vel(k))]);
 end
 xlabel('time [s]');
 ylabel('angle [°]');
@@ -107,3 +112,5 @@ end
 xlabel('time [s]');
 ylabel('acceleration [°/s^2]');
 title('Linear Trajectroy with Parabolic Blends');
+
+disp(' ');
